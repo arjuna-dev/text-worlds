@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var character = new Schema({
+var characterSchema = new Schema({
   creator: String,
   name:  String,
   nickname:  String,
@@ -15,3 +15,5 @@ var character = new Schema({
   tagged: [Date],
   birthmarks: [String],
 });
+
+module.exports = mongoose.model('characters', characterSchema);

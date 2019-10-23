@@ -14,4 +14,4 @@ const postSchema = new Schema({
     fork: Number
 });
 
-module.exports = mongoose.model('users', postSchema);
+module.exports = mongoose.model('posts', postSchema);

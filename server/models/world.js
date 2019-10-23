@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var world = new Schema({
+var worldSchema = new Schema({
   name:  String,
   creator: String,
   maxNumberOfCharacters: Number,
@@ -15,3 +15,5 @@ var world = new Schema({
   maxAgeOfCharacters: Number,
   listOfUsers: [String], 
 });
+
+module.exports = mongoose.model('worlds', worldSchema);
