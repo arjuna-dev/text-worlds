@@ -14,6 +14,7 @@ var characterSchema = new Schema({
   dateCreated: Date.now,
   tagged: [Date],
   birthmarks: [String],
+  onAdoption: Boolean
 });
 
 module.exports = mongoose.model('characters', characterSchema);
