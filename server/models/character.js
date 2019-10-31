@@ -11,7 +11,7 @@ var characterSchema = new Schema({
   fobias: String,
   funFact: String,
   story: String,
-  dateCreated: Date.now,
+  dateCreated: { type: Date, default: Date.now },
   tagged: [Date],
   birthmarks: [String],
   onAdoption: Boolean

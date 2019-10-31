@@ -1,6 +1,6 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
-// const schema = require('./schema/schema');
+const schema = require('./schema/schema');
 const mongoose = require('mongoose');
 var bodyParser = require("body-parser");
 
@@ -21,10 +21,10 @@ mongoose.connection.once('open', () => {
     console.log('connected to the database');
 })
 
-// app.use('/graphql', graphqlHTTP({
-//     schema,
-//     graphiql: true
-// }));
+app.use('/graphql', graphqlHTTP({
+    schema,
+    graphiql: true
+}));
 
 // app.get('/', (req, res) => res.sendStatus(200))
 
@@ -33,9 +33,10 @@ app.listen(3000, () => {
 })
 
 
-app.use(express.static(path.join(__dirname, 'build')));
+// app.use(express.static(path.join(__dirname, 'build')));
 
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    res.send("Hello there")
 });

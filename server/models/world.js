@@ -6,7 +6,7 @@ var worldSchema = new Schema({
   creator: String,
   maxNumberOfCharacters: Number,
   minNumberOfCharacters: Number,
-  dateCreated: Date.now,
+  dateCreated: { type: Date, default: Date.now },
   private: Boolean,
   year: Number,
   description: String,
