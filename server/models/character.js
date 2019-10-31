@@ -13,7 +13,7 @@ var characterSchema = new Schema({
   story: String,
   dateCreated: { type: Date, default: Date.now },
   tagged: [Date],
-  birthmarks: [String],
+  // birthmarks: [String],
   onAdoption: Boolean
 });
 

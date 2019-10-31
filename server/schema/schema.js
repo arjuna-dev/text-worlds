@@ -22,7 +22,7 @@ const CharacterType = new GraphQLObjectType({
         story: { type: GraphQLString },
         // dateCreated: { type: GraphQLString },
         // tagged: { type: GraphQLString },
-        birthmarks: { type: GraphQLList },
+        // birthmarks: { type: GraphQLList },
         onAdoption: { type: GraphQLBoolean },
 
 
@@ -38,15 +38,16 @@ const CharacterType = new GraphQLObjectType({
 })
 
 
-
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: () => ({
         character: {
             type: CharacterType,
-            args: { id: { type: GraphQLID } },
+            args: { name: { type: GraphQLString } },
             resolve(parents, args) {
-                return character.findById(args.id);
+                return character.find({
+                    name: args.name
+                });
             }
         },
     })
