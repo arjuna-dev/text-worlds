@@ -26,8 +26,16 @@ mongoose.connection.once('open', () => {
 //     graphiql: true
 // }));
 
-app.get('/', (req, res) => res.send('Hello World!'))
+// app.get('/', (req, res) => res.sendStatus(200))
 
-app.listen(4000, () => {
-    console.log('now listening for request on port 4000');
+app.listen(3000, () => {
+    console.log('now listening for request on port 3000');
 })
+
+
+app.use(express.static(path.join(__dirname, 'build')));
+
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
