@@ -144,13 +144,10 @@ const PostType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: () => ({
-        character: {
-            type: CharacterType,
-            args: { name: { type: GraphQLString } },
+        users: {
+            type: UserType,
             resolve(parents, args) {
-                return character.find({
-                    name: args.age
-                });
+                return user.find({});
             }
         },
     })
@@ -158,20 +155,20 @@ const RootQuery = new GraphQLObjectType({
 
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
-    fields: () => ({
+    fields:{
         addUser: {
             type: UserType,
             args: {
                 name: { type: GraphQLString },
             },
             resolve(parent, args){
-                let user = new user({
+                let users = new user({
                     name: args.name
                 });
-                return user.save();
+                return users.save();
             }
         }
-    })
+    }
 })
 
 module.exports = new GraphQLSchema({
