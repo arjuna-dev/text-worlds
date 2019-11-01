@@ -6,7 +6,7 @@ var bodyParser = require("body-parser");
 //const key = require('./key.js')
 const app = express();
 
-const user = require('./models/user');
+const users = require('./models/user');
 const character = require('./models/character');
 const world = require('./models/world');
 
@@ -18,7 +18,7 @@ app.use(
     })
 )
 
-mongoose.connect('mongodb+srv://Arjuna:luminoso00@cluster0-nwtgn.gcp.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true });
+mongoose.connect('mongodb+srv://admin:admin@cluster0-zcwkp.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true });
 mongoose.connection.once('open', () => {
     console.log('connected to the database');
 })
@@ -55,7 +55,7 @@ app.listen(4000, () => {
     console.log('now listening for request on port 4000');
 })
 
-console.log(user.find({name: "Paul"}));
+console.log(users.find({name: "Paul"}));
 // app.use(express.static(path.join(__dirname, 'build')));
 
 
