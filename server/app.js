@@ -24,17 +24,20 @@ mongoose.connection.once('open', () => {
 })
 
 const Arjuna = new user ({
+    id: 1,
     name: "Arjuna",
     email: "arjuna1@pm.me",
 })
 
 const Notsyrius = new world ({
+    id: 1,
     name: "Notsyrius",
     year: 3334,
     description: "The Kali yoga is rampant. Long gone are the days of peace and good maners. Materialism is the philosophy of the day. Men and women, onld and young forget themselves in the world of matter, living for their sensual gratifications.",
 })
 
 const Jacob = new character ({
+    id: 1,
     name: "Jacob",
     story: "I was born in an upper class family. Trained in the arts of diplomacy and arts alike. I never cared for it all. I escaped my life of luxory suspecting I could find something more subtle, more beautiful. I've been a beggar, a martial arts student, a nobody. Now I tell stories on the streets and people sometimes listen.",
     age: 34,

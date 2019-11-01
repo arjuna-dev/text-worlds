@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var worldSchema = new Schema({
+  id: Number,
   name:  String,
   maxNumberOfCharacters: Number,
   minNumberOfCharacters: Number,

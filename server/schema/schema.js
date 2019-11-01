@@ -122,11 +122,9 @@ const RootQuery = new GraphQLObjectType({
     fields: () => ({
         character: {
             type: CharacterType,
-            args: { name: { type: GraphQLString } },
-            resolve(parents, args) {
-                return character.find({
-                    name: args.age
-                });
+            args: { id: { type: GraphQLID } },
+            resolve(parent, args) {
+                return character.findById(args.id);
             }
         },
     })
