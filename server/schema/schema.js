@@ -15,13 +15,13 @@ const UserType = new GraphQLObjectType({
         email: { type: { type: GraphQLString }},
         password: { type: { type: GraphQLString }},
         characters: {
-            type: CharacterType,
+            type: new GraphQLList(CharacterType),
             resolve(parent, args){
                 return 
             }
         },
         worlds: {
-            type: WorldType,
+            type: new GraphQLList(WorldType),
             resolve(parent, args){
                 return 
             }
@@ -50,7 +50,7 @@ const WorldType = new GraphQLObjectType({
         joinWithModeratorApproval: { type: GraphQLGraphQLBoolean },
         maxAgeOfCharacters: { type: GraphQLInt },
         characters: {
-            type: CharacterType,
+            type: new GraphQLList(CharacterType),
             resolve(parent, args){
                 return 
             }
@@ -75,13 +75,13 @@ const CharacterType = new GraphQLObjectType({
         // birthmarks: { type: GraphQLList },
         onAdoption: { type: GraphQLBoolean },
         posts: {
-            type: PostType,
+            type: new GraphQLList(PostType),
             resolve(parent, args){
                 return 
             }
         },
         places: {
-            type: PlaceType,
+            type: new GraphQLList(PlaceType),
             resolve(parent, args){
                 return 
             }
