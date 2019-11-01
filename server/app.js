@@ -3,7 +3,7 @@ const graphqlHTTP = require('express-graphql');
 const schema = require('./schema/schema');
 const mongoose = require('mongoose');
 var bodyParser = require("body-parser");
-const key = require('./key.js')
+//const key = require('./key.js')
 const app = express();
 
 const character = require('./models/character');
@@ -16,7 +16,7 @@ app.use(
     })
 )
 
-mongoose.connect(key.key, { useNewUrlParser: true });
+mongoose.connect('mongodb+srv://Arjuna:luminoso00@cluster0-nwtgn.gcp.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true });
 mongoose.connection.once('open', () => {
     console.log('connected to the database');
 })
