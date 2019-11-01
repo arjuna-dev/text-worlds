@@ -5,7 +5,7 @@ const post = require('../models/post');
 const user = require('../models/user');
 const world = require('../models/world');
 
-const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLSchema, GraphQLList, GraphQLFloat, GraphQLNonNull, GraphQLInt, GraphQLBoolean } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLSchema, GraphQLList, GraphQLNonNull, GraphQLInt, GraphQLBoolean } = graphql;
 
 const UserType = new GraphQLObjectType({
     name: 'User',
@@ -88,13 +88,13 @@ const CharacterType = new GraphQLObjectType({
         // birthmarks: { type: GraphQLList },
         onAdoption: { type: GraphQLBoolean },
         posts: {
-            type: PostType,
+            type: new GraphQLList(PostType),
             resolve(parent, args){
                 return post.find({author: parent})
             }
         },
         places: {
-            type: PlaceType,
+            type: new GraphQLList(PlaceType),
             resolve(parent, args){
                 return place.find({characters: {$elemMatch: {parent}}})
             }
@@ -149,7 +149,7 @@ const RootQuery = new GraphQLObjectType({
             args: { name: { type: GraphQLString } },
             resolve(parents, args) {
                 return character.find({
-                    name: args.name
+                    name: args.age
                 });
             }
         },
