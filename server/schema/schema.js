@@ -125,7 +125,7 @@ const RootQuery = new GraphQLObjectType({
             args: { name: { type: GraphQLString } },
             resolve(parents, args) {
                 return character.find({
-                    name: args.name
+                    name: args.age
                 });
             }
         },
