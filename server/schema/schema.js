@@ -24,18 +24,71 @@ const CharacterType = new GraphQLObjectType({
         // tagged: { type: GraphQLString },
         // birthmarks: { type: GraphQLList },
         onAdoption: { type: GraphQLBoolean },
-
-
-        //This looks like a query 👇🏼
-        character: {
-            type: CharacterType,
-            //args: {id:{type:GraphQLString}},
-            resolve(parent, args) {
-                return character.find({name: parent.authorName});
-            }
-        }
     })
 })
+
+const PlaceType = new GraphQLObjectType({
+    name: 'Place',
+    fields: () => ({
+        id: { type: GraphQLID },
+        name: { type: GraphQLString },
+        parentPlace: { type: GraphQLString },
+        description: { type: GraphQLString },
+    })
+})
+
+const PostType = new GraphQLObjectType({
+    name: 'Post',
+    fields: () => ({
+        id: { type: GraphQLID },
+        title: { type: GraphQLString },
+        // dateCreated: { type: Date, default: Date.now },
+        text: { type: GraphQLString },
+        author: { type: GraphQLString },
+        // type: {type: String, enum: ['World Narrator', 'Small Narrator', 'Me Speaking']},
+        // tagged_channels: [String],
+        likes: { type: GraphQLInt },
+        deletes: { type: GraphQLInt },
+        report: { type: GraphQLInt },
+        fork: { type: GraphQLInt },
+    })
+})
+
+const UserType = new GraphQLObjectType({
+    name: 'User',
+    fields: () => ({
+        id: { type: GraphQLID },
+        name: { type: GraphQLString },
+        email: { type: { type: GraphQLString }},
+        // characters: { type: GraphQLList },
+        // meta: {
+        //     loggedIn: [Date],
+        //     Disconnected: [Date],
+        //     LoggedIntoWorld: [(String, Date)],
+        //     DisconnectedFromWorld: [(String, Date)],
+        // }
+    })
+})
+
+const WorldType = new GraphQLObjectType({
+    name: 'World',
+    fields: () => ({
+        id: { type: GraphQLID },
+        name:  { type: { type: GraphQLString }},
+        creator: { type: { type: GraphQLString }},
+        maxNumberOfCharacters: { type: GraphQLInt },
+        minNumberOfCharacters: { type: GraphQLInt },
+        // dateCreated: { type: Date, default: Date.now },
+        private: { type: GraphQLGraphQLBoolean },
+        year: { type: GraphQLInt },
+        description: { type: { type: GraphQLString }},
+        // tags: [String],
+        joinWithModeratorApproval: { type: GraphQLGraphQLBoolean },
+        maxAgeOfCharacters: { type: GraphQLInt },
+        // listOfUsers: [String], 
+    })
+})
+
 
 
 const RootQuery = new GraphQLObjectType({
