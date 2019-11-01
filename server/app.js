@@ -35,7 +35,7 @@ app.use('/graphql', graphqlHTTP({
 
 // app.get('/', (req, res) => res.sendStatus(200))
 
-app.listen(3000, () => {
+app.listen(4000, () => {
     console.log('now listening for request on port 3000');
 })
 

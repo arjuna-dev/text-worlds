@@ -5,7 +5,7 @@ const post = require('../models/post');
 const user = require('../models/user');
 const world = require('../models/world');
 
-const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLSchema, GraphQLList, GraphQLFloat, GraphQLNonNull, GraphQLInt, GraphQLBoolean } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLSchema, GraphQLList, GraphQLNonNull, GraphQLInt, GraphQLBoolean } = graphql;
 
 const UserType = new GraphQLObjectType({
     name: 'User',
