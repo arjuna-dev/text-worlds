@@ -15,16 +15,16 @@ const UserType = new GraphQLObjectType({
         email: { type: { type: GraphQLString }},
         password: { type: { type: GraphQLString }},
         characters: {
-            type: CharacterType,
+            type: GraphQLList(CharacterType),
             resolve(parent, args){
-                return 
+                return character.find({ownerId: parent.id})
             }
         },
         worlds: {
-            type: WorldType,
+            type: GraphQLList(WorldType),
             resolve(parent, args){
-                return 
-            }
+                return world.find({users: {$elemMatch: {parent}}})
+            } 
         }
         // meta: {
         //     loggedIn: [Date],
@@ -50,11 +50,17 @@ const WorldType = new GraphQLObjectType({
         joinWithModeratorApproval: { type: GraphQLGraphQLBoolean },
         maxAgeOfCharacters: { type: GraphQLInt },
         characters: {
-            type: CharacterType,
+            type: GraphQLList(CharacterType),
             resolve(parent, args){
-                return 
+                return character.find({world: parent})
             }
         },
+        users: {
+            type: GraphQLList(UserType),
+            resolve(parent, args){
+                return user.find({worlds: {$elemMatch: {parent}}})
+            }
+        }
     })
 })
 
@@ -62,6 +68,13 @@ const CharacterType = new GraphQLObjectType({
     name: 'Character',
     fields: () => ({
         id: { type: GraphQLID },
+        ownerId: { type: GraphQLID },
+        world: {
+            type: WorldType,
+            resolve(parent, args){
+                return world.findOne({characters: {$elemMatch: {parent}}})
+            }
+        },
         name: { type: GraphQLString },
         nickname: { type: GraphQLString },
         story: { type: GraphQLString },
@@ -77,13 +90,13 @@ const CharacterType = new GraphQLObjectType({
         posts: {
             type: PostType,
             resolve(parent, args){
-                return 
+                return post.find({author: parent})
             }
         },
         places: {
             type: PlaceType,
             resolve(parent, args){
-                return 
+                return place.find({characters: {$elemMatch: {parent}}})
             }
         },
     })
@@ -96,6 +109,12 @@ const PlaceType = new GraphQLObjectType({
         name: { type: GraphQLString },
         parentPlace: { type: GraphQLString },
         description: { type: GraphQLString },
+        characters: {
+            type: GraphQLList(CharacterType),
+            resolve(parent, args){
+                return character.find({posts: {$elemMatch: {parent}}})
+            }
+        }
     })
 })
 
@@ -106,7 +125,12 @@ const PostType = new GraphQLObjectType({
         title: { type: GraphQLString },
         // dateCreated: { type: Date, default: Date.now },
         text: { type: GraphQLString },
-        author: { type: GraphQLString },
+        author: {
+            type: CharacterType,
+            resolve(parents, args){
+                return character.findOne({posts: {$elemMatch: parent}})
+            }    
+        },
         // type: {type: String, enum: ['World Narrator', 'Small Narrator', 'Me Speaking']},
         // tagged_channels: [String],
         likes: { type: GraphQLInt },
