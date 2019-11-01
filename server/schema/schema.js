@@ -12,8 +12,8 @@ const UserType = new GraphQLObjectType({
     fields: () => ({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
-        email: { type: { type: GraphQLString }},
-        password: { type: { type: GraphQLString }},
+        email: { type: GraphQLString },
+        password: { type: GraphQLString },
         characters: {
             type: GraphQLList(CharacterType),
             resolve(parent, args){
@@ -39,24 +39,24 @@ const WorldType = new GraphQLObjectType({
     name: 'World',
     fields: () => ({
         id: { type: GraphQLID },
-        name:  { type: { type: GraphQLString }},
+        name:  { type: GraphQLString },
         maxNumberOfCharacters: { type: GraphQLInt },
         minNumberOfCharacters: { type: GraphQLInt },
         // dateCreated: { type: Date, default: Date.now },
-        private: { type: GraphQLGraphQLBoolean },
+        private: { type: GraphQLBoolean },
         year: { type: GraphQLInt },
-        description: { type: { type: GraphQLString }},
+        description: { type: GraphQLString },
         // tags: [String],
-        joinWithModeratorApproval: { type: GraphQLGraphQLBoolean },
+        joinWithModeratorApproval: { type: GraphQLBoolean },
         maxAgeOfCharacters: { type: GraphQLInt },
         characters: {
-            type: GraphQLList(CharacterType),
+            type: new GraphQLList(CharacterType),
             resolve(parent, args){
                 return character.find({world: parent})
             }
         },
         users: {
-            type: GraphQLList(UserType),
+            type: new GraphQLList(UserType),
             resolve(parent, args){
                 return user.find({worlds: {$elemMatch: {parent}}})
             }
@@ -110,7 +110,7 @@ const PlaceType = new GraphQLObjectType({
         parentPlace: { type: GraphQLString },
         description: { type: GraphQLString },
         characters: {
-            type: GraphQLList(CharacterType),
+            type: new GraphQLList(CharacterType),
             resolve(parent, args){
                 return character.find({posts: {$elemMatch: {parent}}})
             }
@@ -156,7 +156,25 @@ const RootQuery = new GraphQLObjectType({
     })
 });
 
+const Mutation = new GraphQLObjectType({
+    name: 'Mutation',
+    fields: () => ({
+        addUser: {
+            type: UserType,
+            args: {
+                name: { type: GraphQLString },
+            },
+            resolve(parent, args){
+                let user = new user({
+                    name: args.name
+                });
+                return user.save();
+            }
+        }
+    })
+})
+
 module.exports = new GraphQLSchema({
     query: RootQuery,
-    // mutation: Mutation
+    mutation: Mutation
 })
