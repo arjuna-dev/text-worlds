@@ -11,7 +11,7 @@ const CharacterType = new GraphQLObjectType({
     name: 'Character',
     fields: () => ({
         id: { type: GraphQLID },
-        creator: { type: GraphQLString },
+        user: { type: GraphQLString },
         name: { type: GraphQLString },
         nickname: { type: GraphQLString },
         age: { type: GraphQLInt },
@@ -88,7 +88,6 @@ const WorldType = new GraphQLObjectType({
         // listOfUsers: [String], 
     })
 })
-
 
 
 const RootQuery = new GraphQLObjectType({
