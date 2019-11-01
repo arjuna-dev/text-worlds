@@ -7,23 +7,85 @@ const world = require('../models/world');
 
 const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLSchema, GraphQLList, GraphQLFloat, GraphQLNonNull, GraphQLInt, GraphQLBoolean } = graphql;
 
+const UserType = new GraphQLObjectType({
+    name: 'User',
+    fields: () => ({
+        id: { type: GraphQLID },
+        name: { type: GraphQLString },
+        email: { type: { type: GraphQLString }},
+        password: { type: { type: GraphQLString }},
+        characters: {
+            type: CharacterType,
+            resolve(parent, args){
+                return 
+            }
+        },
+        worlds: {
+            type: WorldType,
+            resolve(parent, args){
+                return 
+            }
+        }
+        // meta: {
+        //     loggedIn: [Date],
+        //     Disconnected: [Date],
+        //     LoggedIntoWorld: [(String, Date)],
+        //     DisconnectedFromWorld: [(String, Date)],
+        // }
+    })
+})
+
+const WorldType = new GraphQLObjectType({
+    name: 'World',
+    fields: () => ({
+        id: { type: GraphQLID },
+        name:  { type: { type: GraphQLString }},
+        maxNumberOfCharacters: { type: GraphQLInt },
+        minNumberOfCharacters: { type: GraphQLInt },
+        // dateCreated: { type: Date, default: Date.now },
+        private: { type: GraphQLGraphQLBoolean },
+        year: { type: GraphQLInt },
+        description: { type: { type: GraphQLString }},
+        // tags: [String],
+        joinWithModeratorApproval: { type: GraphQLGraphQLBoolean },
+        maxAgeOfCharacters: { type: GraphQLInt },
+        characters: {
+            type: CharacterType,
+            resolve(parent, args){
+                return 
+            }
+        },
+    })
+})
+
 const CharacterType = new GraphQLObjectType({
     name: 'Character',
     fields: () => ({
         id: { type: GraphQLID },
-        user: { type: GraphQLString },
         name: { type: GraphQLString },
         nickname: { type: GraphQLString },
+        story: { type: GraphQLString },
         age: { type: GraphQLInt },
         occupation: { type: GraphQLString },
         hobbies: { type: GraphQLString },
         fobias: { type: GraphQLString },
         funFact: { type: GraphQLString },
-        story: { type: GraphQLString },
         // dateCreated: { type: GraphQLString },
         // tagged: { type: GraphQLString },
         // birthmarks: { type: GraphQLList },
         onAdoption: { type: GraphQLBoolean },
+        posts: {
+            type: PostType,
+            resolve(parent, args){
+                return 
+            }
+        },
+        places: {
+            type: PlaceType,
+            resolve(parent, args){
+                return 
+            }
+        },
     })
 })
 
@@ -51,41 +113,6 @@ const PostType = new GraphQLObjectType({
         deletes: { type: GraphQLInt },
         report: { type: GraphQLInt },
         fork: { type: GraphQLInt },
-    })
-})
-
-const UserType = new GraphQLObjectType({
-    name: 'User',
-    fields: () => ({
-        id: { type: GraphQLID },
-        name: { type: GraphQLString },
-        email: { type: { type: GraphQLString }},
-        // characters: { type: GraphQLList },
-        // meta: {
-        //     loggedIn: [Date],
-        //     Disconnected: [Date],
-        //     LoggedIntoWorld: [(String, Date)],
-        //     DisconnectedFromWorld: [(String, Date)],
-        // }
-    })
-})
-
-const WorldType = new GraphQLObjectType({
-    name: 'World',
-    fields: () => ({
-        id: { type: GraphQLID },
-        name:  { type: { type: GraphQLString }},
-        creator: { type: { type: GraphQLString }},
-        maxNumberOfCharacters: { type: GraphQLInt },
-        minNumberOfCharacters: { type: GraphQLInt },
-        // dateCreated: { type: Date, default: Date.now },
-        private: { type: GraphQLGraphQLBoolean },
-        year: { type: GraphQLInt },
-        description: { type: { type: GraphQLString }},
-        // tags: [String],
-        joinWithModeratorApproval: { type: GraphQLGraphQLBoolean },
-        maxAgeOfCharacters: { type: GraphQLInt },
-        // listOfUsers: [String], 
     })
 })
 

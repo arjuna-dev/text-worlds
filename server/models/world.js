@@ -3,7 +3,6 @@ var Schema = mongoose.Schema;
 
 var worldSchema = new Schema({
   name:  String,
-  creator: String,
   maxNumberOfCharacters: Number,
   minNumberOfCharacters: Number,
   dateCreated: { type: Date, default: Date.now },
@@ -13,7 +12,6 @@ var worldSchema = new Schema({
   tags: [String],
   joinWithModeratorApproval: Boolean,
   maxAgeOfCharacters: Number,
-  listOfUsers: [String], 
 });
 
 module.exports = mongoose.model('worlds', worldSchema);
