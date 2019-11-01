@@ -17,7 +17,7 @@ const UserType = new GraphQLObjectType({
         characters: {
             type: GraphQLList(CharacterType),
             resolve(parent, args){
-                return character.find({ownerId: parent.id})
+                return character.find({owner: parent})
             }
         },
         worlds: {
@@ -68,7 +68,12 @@ const CharacterType = new GraphQLObjectType({
     name: 'Character',
     fields: () => ({
         id: { type: GraphQLID },
-        ownerId: { type: GraphQLID },
+        owner: { 
+            type: UserType,
+            resolve(parent, args){
+                return user.findOne({characters: {$elemMatch: {parent}}})
+            }
+        },
         world: {
             type: WorldType,
             resolve(parent, args){
