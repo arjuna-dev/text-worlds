@@ -171,13 +171,11 @@ const PostType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: () => ({
-        users: {
-            type: GraphQLList(UserType),
+        character: {
+            type: CharacterType,
+            args: { id: { type: GraphQLID } },
             resolve(parent, args) {
-                return user.find({}, function(err, doc){
-                    if (err) console.log(err)
-                    return doc
-                });
+                return character.findById(args.id);
             }
         },
         worlds: {

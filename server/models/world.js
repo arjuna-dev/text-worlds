@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var worldSchema = new Schema({
+  id: Number,
   name:  String,
   creatorId: String,
   usersId: [String],
