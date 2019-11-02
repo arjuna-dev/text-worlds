@@ -156,7 +156,7 @@ const PostType = new GraphQLObjectType({
         author: {
             type: CharacterType,
             resolve(parent, args){
-                return character.findOne({_id: authorId})
+                return character.findOne({_id: parent.authorId})
             }    
         },
         // type: {type: String, enum: ['World Narrator', 'Small Narrator', 'Me Speaking']},
@@ -274,12 +274,14 @@ const Mutation = new GraphQLObjectType({
             type: PostType,
             args: {
                 title: { type: new GraphQLNonNull(GraphQLString)},
-                text: { type: new GraphQLNonNull(GraphQLString)}
+                text: { type: new GraphQLNonNull(GraphQLString)},
+                authorId: {type: GraphQLID}
             },
             resolve(parent, args){
                 let newPost = new post({
                     title: args.title,
                     text: args.text,
+                    authorId: args.authorId
                 });
                 return newPost.save()
             }
