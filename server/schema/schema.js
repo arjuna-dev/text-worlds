@@ -51,7 +51,7 @@ const WorldType = new GraphQLObjectType({
         joinWithModeratorApproval: { type: GraphQLBoolean },
         maxAgeOfCharacters: { type: GraphQLInt },
         characters: {
-            type: new GraphQLList(CharacterType),
+            type: new GraphQLList(CharacterType), 
             resolve(parent, args){
                 return character.find({world: parent})
             }
@@ -149,13 +149,6 @@ const PostType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: () => ({
-<<<<<<< HEAD
-        character: {
-            type: CharacterType,
-            args: { id: { type: GraphQLID } },
-            resolve(parent, args) {
-                return character.findById(args.id);
-=======
         users: {
             type: GraphQLList(UserType),
             resolve(parent, args) {
@@ -163,7 +156,6 @@ const RootQuery = new GraphQLObjectType({
                     if (err) console.log(err)
                     return doc
                 });
->>>>>>> 71aa019a244ff9f76191e2d5cf42411b12a91d87
             }
         },
         worlds: {

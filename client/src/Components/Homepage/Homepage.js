@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../../assets/logo.png';
 import SearchBar from './SearchBar.js'
 import MenuButton from './MenuButton';
+import WorldList from './WorldList';
 
 const Homepage = () => {
     return (
@@ -20,6 +21,9 @@ const Homepage = () => {
                         <MenuButton />
                     </div>
                 </div>
+            </div>
+            <div className = "world-list">
+            <WorldList></WorldList>
             </div>
         </div>
     );
