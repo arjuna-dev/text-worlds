@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var characterSchema = new Schema({
   user: String,
   name:  String,
-  ownerId: Number,
+  userId: Number,
   nickname:  String,
   story: String,
   age:  Number,
