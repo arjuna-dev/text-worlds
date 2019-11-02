@@ -5,6 +5,7 @@ const post = require('../models/post');
 const user = require('../models/user');
 const world = require('../models/world');
 
+
 const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLSchema, GraphQLList, GraphQLNonNull, GraphQLInt, GraphQLBoolean } = graphql;
 
 const UserType = new GraphQLObjectType({
@@ -132,7 +133,7 @@ const PostType = new GraphQLObjectType({
         text: { type: GraphQLString },
         author: {
             type: CharacterType,
-            resolve(parents, args){
+            resolve(parent, args){
                 return character.findOne({posts: {$elemMatch: parent}})
             }    
         },
@@ -145,22 +146,57 @@ const PostType = new GraphQLObjectType({
     })
 })
 
-
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: () => ({
-        user: {
-            type: UserType,
-            args: {name: { type: GraphQLString }},
-            resolve(parents, args) {
-                return user.findOne({name: args.name}, function(err, doc){
+        users: {
+            type: GraphQLList(UserType),
+            resolve(parent, args) {
+                return user.find({}, function(err, doc){
                     if (err) console.log(err)
                     return doc
                 });
             }
         },
+        worlds: {
+            type: GraphQLList(WorldType),
+            resolve(parent, args){
+                return world.find({}, function(err, doc){
+                    if (err) console.log(err)
+                    return doc
+                })
+            }
+        },
+        characters: {
+            type: GraphQLList(CharacterType),
+            resolve(parent, args){
+                return character.find({}, function(err, doc){
+                    if (err) console.log(err)
+                    return doc
+                })
+            }
+        },
+        posts: {
+            type: GraphQLList(PostType),
+            resolve(parent, args){
+                return post.find({}, function(err, doc){
+                    if (err) console.log(err)
+                    return doc
+                })
+            }
+        },
+        places: {
+            type: GraphQLList(PlaceType),
+            resolve(parent, args){
+                return place.find({}, function(err, doc){
+                    if (err) console.log(err)
+                    return doc
+                })
+            }
+        }
     })
 });
+
 
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
@@ -168,13 +204,78 @@ const Mutation = new GraphQLObjectType({
         addUser: {
             type: UserType,
             args: {
-                name: { type: GraphQLString },
+                name: { type: new GraphQLNonNull(GraphQLString) },
+                email: {type: new GraphQLNonNull(GraphQLString)}
             },
             resolve(parent, args){
-                let users = new user({
-                    name: args.name
+                let newUser = new user({
+                    name: args.name,
+                    email: args.email,
+                    //add more later
                 });
-                return users.save();
+                return newUser.save();
+            }
+        },
+        addWorld: {
+            type: WorldType,
+            args: {
+                name: { type: new GraphQLNonNull(GraphQLString)},
+                description: { type: new GraphQLNonNull(GraphQLString)}
+                //add more later
+            },
+            resolve(parent, args){
+                let newWorld = new world({
+                    name: args.name,
+                    description: args.description
+                });
+                return newWorld.save();
+            }
+        },
+        addCharacter: {
+            type: CharacterType,
+            args: {
+                name: { type: new GraphQLNonNull(GraphQLString)},
+                story: { type: new GraphQLNonNull(GraphQLString) },
+                age: { type: GraphQLInt },
+                occupation: { type: GraphQLString } 
+                // add more later
+            },
+            resolve(parent, args){
+                let newCharacter = new character({
+                    name: args.name,
+                    story: args.name,
+                    age: args.age,
+                    occupation: args.occupation
+                });
+                return newCharacter.save()
+            }
+        },
+        addPost: {
+            type: PostType,
+            args: {
+                title: { type: new GraphQLNonNull(GraphQLString)},
+                text: { type: new GraphQLNonNull(GraphQLString)}
+            },
+            resolve(parent, args){
+                let newPost = new post({
+                    title: args.title,
+                    text: args.text,
+                });
+                return newPost.save()
+            }
+        },
+        addPlace: {
+            type: PlaceType,
+            args: {
+                name: { type: new GraphQLNonNull(GraphQLString)},
+                description: { type: new GraphQLNonNull(GraphQLString)}
+            },
+            resolve(parent, args){
+                let newPlace = new place({
+                    name: args.name,
+                    description: args.description,
+                });
+                return newPlace.save()
             }
         }
     }
