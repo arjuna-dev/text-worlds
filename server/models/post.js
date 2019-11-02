@@ -6,7 +6,7 @@ const postSchema = new Schema({
     title: String,
     dateCreated: { type: Date, default: Date.now },
     text: String,
-    author: String,
+    authorId: String,
     type: {type: String, enum: ['World Narrator', 'Small Narrator', 'Me Speaking']},
     tagged_channels: [String],
     likes: Number,

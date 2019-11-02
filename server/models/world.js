@@ -4,6 +4,8 @@ var Schema = mongoose.Schema;
 var worldSchema = new Schema({
   id: Number,
   name:  String,
+  creatorId: String,
+  usersId: [String],
   maxNumberOfCharacters: Number,
   minNumberOfCharacters: Number,
   dateCreated: { type: Date, default: Date.now },
