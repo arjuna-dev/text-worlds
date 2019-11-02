@@ -27,7 +27,7 @@ const UserType = new GraphQLObjectType({
         worlds: {
             type: GraphQLList(WorldType),
             resolve(parent, args){
-                return world.find({usersId: {$elemMatch: parent._id}}, function(err, data){
+                return world.find({usersId: {$elemMatch: {$eq: parent._id}}}, function(err, data){
                     if (err) console.log(err)
                     return data
                 })
@@ -69,7 +69,7 @@ const WorldType = new GraphQLObjectType({
         characters: {
             type: new GraphQLList(CharacterType),
             resolve(parent, args){
-                return character.find({userId: {$in: parent.usersId}}, function(err, data){
+                return character.find({worldId: parent._id}, function(err, data){
                     if (err) console.log(err)
                     return data
                 })
@@ -83,6 +83,7 @@ const CharacterType = new GraphQLObjectType({
     fields: () => ({
         _id: { type: GraphQLID },
         userId: { type: GraphQLID },
+        worldId: {type: GraphQLID},
         user: { 
             type: UserType,
             resolve(parent, args){
@@ -95,7 +96,7 @@ const CharacterType = new GraphQLObjectType({
         world: {
             type: WorldType,
             resolve(parent, args){
-                return world.findOne({_usersId: {$elemMatch: parent.userId}})
+                return world.findOne({_id: parent.worldId})
             }
         },
         name: { type: GraphQLString },
@@ -119,7 +120,7 @@ const CharacterType = new GraphQLObjectType({
         places: {
             type: new GraphQLList(PlaceType),
             resolve(parent, args){
-                return place.find({charactersId: {$elemMatch: parent._id}})
+                return place.find({charactersId: {$elemMatch: {$eq: parent._id}}})
             }
         },
     })
@@ -242,13 +243,15 @@ const Mutation = new GraphQLObjectType({
             type: WorldType,
             args: {
                 name: { type: new GraphQLNonNull(GraphQLString)},
-                description: { type: new GraphQLNonNull(GraphQLString)}
+                description: { type: new GraphQLNonNull(GraphQLString)},
+                usersId: {type: new GraphQLList(GraphQLID)}
                 //add more later
             },
             resolve(parent, args){
                 let newWorld = new world({
                     name: args.name,
-                    description: args.description
+                    description: args.description,
+                    usersId: args.usersId
                 });
                 return newWorld.save();
             }
