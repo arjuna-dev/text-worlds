@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const placeSchema = new Schema({
     id: Number,
     name: String,
+    charactersId: [String],
     parentPlace: String,
     description: String,
 });
