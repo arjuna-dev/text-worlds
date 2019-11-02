@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var characterSchema = new Schema({
+  id: Number,
   user: String,
   name:  String,
   userId: Number,
