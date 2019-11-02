@@ -5,6 +5,7 @@ var characterSchema = new Schema({
   id: Number,
   user: String,
   name:  String,
+  ownerId: Number,
   nickname:  String,
   story: String,
   age:  Number,
