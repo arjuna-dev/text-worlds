@@ -149,10 +149,14 @@ const PostType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: () => ({
-        users: {
+        user: {
             type: UserType,
+            args: {name: { type: GraphQLString }},
             resolve(parents, args) {
-                return user.find({});
+                return user.findOne({name: args.name}, function(err, doc){
+                    if (err) console.log(err)
+                    return doc
+                });
             }
         },
     })

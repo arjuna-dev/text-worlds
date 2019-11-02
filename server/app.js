@@ -55,7 +55,9 @@ app.listen(4000, () => {
     console.log('now listening for request on port 4000');
 })
 
-console.log(users.find({name: "Paul"}));
+// var test = users.find({name: "Paul"}, function(error, docs){
+//     console.log(docs);
+// })
 // app.use(express.static(path.join(__dirname, 'build')));
 
 
