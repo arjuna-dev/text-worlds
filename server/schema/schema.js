@@ -260,6 +260,8 @@ const Mutation = new GraphQLObjectType({
             type: CharacterType,
             args: {
                 name: { type: new GraphQLNonNull(GraphQLString)},
+                worldId: {type: new GraphQLNonNull(GraphQLString)},
+                userId: {type: new GraphQLNonNull(GraphQLString)},
                 story: { type: new GraphQLNonNull(GraphQLString) },
                 age: { type: GraphQLInt },
                 occupation: { type: GraphQLString } 
@@ -268,6 +270,8 @@ const Mutation = new GraphQLObjectType({
             resolve(parent, args){
                 let newCharacter = new character({
                     name: args.name,
+                    worldId: args.worldId,
+                    userId: args.userId,
                     story: args.story,
                     age: args.age,
                     occupation: args.occupation
@@ -295,12 +299,14 @@ const Mutation = new GraphQLObjectType({
             type: PlaceType,
             args: {
                 name: { type: new GraphQLNonNull(GraphQLString)},
-                description: { type: new GraphQLNonNull(GraphQLString)}
+                description: { type: new GraphQLNonNull(GraphQLString)},
+                charactersId: { type: GraphQLList(GraphQLString) }
             },
             resolve(parent, args){
                 let newPlace = new place({
                     name: args.name,
                     description: args.description,
+                    charactersId: args.charactersId
                 });
                 return newPlace.save()
             }
