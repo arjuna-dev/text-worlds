@@ -243,7 +243,7 @@ const Mutation = new GraphQLObjectType({
             resolve(parent, args){
                 let newCharacter = new character({
                     name: args.name,
-                    story: args.name,
+                    story: args.story,
                     age: args.age,
                     occupation: args.occupation
                 });
