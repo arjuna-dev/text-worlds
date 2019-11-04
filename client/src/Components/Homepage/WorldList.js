@@ -7,25 +7,28 @@ import { getAllWorlds } from '../../queries/queries';
 import { useQuery } from '@apollo/react-hooks';
 
 
-function ListExampleImage() {
+function WorldList() {
 const { loading, error, data } = useQuery(getAllWorlds);
 
 if (loading) return <p>Loading...</p>;
 if (error) return <p>Error :(</p>;
     return data.worlds.map(( world ) => (
-      <List size='massive'>
-      <List.Item>
-        <Image avatar src={ p1 } />
-        <List.Content>
-          <List.Header as='a'>{ world.name }</List.Header>
-          <List.Description>
-              <WorldDescription>{ world.description }</WorldDescription>
-          </List.Description>
-        </List.Content>
-      </List.Item>
-    </List>
-      ));
+      <div className = "world-list">
+        <List size='massive'>
+          <List.Item>
+            <Image avatar src={ p1 } />
+            <List.Content>
+            <List.Header as='a'>{ world.name }</List.Header>
+              <List.Description>
+                  <WorldDescription>{ world.description }</WorldDescription>
+              </List.Description>
+            </List.Content>
+          </List.Item>
+        </List>
+      </div>
+      )
+    );
 }
 
 
-export default ListExampleImage
+export default WorldList;

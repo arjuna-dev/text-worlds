@@ -25,8 +25,8 @@ const getAllWorlds = gql`
   }`
 
 const addWorldMutation = gql`
-    mutation AddWorld ($name: String!, $description: String!, $userId: String!){
-    addWorld(name: $name, description: $description, userId: $userId, ){
+    mutation AddWorld ($name: String!, $description: String!, $userId: String){
+    addWorld(name: $name, description: $description, userId: $userId){
         name
         description
         user {
