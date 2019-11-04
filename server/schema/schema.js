@@ -23,6 +23,15 @@ const UserType = new GraphQLObjectType({
                     return data
                 })
             }
+        },
+        worlds: {
+            type: GraphQLList(WorldType),
+            resolve(parent, args){
+                return world.find({userId: parent._id}, function(err, data){
+                    if (err) console.log(err)
+                    return data
+                })
+            }
         }
         // meta: {
         //     loggedIn: [Date],
@@ -38,6 +47,7 @@ const WorldType = new GraphQLObjectType({
     fields: () => ({
         _id: { type: GraphQLID },
         name:  { type: GraphQLString },
+        userId: { type: GraphQLID },
         maxNumberOfCharacters: { type: GraphQLInt },
         minNumberOfCharacters: { type: GraphQLInt },
         // dateCreated: { type: Date, default: Date.now },
@@ -47,6 +57,15 @@ const WorldType = new GraphQLObjectType({
         // tags: [String],
         joinWithModeratorApproval: { type: GraphQLBoolean },
         maxAgeOfCharacters: { type: GraphQLInt },
+        user: {
+            type: UserType,
+            resolve(parent, args){
+                return user.find({_id: parent.userId}, function(err, data){
+                    if (err) console.log(err)
+                    return data
+                })
+            }
+        },
         characters: {
             type: new GraphQLList(CharacterType),
             resolve(parent, args){
@@ -266,13 +285,13 @@ const Mutation = new GraphQLObjectType({
             args: {
                 title: { type: new GraphQLNonNull(GraphQLString)},
                 text: { type: new GraphQLNonNull(GraphQLString)},
-                characterId: {type: GraphQLID}
+                characterId: {type: new GraphQLNonNull(GraphQLID)}
             },
             resolve(parent, args){
                 let newPost = new post({
                     title: args.title,
                     text: args.text,
-                    characterId: args.authorId
+                    characterId: args.characterId
                 });
                 return newPost.save()
             }
