@@ -10,6 +10,10 @@ const users = require('./models/user');
 const character = require('./models/character');
 const world = require('./models/world');
 
+const cors = require('cors')
+
+app.use(cors()) // not having cors enabled will cause an access control error
+
 app.use(bodyParser.json())
 
 app.use(
