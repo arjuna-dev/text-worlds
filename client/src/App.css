@@ -20,6 +20,12 @@
 .world-list{
   margin-top: 10vh;
   margin-left: 10vw;
+  margin-bottom: 10vw;
+}
+.add-world{
+  margin-top: 10vh;
+  margin-left: 10vw;
+  margin-right: 10vw;
 }
 
 
