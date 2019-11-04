@@ -27,11 +27,11 @@ const UserType = new GraphQLObjectType({
         worlds: {
             type: GraphQLList(WorldType),
             resolve(parent, args){
-                return world.find({usersId: {$elemMatch: {$eq: parent._id}}}, function(err, data){
+                return world.find({userId: parent._id}, function(err, data){
                     if (err) console.log(err)
                     return data
                 })
-            } 
+            }
         }
         // meta: {
         //     loggedIn: [Date],
@@ -47,7 +47,7 @@ const WorldType = new GraphQLObjectType({
     fields: () => ({
         _id: { type: GraphQLID },
         name:  { type: GraphQLString },
-        usersId: { type : GraphQLList(GraphQLID)},
+        userId: { type: GraphQLID },
         maxNumberOfCharacters: { type: GraphQLInt },
         minNumberOfCharacters: { type: GraphQLInt },
         // dateCreated: { type: Date, default: Date.now },
@@ -57,10 +57,10 @@ const WorldType = new GraphQLObjectType({
         // tags: [String],
         joinWithModeratorApproval: { type: GraphQLBoolean },
         maxAgeOfCharacters: { type: GraphQLInt },
-        users: {
-            type: new GraphQLList(UserType),
+        user: {
+            type: UserType,
             resolve(parent, args){
-                return user.find({_id: {$in: parent.usersId}}, function(err, data){
+                return user.find({_id: parent.userId}, function(err, data){
                     if (err) console.log(err)
                     return data
                 })
@@ -114,7 +114,7 @@ const CharacterType = new GraphQLObjectType({
         posts: {
             type: new GraphQLList(PostType),
             resolve(parent, args){
-                return post.find({authorId: parent._id})
+                return post.find({characterId: parent._id})
             }
         },
         places: {
@@ -150,14 +150,14 @@ const PostType = new GraphQLObjectType({
     name: 'Post',
     fields: () => ({
         _id: { type: GraphQLID },
-        authorId: {type: GraphQLID},
+        characterId: {type: GraphQLID},
         title: { type: GraphQLString },
         // dateCreated: { type: Date, default: Date.now },
         text: { type: GraphQLString },
-        author: {
+        character: {
             type: CharacterType,
             resolve(parent, args){
-                return character.findOne({_id: parent.authorId})
+                return character.findOne({_id: parent.userId})
             }    
         },
         // type: {type: String, enum: ['World Narrator', 'Small Narrator', 'Me Speaking']},
@@ -244,14 +244,15 @@ const Mutation = new GraphQLObjectType({
             args: {
                 name: { type: new GraphQLNonNull(GraphQLString)},
                 description: { type: new GraphQLNonNull(GraphQLString)},
-                usersId: {type: new GraphQLList(GraphQLID)}
+                userId: {type: new GraphQLNonNull(GraphQLString)}
+
                 //add more later
             },
             resolve(parent, args){
                 let newWorld = new world({
                     name: args.name,
                     description: args.description,
-                    usersId: args.usersId
+                    userId: args.usersId
                 });
                 return newWorld.save();
             }
@@ -284,13 +285,13 @@ const Mutation = new GraphQLObjectType({
             args: {
                 title: { type: new GraphQLNonNull(GraphQLString)},
                 text: { type: new GraphQLNonNull(GraphQLString)},
-                authorId: {type: GraphQLID}
+                characterId: {type: new GraphQLNonNull(GraphQLID)}
             },
             resolve(parent, args){
                 let newPost = new post({
                     title: args.title,
                     text: args.text,
-                    authorId: args.authorId
+                    characterId: args.characterId
                 });
                 return newPost.save()
             }
