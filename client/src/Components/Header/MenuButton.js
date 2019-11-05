@@ -1,18 +1,22 @@
 import React from 'react'
 import { Dropdown, Menu } from 'semantic-ui-react'
-import { Link } from 'react-router-dom';
+import { createBrowserHistory } from "history"
 
-const options = [
-  { key: 1, text: 'Explore Worlds',  value: 1, },
-  { key: 2, text: 'Create New World', value: <Link to='/add-world' /> },
-  { key: 3, text: 'World Forum', value: 3 },
-  { key: 4, text: 'Adopt a Character', value: 4 }
-]
+const history = createBrowserHistory();
 
-const MenuButton = () => (
-  <Menu compact>
-    <Dropdown text='Menu' options={options} simple item />
+const MenuExampleDropdownItem = () => {
+
+  return(
+  <Menu className = "menu-button" horizontal>
+    <Dropdown item text='Menu'>
+      <Dropdown.Menu>
+        <Dropdown.Item onClick = {(e) => {history.push('/'); window.location.reload(true)}}>Explore World</Dropdown.Item>
+        <Dropdown.Item onClick = {(e) => {history.push('/add-world'); window.location.reload(true)}}>Add a World</Dropdown.Item>
+        <Dropdown.Item>Adopt a character</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
   </Menu>
 )
+}
 
-export default MenuButton;
+export default MenuExampleDropdownItem

@@ -15,6 +15,7 @@
 .menu-button{
   display: flex;
   flex-direction: row;
+  width:89.5px;
 }
 
 .world-list{
@@ -27,5 +28,6 @@
   margin-left: 10vw;
   margin-right: 10vw;
 }
+
 
 
