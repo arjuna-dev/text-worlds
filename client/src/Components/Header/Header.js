@@ -13,7 +13,7 @@ const Header = () => {
                     </div>
                         <div className = "eight wide column">
                             <div className = "logo-parent">
-                                <img src = {logo} alt = "logo" className = "logo" />
+                            <a href= "/"><img src = {logo} alt = "logo" className = "logo" /></a>
                             </div>
                         </div>
                     <div className = "four wide column">
