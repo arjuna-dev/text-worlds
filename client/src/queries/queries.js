@@ -19,6 +19,7 @@ const getAllPlaces = gql`
 const getAllWorlds = gql`
     query {
     worlds{
+        _id
         name
         description
       } 

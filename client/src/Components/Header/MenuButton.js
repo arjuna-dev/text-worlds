@@ -4,10 +4,10 @@ import { createBrowserHistory } from "history"
 
 const history = createBrowserHistory();
 
-const MenuExampleDropdownItem = () => {
+const MenuDropdownItem = () => {
 
   return(
-  <Menu className = "menu-button" horizontal>
+  <Menu className = "menu-button" horizontal = "true">
     <Dropdown item text='Menu'>
       <Dropdown.Menu>
         <Dropdown.Item onClick = {(e) => {history.push('/'); window.location.reload(true)}}>Explore World</Dropdown.Item>
@@ -19,4 +19,4 @@ const MenuExampleDropdownItem = () => {
 )
 }
 
-export default MenuExampleDropdownItem
+export default MenuDropdownItem
