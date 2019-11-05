@@ -12,8 +12,9 @@ const { loading, error, data } = useQuery(getAllWorlds);
 
 if (loading) return <p>Loading...</p>;
 if (error) return <p>Error :(</p>;
-    return data.worlds.map(( world ) => (
+    return (
       <div className = "world-list">
+        {data.worlds.map(( world ) => (
         <List size='massive'>
           <List.Item>
             <Image avatar src={ p1 } />
@@ -25,8 +26,8 @@ if (error) return <p>Error :(</p>;
             </List.Content>
           </List.Item>
         </List>
+        ))}
       </div>
-      )
     );
 }
 
