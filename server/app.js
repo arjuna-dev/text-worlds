@@ -8,26 +8,28 @@ const app = express();
 const cors = require('cors')
 const jwt = require('jsonwebtoken')
 const dotenv = require('dotenv');
-
-//Import Routes
 const authRoute = require('./routes/auth')
 
+app.use(cors())
 dotenv.config();
 
+//Middleware
+app.use(express.json())
 //Routes Middleware
 app.use('/api/user', authRoute)
-
-app.use(cors()) // not having cors enabled will cause an access control error
 
 app.use(bodyParser.json())
 
 app.use(
     bodyParser.urlencoded({
         extended: false
-    })
+    }) 
 )
 
-mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true });
+mongoose.connect(process.env.DB_CONNECT, { 
+    useUnifiedTopology: true,    
+    useNewUrlParser: true 
+});
 
 mongoose.connection.once('open', () => {
     console.log('connected to the database');
