@@ -41,6 +41,12 @@ const getWorldQuery = gql`
           characters{
             name
             story
+            role
+            gender
+          }
+          events{
+            title
+            text
           }
       }
   }
@@ -57,6 +63,14 @@ const addWorldMutation = gql`
       } 
   }`
 
+const addCharacterMutation = gql`
+    mutation AddCharacter ($name: String!, $story: String!, $userId: String, $worldId: String! ){
+      addCharacter(name: $name, story: $story, userId: $userId, worldId: $worldId){
+        name
+        story
+      }
+    }
+`
 
 
-  export { getAllCharacters, addWorldMutation, getAllPlaces, getAllWorlds, getWorldQuery };
+  export { getAllCharacters, addWorldMutation, getAllPlaces, getAllWorlds, getWorldQuery, addCharacterMutation };
