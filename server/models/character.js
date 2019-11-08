@@ -6,6 +6,8 @@ var characterSchema = new Schema({
   name:  String,
   userId: String,
   worldId: String,
+  role: String,
+  gender: String,
   nickname:  String,
   story: String,
   age:  Number,

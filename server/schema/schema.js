@@ -4,7 +4,7 @@ const place = require('../models/place');
 const post = require('../models/post');
 const user = require('../models/user');
 const world = require('../models/world');
-
+const event = require('../models/event');
 
 const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLSchema, GraphQLList, GraphQLNonNull, GraphQLInt, GraphQLBoolean } = graphql;
 
@@ -75,6 +75,15 @@ const WorldType = new GraphQLObjectType({
                 })
             }
         },
+        events: {
+            type: new GraphQLList(EventType),
+            resolve(parent, args){
+                return event.find({worldId: parent._id}, function(err, data){
+                    if (err) console.log(err)
+                    return data
+                })
+            }
+        }
     })
 })
 
@@ -100,6 +109,8 @@ const CharacterType = new GraphQLObjectType({
             }
         },
         name: { type: GraphQLString },
+        role: {type: GraphQLString},
+        gender: {type: GraphQLString},
         nickname: { type: GraphQLString },
         story: { type: GraphQLString },
         age: { type: GraphQLInt },
@@ -115,6 +126,12 @@ const CharacterType = new GraphQLObjectType({
             type: new GraphQLList(PostType),
             resolve(parent, args){
                 return post.find({characterId: parent._id})
+            }
+        },
+        events: {
+            type: new GraphQLList(EventType),
+            resolve(parent, args){
+                return event.find({characterId: parent._id})
             }
         },
         places: {
@@ -159,6 +176,36 @@ const PostType = new GraphQLObjectType({
             resolve(parent, args){
                 return character.findOne({_id: parent.userId})
             }    
+        },
+        // type: {type: String, enum: ['World Narrator', 'Small Narrator', 'Me Speaking']},
+        // tagged_channels: [String],
+        likes: { type: GraphQLInt },
+        deletes: { type: GraphQLInt },
+        report: { type: GraphQLInt },
+        fork: { type: GraphQLInt },
+    })
+})
+
+const EventType = new GraphQLObjectType({
+    name: 'Event',
+    fields: () => ({
+        _id: { type: GraphQLID },
+        characterId: {type: GraphQLID},
+        worldId: {type: GraphQLID},
+        title: { type: GraphQLString },
+        // dateCreated: { type: Date, default: Date.now },
+        text: { type: GraphQLString },
+        character: {
+            type: CharacterType,
+            resolve(parent, args){
+                return character.findOne({_id: parent.characterId})
+            }    
+        },
+        world: {
+            type: WorldType,
+            resolve(parent, args){
+                return world.findOne({_id: parent.worldId})
+            }
         },
         // type: {type: String, enum: ['World Narrator', 'Small Narrator', 'Me Speaking']},
         // tagged_channels: [String],
@@ -217,13 +264,22 @@ const RootQuery = new GraphQLObjectType({
                 })
             }
         },
+        events:{
+            type: GraphQLList(EventType),
+            resolve(parent, args){
+                return event.find({}, function(err, doc){
+                    if (err) console.log(err)
+                    return doc
+                })
+            }
+        },
         world: {
             type: WorldType,
             args: { id: { type: GraphQLID } },
             resolve(parents, args) {
                 return world.findById(args.id);
             }
-        },
+        }
     })
 });
 
@@ -269,8 +325,10 @@ const Mutation = new GraphQLObjectType({
             args: {
                 name: { type: new GraphQLNonNull(GraphQLString)},
                 worldId: {type: new GraphQLNonNull(GraphQLString)},
-                userId: {type: new GraphQLNonNull(GraphQLString)},
+                userId: {type: GraphQLString},
                 story: { type: new GraphQLNonNull(GraphQLString) },
+                gender: {type: GraphQLString},
+                role: {type: GraphQLString},
                 age: { type: GraphQLInt },
                 occupation: { type: GraphQLString } 
                 // add more later
@@ -281,6 +339,8 @@ const Mutation = new GraphQLObjectType({
                     worldId: args.worldId,
                     userId: args.userId,
                     story: args.story,
+                    gender: args.gender,
+                    role: args.role,
                     age: args.age,
                     occupation: args.occupation
                 });
@@ -317,6 +377,24 @@ const Mutation = new GraphQLObjectType({
                     charactersId: args.charactersId
                 });
                 return newPlace.save()
+            }
+        },
+        addEvent: {
+            type: EventType,
+            args: {
+                    title: { type: new GraphQLNonNull(GraphQLString)},
+                    text: { type: new GraphQLNonNull(GraphQLString)},
+                    characterId: {type: new GraphQLNonNull(GraphQLID)},
+                    worldId: {type: new GraphQLNonNull(GraphQLID)}
+                },
+            resolve(parent, args){
+                let newEvent = new event({
+                    title: args.title,
+                    text: args.text,
+                    characterId: args.characterId,
+                    worldId: args.worldId
+                });
+                return newEvent.save()
             }
         }
     }

@@ -32,7 +32,32 @@
 .world{
   margin-left: 10vw;
   margin-top: 10vh;
+  padding: 2vw;
 }
+.world-title{
+  font-size: 2.5vw;
+  padding: 2vw;
+}
+.world-details{
+  font-size: 1.5vw;
+  padding: 2vw;
+}
+.world-events{
+  font-size: 1.5vw;
+  padding: 2vw;
+}
+.world-characters{
+  font-size: 1.5vw;
+  padding: 2vw;
+}
+.world-elements-inside{
+  display: flex;
+  margin-top: 1vw;
+}
+.card-character{
+  margin-right: 20px;
+}
+
 
 
 
