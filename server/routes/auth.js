@@ -36,13 +36,19 @@ router.post('/register',async (req, res) => {
 });
 
 router.post('/login',async (req, res) => {
-
+    //Check for validation errors
     const lgnValidation = loginValidation(req.body)
-
     if (lgnValidation[0]) return res.status(400).send(lgnValidation[0].details[0].message)
 
-    res.send(lgnValidation[1]);
+    //Check db for existing email
+    const user = await User.findOne({email: req.body.email})
+    if(!user) return res.status(400).send('This email is not registered 🤔')
 
+    //Validate password
+    const validPassword = await bcrypt.compare(req.body.password, user.password)
+    if (!validPassword) return res.status(400).send('Invalid password')
+
+    res.send('Logged in')
 });
 
 module.exports = router;
