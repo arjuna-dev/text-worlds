@@ -5,24 +5,36 @@ const mongoose = require('mongoose');
 var bodyParser = require("body-parser");
 //const key = require('./key.js')
 const app = express();
-
-const users = require('./models/user');
-const character = require('./models/character');
-const world = require('./models/world');
-
 const cors = require('cors')
+const dotenv = require('dotenv');
+const authRoute = require('./routes/auth')
+const registerRoute = require('./routes/register')
 
-app.use(cors()) // not having cors enabled will cause an access control error
+const getUser = require('./routes/sampleGetLoggedInUser')
+
+app.use(cors())
+dotenv.config();
+
+//Middleware
+app.use(express.json())
+//Routes Middleware
+app.use('/api/user', authRoute)
+app.use('/api/sampleget', getUser)
+app.use('/register', registerRoute)
 
 app.use(bodyParser.json())
 
 app.use(
     bodyParser.urlencoded({
         extended: false
-    })
+    }) 
 )
 
-mongoose.connect('mongodb+srv://admin:admin@cluster0-zcwkp.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true });
+mongoose.connect(process.env.DB_CONNECT, { 
+    useUnifiedTopology: true,    
+    useNewUrlParser: true 
+});
+
 mongoose.connection.once('open', () => {
     console.log('connected to the database');
 })
@@ -32,16 +44,9 @@ app.use('/graphql', graphqlHTTP({
     graphiql: true
 }));
 
-// app.get('/', (req, res) => res.sendStatus(200))
-
 app.listen(4000, () => {
     console.log('now listening for request on port 4000');
 })
-
-// var test = users.find({name: "Paul"}, function(error, docs){
-//     console.log(docs);
-// })
-// app.use(express.static(path.join(__dirname, 'build')));
 
 
 app.get('/*', (req, res) => {
