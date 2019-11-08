@@ -28,4 +28,20 @@ const registerValidation = data =>{
     return [error, value]
 }
 
+const loginValidation = data =>{
+    const schema = Joi.object({
+        email: Joi.string()
+        .required()
+        .email({ minDomainSegments: 2}),
+        password: Joi.string()
+            .required()
+            .pattern(/^[a-zA-Z0-9]{3,30}$/),
+        });
+
+    const { error, value } = schema.validate(data);
+
+    return [error, value]
+}
+
 module.exports.registerValidation = registerValidation;
+module.exports.loginValidation = loginValidation;
