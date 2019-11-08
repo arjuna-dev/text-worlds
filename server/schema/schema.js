@@ -216,7 +216,14 @@ const RootQuery = new GraphQLObjectType({
                     return doc
                 })
             }
-        }
+        },
+        world: {
+            type: WorldType,
+            args: { id: { type: GraphQLID } },
+            resolve(parents, args) {
+                return world.findById(args.id);
+            }
+        },
     })
 });
 

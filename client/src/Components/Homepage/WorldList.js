@@ -1,6 +1,7 @@
 import React from 'react'
 import { List, Image } from 'semantic-ui-react'
 import WorldDescription from './WorldDescription';
+import { Link } from 'react-router-dom';
 import p1 from '../../assets/Worlds/p1.png'
 import p2 from '../../assets/Worlds/p2.png'
 import pf3 from '../../assets/Worlds/pf3.png'
@@ -20,17 +21,19 @@ if (error) return <p>Error :(</p>;
     return (
       <div className = "world-list">
         {data.worlds.map(( world ) => (
-        <List size='massive' key = {world._id}>
-          <List.Item>
-            <Image avatar src={ picNames[Math.floor(Math.random() * Math.floor(4))] } />
-            <List.Content>
-            <List.Header as='a'>{ world.name }</List.Header>
-              <List.Description>
-                  <WorldDescription>{ world.description }</WorldDescription>
-              </List.Description>
-            </List.Content>
-          </List.Item>
-        </List>
+        <Link to = {'/world/' + world._id} key={world._id}>
+          <List size='massive'>
+            <List.Item>
+              <Image avatar src={ picNames[Math.floor(Math.random() * Math.floor(4))] } />
+              <List.Content>
+              <List.Header as='a'>{ world.name }</List.Header>
+                <List.Description>
+                    <WorldDescription>{ world.description }</WorldDescription>
+                </List.Description>
+              </List.Content>
+            </List.Item>
+          </List>
+        </Link>
         ))}
       </div>
     );
