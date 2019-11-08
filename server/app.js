@@ -6,9 +6,10 @@ var bodyParser = require("body-parser");
 //const key = require('./key.js')
 const app = express();
 const cors = require('cors')
-const jwt = require('jsonwebtoken')
 const dotenv = require('dotenv');
 const authRoute = require('./routes/auth')
+const registerRoute = require('./routes/register')
+const getUser = require('./routes/sampleGetLoggedInUser')
 
 app.use(cors())
 dotenv.config();
@@ -17,6 +18,8 @@ dotenv.config();
 app.use(express.json())
 //Routes Middleware
 app.use('/api/user', authRoute)
+app.use('/api/sampleget', getUser)
+app.use('/register', registerRoute)
 
 app.use(bodyParser.json())
 
@@ -44,10 +47,6 @@ app.listen(4000, () => {
     console.log('now listening for request on port 4000');
 })
 
-
-app.post('/login', (req, res) => {
-    jwt.sign();
-});
 
 app.get('/*', (req, res) => {
 //   res.sendFile(path.join(__dirname, 'build', 'index.html'));
