@@ -1,7 +1,7 @@
 const Joi = require('@hapi/joi')
 
 
-const registerValidation = data =>{
+const signupValidation = data =>{
     const schema = Joi.object({
         name: Joi.string()
             .alphanum()
@@ -43,5 +43,5 @@ const loginValidation = data =>{
     return [error, value]
 }
 
-module.exports.registerValidation = registerValidation;
+module.exports.signupValidation = signupValidation;
 module.exports.loginValidation = loginValidation;
