@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../../assets/logo.png';
 import SearchBar from './SearchBar.js'
 import MenuButton from './MenuButton';
-import WorldList from '../Homepage/WorldList';
+import {Link} from 'react-router-dom';
 
 const Header = () => {
     return (
@@ -13,7 +13,7 @@ const Header = () => {
                     </div>
                         <div className = "eight wide column">
                             <div className = "logo-parent">
-                            <a href= "/"><img src = {logo} alt = "logo" className = "logo" /></a>
+                            <Link to= "/"><img src = {logo} alt = "logo" className = "logo" /></Link>
                             </div>
                         </div>
                     <div className = "four wide column">
