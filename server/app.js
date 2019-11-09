@@ -8,7 +8,6 @@ const app = express();
 const cors = require('cors')
 const dotenv = require('dotenv');
 const authRoute = require('./routes/auth')
-const registerRoute = require('./routes/register')
 
 const getUser = require('./routes/sampleGetLoggedInUser')
 
@@ -20,7 +19,6 @@ app.use(express.json())
 //Routes Middleware
 app.use('/api/user', authRoute)
 app.use('/api/sampleget', getUser)
-app.use('/register', registerRoute)
 
 app.use(bodyParser.json())
 
