@@ -21,11 +21,11 @@ if (error) return <p>Error :(</p>;
     return (
       <div className = "world-list">
         {data.worlds.map(( world ) => (
-          <List size='massive'>
+          <List size='massive' key={world._id}>
             <List.Item>
               <Image avatar src={ picNames[Math.floor(Math.random() * Math.floor(4))] } />
               <List.Content>
-              <Link to = {'/world/' + world._id} key={world._id}><List.Header as='a'>{ world.name }</List.Header></Link>
+              <Link to = {'/world/' + world._id} ><List.Header as='a'>{ world.name }</List.Header></Link>
                 <List.Description>
                     <WorldDescription>{ world.description }</WorldDescription>
                 </List.Description>
