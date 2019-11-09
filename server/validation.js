@@ -1,7 +1,11 @@
 const Joi = require('@hapi/joi')
 
 
+<<<<<<< HEAD
 const registerValidation = data =>{
+=======
+const signupValidation = data =>{
+>>>>>>> feature-add-world
     const schema = Joi.object({
         name: Joi.string()
             .alphanum()
@@ -43,5 +47,9 @@ const loginValidation = data =>{
     return [error, value]
 }
 
+<<<<<<< HEAD
 module.exports.registerValidation = registerValidation;
+=======
+module.exports.signupValidation = signupValidation;
+>>>>>>> feature-add-world
 module.exports.loginValidation = loginValidation;
