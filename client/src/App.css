@@ -1,3 +1,5 @@
+/* Title and menu */
+
 .topbar {
   margin-top: 10vh;
 }
@@ -18,16 +20,22 @@
   width:89.3px;
 }
 
+/* Explore world */
+
 .world-list{
   margin-top: 10vh;
   margin-left: 10vw;
   margin-bottom: 10vw;
 }
+
+/* Add world */
 .add-world{
   margin-top: 10vh;
   margin-left: 10vw;
   margin-right: 10vw;
 }
+
+/* World Homepage */
 
 .world{
   margin-left: 10vw;
@@ -37,7 +45,13 @@
 .world-title{
   font-size: 2.5vw;
   padding: 2vw;
+  display: flex;
 }
+.join-world{
+  margin-left: 4vw;
+  margin-top: -0.5vw;
+}
+
 .world-details{
   font-size: 1.5vw;
   padding: 2vw;
@@ -50,14 +64,30 @@
   font-size: 1.5vw;
   padding: 2vw;
 }
+.world-places{
+  font-size: 1.5vw;
+  padding: 2vw;
+}
 .world-elements-inside{
   display: flex;
   margin-top: 1vw;
+  overflow-x: scroll;
+}
+.add-character{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .card-character{
   margin-right: 20px;
 }
 
+.image-card{
+  width: 50%;
+  height: 20%;
+}
 
+/*  */
 
 

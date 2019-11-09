@@ -21,12 +21,15 @@ const ModalPopup = (props) => {
             role: role,
             gender: gender
         }})
+        console.log(gender);
         setName('');
         setStory('');
+        setRole('');
+        setGender('male');
     }
     
     return(
-  <Modal trigger={<Button positive>Join the world</Button>}>
+  <Modal trigger={<Button positive className = "join-world">Join the world</Button>}>
     <Modal.Header>Define your character</Modal.Header>
     <Modal.Content image>
       <Image wrapped size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' />
@@ -40,21 +43,10 @@ const ModalPopup = (props) => {
             <Form.Group widths='equal'>
                 <Form.Field label='Role in the World' control='input' value={role} onChange={(e) => setRole(e.target.value)} />
             </Form.Group>
-            <Form.Group grouped>
-                <label>Gender</label>
-                <Form.Field
-                    label='Male'
-                    control='input'
-                    type='radio'
-                    name='htmlRadios'
-                />
-                <Form.Field
-                    label='Female'
-                    control='input'
-                    type='radio'
-                    name='htmlRadios'
-                />
-            </Form.Group>
+            {/* <div onChange={event => setGender(event)}>
+                <input type="radio" value="Male" name="gender"/> Male
+                <input type="radio" value="Female" name="gender"/> Female
+            </div> */}
             <Form.Field control='button'>
                 CREATE CHARACTER
             </Form.Field>
