@@ -43,6 +43,10 @@ const getWorldQuery = gql`
             story
             role
             gender
+            places{
+              name
+              description
+            }
           }
           events{
             title
@@ -64,8 +68,8 @@ const addWorldMutation = gql`
   }`
 
 const addCharacterMutation = gql`
-    mutation AddCharacter ($name: String!, $story: String!, $userId: String, $worldId: String! ){
-      addCharacter(name: $name, story: $story, userId: $userId, worldId: $worldId){
+    mutation AddCharacter ($name: String!, $story: String!, $userId: String, $worldId: String!, $role: String, $gender: String ){
+      addCharacter(name: $name, story: $story, userId: $userId, worldId: $worldId, role: $role, gender: $gender){
         name
         story
       }

@@ -14,25 +14,35 @@ const World = (props) => {
     return (
         <div className = "world">
             <div className = "world-title">
-                <strong>{data.world.name}</strong>
-                <ModalPopup worldId = {data.world._id} />
+                <div><strong>{data.world.name}</strong></div>
+                <div className = "join-world"><ModalPopup worldId = {data.world._id} /></div>
             </div>
             <div className = "world-details">
                 {data.world.description}
             </div>
             <div className = "world-events">
-                EVENTS <br></br>
+                <strong>EVENTS</strong> <br></br>
                 <div className = "world-elements-inside">
                     {data.world.events.map((event)=> (
-                        <CardEvent event = {event}/>
+                        <CardEvent key = {event._key} event = {event}/>
                     ))}
                 </div>
             </div>
             <div className = "world-characters">
-                CHARACTERS <br></br>
+                <strong>CHARACTERS</strong> <br></br>
                 <div className = "world-elements-inside">
                     {data.world.characters.map((character)=> (
-                        <CardEvent character = {character}/>
+                        <CardEvent key = {character._key} character = {character}/>
+                    ))}
+                </div>
+            </div>
+            <div className = "world-places">
+                <strong>PLACES</strong> <br></br>
+                <div className = "world-elements-inside">
+                    {data.world.characters.map((character)=> (
+                        character.places.map((place) => (
+                            <CardEvent key = {place._key} place = {place}/>
+                        ))
                     ))}
                 </div>
             </div>
