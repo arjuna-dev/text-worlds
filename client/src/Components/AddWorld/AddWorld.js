@@ -15,6 +15,7 @@ const AddWorld = () => {
             name: name,
             description: description
         }})
+        console.log(data)
         setName('');
         setDescription('');
     }

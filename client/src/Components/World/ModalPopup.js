@@ -21,7 +21,7 @@ const ModalPopup = (props) => {
             role: role,
             gender: gender
         }})
-        console.log(gender);
+        console.log(data);
         setName('');
         setStory('');
         setRole('');

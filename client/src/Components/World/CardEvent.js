@@ -1,11 +1,10 @@
 import React from 'react'
 import { Card, Icon, Image } from 'semantic-ui-react'
-import man from '../../assets/Characters/man.png'
-import women from '../../assets/Characters/women.png'
 import meteorCrash from '../../assets/Events/meteorCrash.png'
 import placeholder from '../../assets/placeholder.png'
 
 const CardEvent = (props) => {
+  let imageLink = "https://react.semantic-ui.com/images/avatar/large/daniel.jpg";
   if (props.event){
     return(
         <Card key = {props.event._id} className = "card-event">
@@ -21,18 +20,6 @@ const CardEvent = (props) => {
           </Card.Content>
         </Card>
     )
-  }
-  if (props.character){
-    var imageLink;
-    if(props.character.gender == "male"){
-      imageLink = man
-    }
-    else if (props.character.gender == "female"){
-      imageLink = women
-    }
-    else {
-      imageLink = "https://react.semantic-ui.com/images/avatar/large/daniel.jpg"
-    }
   }
 
   if (props.character){

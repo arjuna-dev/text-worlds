@@ -3,7 +3,6 @@ import './App.css';
 import Header from './Components/Header/Header';
 import World from './Components/World/World';
 import ApolloClient from 'apollo-boost';
-import { gql } from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { BrowserRouter, Route } from 'react-router-dom';
 import WorldList from './Components/Homepage/WorldList';
