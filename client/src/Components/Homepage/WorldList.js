@@ -25,7 +25,7 @@ if (error) return <p>Error :(</p>;
             <List.Item>
               <Image avatar src={ picNames[Math.floor(Math.random() * Math.floor(4))] } />
               <List.Content>
-              <Link to = {'/world/' + world._id} ><List.Header as='a'>{ world.name }</List.Header></Link>
+              <Link to = {'/world/' + world._id} ><List.Header><div className = "world-header">{ world.name }</div></List.Header></Link>
                 <List.Description>
                     <WorldDescription>{ world.description }</WorldDescription>
                 </List.Description>
