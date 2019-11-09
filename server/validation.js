@@ -46,4 +46,6 @@ const loginValidation = data =>{
 module.exports.signupValidation = signupValidation;
 module.exports.loginValidation = loginValidation;
 
-//Once more, this time I think I nailed it: Test commit (bash alias function experiment) with many words for commit using variables for each
+//Test
+//Test
+//Test
