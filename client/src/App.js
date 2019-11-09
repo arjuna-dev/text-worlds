@@ -8,6 +8,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { BrowserRouter, Route } from 'react-router-dom';
 import WorldList from './Components/Homepage/WorldList';
 import AddWorld from './Components/AddWorld/AddWorld';
+import Register from './Components/Forms/Register';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql',
@@ -21,6 +22,7 @@ function App() {
         <Header />
         <Route exact path = '/' component = {WorldList}/>
         <Route exact path = '/add-world' component = {AddWorld} />
+        <Route exact path = '/register' component = {Register} />
         <Route exact path = '/world/:id' component = {World}/>
       </BrowserRouter>
    </ApolloProvider>
