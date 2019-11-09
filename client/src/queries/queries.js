@@ -39,16 +39,19 @@ const getWorldQuery = gql`
             name
           }
           characters{
+            _id
             name
             story
             role
             gender
             places{
+              _id
               name
               description
             }
           }
           events{
+            _id
             title
             text
           }

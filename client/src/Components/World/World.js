@@ -24,7 +24,9 @@ const World = (props) => {
                 <strong>EVENTS</strong> <br></br>
                 <div className = "world-elements-inside">
                     {data.world.events.map((event)=> (
-                        <CardEvent key = {event._key} event = {event}/>
+                        <div key = {event._id}>
+                            <CardEvent event = {event}/>
+                        </div>
                     ))}
                 </div>
             </div>
@@ -32,7 +34,9 @@ const World = (props) => {
                 <strong>CHARACTERS</strong> <br></br>
                 <div className = "world-elements-inside">
                     {data.world.characters.map((character)=> (
-                        <CardEvent key = {character._key} character = {character}/>
+                        <div key = {character._id}>
+                            <CardEvent character = {character}/>
+                        </div>
                     ))}
                 </div>
             </div>
@@ -41,7 +45,9 @@ const World = (props) => {
                 <div className = "world-elements-inside">
                     {data.world.characters.map((character)=> (
                         character.places.map((place) => (
-                            <CardEvent key = {place._key} place = {place}/>
+                            <div key = {place._id}>
+                                <CardEvent place = {place}/>
+                            </div>
                         ))
                     ))}
                 </div>
