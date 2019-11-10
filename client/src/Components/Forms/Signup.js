@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Button, Divider, Form } from 'semantic-ui-react';
 import axios from 'axios';
 import { Redirect, Route } from 'react-router'
+import { Link } from 'react-router-dom'
 import BackNavigation from '../BackNavigation'
 
 const SignupForm = () => {
@@ -46,7 +47,7 @@ const SignupForm = () => {
   <div className="ui grid">
     <div className="four wide column"></div>
     <div className="eight wide column">
-
+    <Link className = "signup-link" to = '/login'>Already have an account? Click here to log in</Link> <br /><br />
       <Form onSubmit={submitHandler}>
         <Form.Input
           // error={{ content: 'Please enter a user name', pointing: 'below' }}
