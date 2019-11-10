@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Header from './Components/Header/Header';
 import World from './Components/World/World';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
@@ -19,7 +18,6 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
-        <Header />
         <Route exact path = '/' component = {WorldList}/>
         <Route exact path = '/add-world' component = {AddWorld} />
         <Route exact path = '/signup' component = {Signup} />

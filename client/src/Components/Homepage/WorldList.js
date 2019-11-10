@@ -1,5 +1,6 @@
 import React from 'react'
 import { List, Image } from 'semantic-ui-react'
+import Header from '../Header/Header'
 import WorldDescription from './WorldDescription';
 import { Link } from 'react-router-dom';
 import p1 from '../../assets/Worlds/p1.png'
@@ -19,20 +20,23 @@ const picNames = [p1, p2, pf3, pf4, pp1];
 if (loading) return <p>Loading...</p>;
 if (error) return <p>Error :(</p>;
     return (
-      <div className = "world-list">
-        {data.worlds.map(( world ) => (
-          <List size='massive' key={world._id}>
-            <List.Item>
-              <Image avatar src={ picNames[Math.floor(Math.random() * Math.floor(4))] } />
-              <List.Content>
-              <Link to = {'/world/' + world._id} ><List.Header><div className = "world-header">{ world.name }</div></List.Header></Link>
-                <List.Description>
-                    <WorldDescription>{ world.description }</WorldDescription>
-                </List.Description>
-              </List.Content>
-            </List.Item>
-          </List>
-        ))}
+      <div>
+        <Header />
+        <div className = "world-list">
+          {data.worlds.map(( world ) => (
+            <List size='massive' key={world._id}>
+              <List.Item>
+                <Image avatar src={ picNames[Math.floor(Math.random() * Math.floor(4))] } />
+                <List.Content>
+                <Link to = {'/world/' + world._id} ><List.Header><div className = "world-header">{ world.name }</div></List.Header></Link>
+                  <List.Description>
+                      <WorldDescription>{ world.description }</WorldDescription>
+                  </List.Description>
+                </List.Content>
+              </List.Item>
+            </List>
+          ))}
+        </div>
       </div>
     );
 }
