@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import CardEvent from './CardEvent';
 import { getWorldQuery } from '../../queries/queries';
 import ModalPopup from './ModalPopup';
+import BackNavigation from '../BackNavigation';
 
 const World = (props) => {
     const { loading, error, data } = useQuery(getWorldQuery, {
@@ -12,44 +13,48 @@ const World = (props) => {
     if (error) return <p>Error :(</p>;
     console.log(data);
     return (
-        <div className = "world">
-            <div className = "world-title">
-                <div><strong>{data.world.name}</strong></div>
-                <div className = "join-world"><ModalPopup worldId = {data.world._id} /></div>
-            </div>
-            <div className = "world-details">
-                {data.world.description}
-            </div>
-            <div className = "world-events">
-                <strong>EVENTS</strong> <br></br>
-                <div className = "world-elements-inside">
-                    {data.world.events.map((event)=> (
-                        <div key = {event._id}>
-                            <CardEvent event = {event}/>
-                        </div>
-                    ))}
+        <div>
+            <BackNavigation />
+            <div className = "page-name">Inside The World</div>
+            <div className = "world">
+                <div className = "world-title">
+                    <div><strong>{data.world.name}</strong></div>
+                    <div className = "join-world"><ModalPopup worldId = {data.world._id} /></div>
                 </div>
-            </div>
-            <div className = "world-characters">
-                <strong>CHARACTERS</strong> <br></br>
-                <div className = "world-elements-inside">
-                    {data.world.characters.map((character)=> (
-                        <div key = {character._id}>
-                            <CardEvent character = {character}/>
-                        </div>
-                    ))}
+                <div className = "world-details">
+                    {data.world.description}
                 </div>
-            </div>
-            <div className = "world-places">
-                <strong>PLACES</strong> <br></br>
-                <div className = "world-elements-inside">
-                    {data.world.characters.map((character)=> (
-                        character.places.map((place) => (
-                            <div key = {place._id}>
-                                <CardEvent place = {place}/>
+                <div className = "world-events">
+                    <strong>EVENTS</strong> <br></br>
+                    <div className = "world-elements-inside">
+                        {data.world.events.map((event)=> (
+                            <div key = {event._id}>
+                                <CardEvent event = {event}/>
                             </div>
-                        ))
-                    ))}
+                        ))}
+                    </div>
+                </div>
+                <div className = "world-characters">
+                    <strong>CHARACTERS</strong> <br></br>
+                    <div className = "world-elements-inside">
+                        {data.world.characters.map((character)=> (
+                            <div key = {character._id}>
+                                <CardEvent character = {character}/>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className = "world-places">
+                    <strong>PLACES</strong> <br></br>
+                    <div className = "world-elements-inside">
+                        {data.world.characters.map((character)=> (
+                            character.places.map((place) => (
+                                <div key = {place._id}>
+                                    <CardEvent place = {place}/>
+                                </div>
+                            ))
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

@@ -91,6 +91,29 @@
   height: 20%;
 }
 
-/*  */
+/* Back navigation button */
+.back-navigation{
+  margin-top: 4vh;
+  font-size: 20px;
+  color: black;
+  cursor: pointer;
+  padding: 10px;
+}
 
+.back-standard{
+  display: flex;
+  flex-direction: column;
+  margin-left: 8vw;
+  margin-top: 8vh;
+}
 
+.logo-small{
+  width: 250px;
+}
+.page-name{
+  font-size: 2vw;
+  font-weight: bolder;
+  text-align: center;
+  margin-left: 9vw;
+  margin-top: 4vh;
+}
