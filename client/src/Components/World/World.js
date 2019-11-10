@@ -15,7 +15,7 @@ const World = (props) => {
     return (
         <div>
             <BackNavigation />
-            <div className = "page-name">Inside The World</div>
+            <div className = "page-name">Inside This World</div>
             <div className = "world">
                 <div className = "world-title">
                     <div><strong>{data.world.name}</strong></div>
