@@ -35,6 +35,9 @@ const LoginForm = () => {
     if (loggedIn == true){
       return <Redirect to="/" />
     }
+    if (localStorage.usertoken){
+      return <Redirect to="/" />
+    }
 
   return(
   <div>
