@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { Form } from 'semantic-ui-react'
 import { addWorldMutation } from '../../queries/queries';
 import BackNavigation from '../BackNavigation';
+import {Redirect} from 'react-router-dom'
 
 const AddWorld = () => {
     
@@ -21,6 +22,9 @@ const AddWorld = () => {
         setDescription('');
     }
     
+    if (!localStorage.usertoken){
+      return (<Redirect to = '/login' />)
+    }
     
     return(
         <div>
