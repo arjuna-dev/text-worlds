@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Button, Divider, Form } from 'semantic-ui-react';
 import axios from 'axios';
 import { Redirect, Route } from 'react-router'
+import BackNavigation from '../BackNavigation'
 
 const SignupForm = () => {
 
@@ -39,6 +40,9 @@ const SignupForm = () => {
     }
 
   return(
+    <div>
+    <BackNavigation />
+    <div className = "page-name">Sign Up</div>
   <div className="ui grid">
     <div className="four wide column"></div>
     <div className="eight wide column">
@@ -89,6 +93,7 @@ const SignupForm = () => {
       </Form>
     </div>
     <div className="four wide column"></div>
+  </div>
   </div>
   )
 }
