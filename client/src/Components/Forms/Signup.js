@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Button, Divider, Form } from 'semantic-ui-react';
 import axios from 'axios';
-import { Redirect, Route } from 'react-router'
+import { Redirect} from 'react-router'
 import { Link } from 'react-router-dom'
 import BackNavigation from '../BackNavigation'
 
@@ -36,7 +36,7 @@ const SignupForm = () => {
       })
   }
     
-    if (loggedIn == true){
+    if (loggedIn === true){
       return <Redirect to="/" />
     }
     if (localStorage.usertoken){
