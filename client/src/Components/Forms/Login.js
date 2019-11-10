@@ -32,7 +32,7 @@ const LoginForm = () => {
       })
   }
     
-    if (loggedIn == true){
+    if (loggedIn === true){
       return <Redirect to="/" />
     }
     if (localStorage.usertoken){
