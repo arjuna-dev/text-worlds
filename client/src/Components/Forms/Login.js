@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Button, Divider, Form } from 'semantic-ui-react';
 import axios from 'axios';
 import { Redirect } from 'react-router'
+import BackNavigation from '../BackNavigation';
 
 const LoginForm = () => {
 
@@ -35,6 +36,9 @@ const LoginForm = () => {
     }
 
   return(
+  <div>
+    <BackNavigation />
+    <div className = "page-name">Log In</div>
   <div className="ui grid">
     <div className="four wide column"></div>
     <div className="eight wide column">
@@ -43,7 +47,7 @@ const LoginForm = () => {
         <Form.Input
           // error='Please enter your email address'
           fluid
-          label='email'
+          label='Email'
           name='email'
           placeholder='email'
           type="email"
@@ -53,7 +57,7 @@ const LoginForm = () => {
         <Form.Input
           // error='Please enter password'
           fluid
-          label='password'
+          label='Password'
           name='password'
           placeholder='Password'
           type="password"
@@ -65,6 +69,7 @@ const LoginForm = () => {
       </Form>
     </div>
     <div className="four wide column"></div>
+  </div>
   </div>
   )
 }

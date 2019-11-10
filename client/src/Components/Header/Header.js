@@ -4,7 +4,25 @@ import SearchBar from './SearchBar.js'
 import MenuButton from './MenuButton';
 import {Link} from 'react-router-dom';
 
-const Header = () => {
+const Header = () => 
+
+{
+    function logout(){
+        localStorage.removeItem('usertoken');
+        window.location.reload(true);
+    }
+
+    const notlogged = (
+        <div>
+            <Link to = "/signup" className = "signup">Sign up </Link>
+            <Link to = "/login">Log in </Link>
+        </div>
+    )
+    const logged = (
+        <div onClick = {logout} className = "logout">
+            Logout
+        </div>
+    )
     return (
         <div className = "header">
             <div className = "topbar">
@@ -18,7 +36,13 @@ const Header = () => {
                         </div>
                     <div className = "four wide column">
                         <SearchBar />
+                        <br />
+                        <div className = "menu">
                         <MenuButton />
+                        <div className = "auth-button">
+                            {localStorage.usertoken ? logged : notlogged}
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>

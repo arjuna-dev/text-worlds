@@ -14,10 +14,29 @@
   width: 40vw;
 }
 
+.menu {
+  display: flex;
+}
+
+.auth-button{
+  margin-left: 20px;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.signup{
+  margin-right: 20px;
+}
+
 .menu-button{
   display: flex;
   flex-direction: row;
   width:89.3px;
+}
+
+.logout{
+  color: red;
+  cursor: pointer;
 }
 
 /* Explore world */
@@ -116,4 +135,5 @@
   text-align: center;
   margin-left: 9vw;
   margin-top: 4vh;
+  margin-bottom: 1vh;
 }
