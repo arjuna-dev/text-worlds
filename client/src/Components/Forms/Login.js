@@ -3,6 +3,7 @@ import { Button, Divider, Form } from 'semantic-ui-react';
 import axios from 'axios';
 import { Redirect } from 'react-router'
 import BackNavigation from '../BackNavigation';
+import {Link} from 'react-router-dom'
 
 const LoginForm = () => {
 
@@ -42,7 +43,7 @@ const LoginForm = () => {
   <div className="ui grid">
     <div className="four wide column"></div>
     <div className="eight wide column">
-
+    <Link className = "signup-link" to = '/signup'>Haven't joined yet? Click here to Sign up</Link> <br /><br />
       <Form onSubmit={submitHandler}>
         <Form.Input
           // error='Please enter your email address'
@@ -64,7 +65,7 @@ const LoginForm = () => {
           value={form.password}
           onChange={updateField}
         />
-        <Button type='submit'>Submit</Button>
+        <Button type='submit'>Login</Button>
         <Divider hidden />
       </Form>
     </div>
