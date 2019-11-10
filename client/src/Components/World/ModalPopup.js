@@ -4,6 +4,7 @@ import { Button, Header, Image, Modal } from 'semantic-ui-react'
 import { Form } from 'semantic-ui-react'
 import { addCharacterMutation } from '../../queries/queries';
 import { createBrowserHistory } from "history"
+import jwt_decode from 'jwt-decode'
 
 const history = createBrowserHistory();
 
@@ -21,6 +22,7 @@ const ModalPopup = (props) => {
             name: name,
             story: story,
             worldId: props.worldId,
+            userId: (jwt_decode(localStorage.usertoken))._id,
             role: role,
             gender: gender
         }})

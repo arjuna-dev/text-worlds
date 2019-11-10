@@ -4,6 +4,7 @@ import { Form } from 'semantic-ui-react'
 import { addWorldMutation } from '../../queries/queries';
 import BackNavigation from '../BackNavigation';
 import {Redirect} from 'react-router-dom'
+import jwt_decode from 'jwt-decode'
 
 const AddWorld = () => {
     
@@ -13,9 +14,11 @@ const AddWorld = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log((jwt_decode(localStorage.usertoken))._id);
         addWorld({variables: {
             name: name,
-            description: description
+            description: description,
+            userId: (jwt_decode(localStorage.usertoken))._id
         }})
         console.log(data)
         setName('');
