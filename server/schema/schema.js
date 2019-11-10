@@ -60,7 +60,7 @@ const WorldType = new GraphQLObjectType({
         user: {
             type: UserType,
             resolve(parent, args){
-                return user.find({_id: parent.userId}, function(err, data){
+                return user.findOne({_id: parent.userId}, function(err, data){
                     if (err) console.log(err)
                     return data
                 })
@@ -307,7 +307,7 @@ const Mutation = new GraphQLObjectType({
             args: {
                 name: { type: new GraphQLNonNull(GraphQLString)},
                 description: { type: new GraphQLNonNull(GraphQLString)},
-                userId: {type: GraphQLString}
+                userId: {type: new GraphQLNonNull(GraphQLString)}
 
                 //add more later
             },
@@ -315,7 +315,7 @@ const Mutation = new GraphQLObjectType({
                 let newWorld = new world({
                     name: args.name,
                     description: args.description,
-                    userId: args.usersId
+                    userId: args.userId
                 });
                 return newWorld.save();
             }
@@ -325,7 +325,7 @@ const Mutation = new GraphQLObjectType({
             args: {
                 name: { type: new GraphQLNonNull(GraphQLString)},
                 worldId: {type: new GraphQLNonNull(GraphQLString)},
-                userId: {type: GraphQLString},
+                userId: {type: new GraphQLNonNull(GraphQLString)},
                 story: { type: new GraphQLNonNull(GraphQLString) },
                 gender: {type: GraphQLString},
                 role: {type: GraphQLString},

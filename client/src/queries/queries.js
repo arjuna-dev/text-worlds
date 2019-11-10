@@ -60,7 +60,7 @@ const getWorldQuery = gql`
 `
 
 const addWorldMutation = gql`
-    mutation AddWorld ($name: String!, $description: String!, $userId: String){
+    mutation AddWorld ($name: String!, $description: String!, $userId: String!){
     addWorld(name: $name, description: $description, userId: $userId){
         name
         description
@@ -71,7 +71,7 @@ const addWorldMutation = gql`
   }`
 
 const addCharacterMutation = gql`
-    mutation AddCharacter ($name: String!, $story: String!, $userId: String, $worldId: String!, $role: String, $gender: String ){
+    mutation AddCharacter ($name: String!, $story: String!, $userId: String!, $worldId: String!, $role: String, $gender: String ){
       addCharacter(name: $name, story: $story, userId: $userId, worldId: $worldId, role: $role, gender: $gender){
         name
         story
