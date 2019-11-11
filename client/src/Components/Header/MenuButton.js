@@ -1,9 +1,7 @@
 import React from 'react'
 import { Dropdown, Menu } from 'semantic-ui-react'
-import { createBrowserHistory } from "history"
 import {Link} from 'react-router-dom'
 
-const history = createBrowserHistory();
 
 const MenuDropdownItem = () => {
 

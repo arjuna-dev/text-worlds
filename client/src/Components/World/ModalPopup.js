@@ -34,7 +34,7 @@ const ModalPopup = (props) => {
 
     if (!localStorage.usertoken){
       return (
-        <Link to = '/login'><Button neutral className = "join-world"> Log in & Join the world </Button></Link>
+        <Link to = '/login'><Button neutral= "true" className = "join-world"> Log in & Join the world </Button></Link>
       )
     }
     
