@@ -5,7 +5,8 @@ import { List } from 'semantic-ui-react'
 import { Image, Popup } from 'semantic-ui-react'
 import p1 from '../../assets/Worlds/p1.png'
 import p2 from '../../assets/Worlds/p2.png'
-
+import jwt_decode from 'jwt-decode'
+import { Redirect } from 'react-router-dom'
 import BackNavigation from '../BackNavigation';
 
 const WorldGraph = (props) => {
@@ -15,6 +16,19 @@ const WorldGraph = (props) => {
     if (loading) return <div className="ui active centered loader"></div>
     if (error) return <div>Error :( Try again later</div>;
     console.log(data);
+
+    let redirect = true
+    data.world.characters.map((character) => {
+        if (localStorage.usertoken && character.userId === jwt_decode(localStorage.usertoken)._id){
+            redirect = false;
+        }
+        return;
+    })
+    if (redirect){
+        return <Redirect to = '/' />
+    }
+
+
     return (
     <div>
         <BackNavigation />
