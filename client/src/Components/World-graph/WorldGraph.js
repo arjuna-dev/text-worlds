@@ -42,7 +42,7 @@ const WorldGraph = (props) => {
                         content={event.text}
                         key={event._id}
                         header={event.title}
-                        trigger={<Image src={p1} avatar />}
+                        trigger={<div className = "graph-item-event"><Image src={p1} avatar /> {event.title}</div>}
                       />
                     })}
                     {data.world.characters.map((character)=> (
@@ -52,7 +52,7 @@ const WorldGraph = (props) => {
                         content={post.text}
                         key={post._id}
                         header={header}
-                        trigger={<Image src={p2} avatar />}
+                        trigger={<div className = "graph-item-post"><Image src={p2} avatar /> {header}</div>}
                       />
                     
                     })
@@ -69,7 +69,7 @@ const WorldGraph = (props) => {
                                 content={post.text}
                                 key={post._id}
                                 header={post.title}
-                                trigger={<Image src={p2} avatar />}
+                                trigger={<div className = "graph-item-post"><Image src={p2} avatar /> {post.title}</div>}
                               />
                             })}
                         </div>

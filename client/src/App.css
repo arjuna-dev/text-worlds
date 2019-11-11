@@ -164,3 +164,13 @@
 .linked-world-characters{
   display: flex;
 }
+.graph-item-event{
+  margin-right: 2vw;
+  margin-left: 2vw;
+  font-weight: bolder;
+}
+.graph-item-post{
+  margin-right: 2vw;
+  margin-left: 2vw;
+  font-weight: bolder;
+}

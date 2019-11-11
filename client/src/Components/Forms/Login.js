@@ -4,6 +4,9 @@ import axios from 'axios';
 import { Redirect } from 'react-router'
 import BackNavigation from '../BackNavigation';
 import {Link} from 'react-router-dom'
+import { createBrowserHistory } from "history"
+
+const history = createBrowserHistory();
 
 const LoginForm = () => {
 
@@ -24,6 +27,7 @@ const LoginForm = () => {
       .then(response => {
         if (response.data && !response.data.error){
             localStorage.setItem('usertoken', response.data)
+            history.goBack();
         }
         setLoggedIn(true)
       })
@@ -32,11 +36,8 @@ const LoginForm = () => {
       })
   }
     
-    if (loggedIn === true){
-      return <Redirect to="/" />
-    }
-    if (localStorage.usertoken){
-      return <Redirect to="/" />
+    if (localStorage.usertoken || loggedIn){
+      return <Redirect to = '/' />
     }
 
   return(
