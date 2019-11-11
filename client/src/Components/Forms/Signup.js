@@ -22,17 +22,17 @@ const SignupForm = () => {
 
   const submitHandler = e => {
     e.preventDefault();
-    console.log(form)
+    // console.log(form)
     axios.post('http://localhost:4000/api/user/signup', form)
       .then(response => {
-        console.log(response)
+        // console.log(response)
         if (response.data && !response.data.error){
           localStorage.setItem('usertoken', response.data)
         }
         setLoggedIn(true)
       })
       .catch(error => {
-        console.log(error)
+        // console.log(error)
       })
   }
     
