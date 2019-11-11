@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import World from './Components/World/World';
+import World from './Components/World-homepage/World';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import WorldList from './Components/Homepage/WorldList';
 import AddWorld from './Components/AddWorld/AddWorld';
