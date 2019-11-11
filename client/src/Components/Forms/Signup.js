@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import { Button, Divider, Form } from 'semantic-ui-react';
+import { Button, Divider } from 'semantic-ui-react';
 import axios from 'axios';
 import { Redirect} from 'react-router'
 import { Link } from 'react-router-dom'
 import BackNavigation from '../BackNavigation'
+import { Form, Input, TextArea, Checkbox, Radio, RadioGroup, Dropdown, Select, } from 'formsy-semantic-ui-react';
 
 const SignupForm = () => {
 
@@ -22,17 +23,23 @@ const SignupForm = () => {
 
   const submitHandler = e => {
     e.preventDefault();
-    // console.log(form)
     axios.post('http://localhost:4000/api/user/signup', form)
       .then(response => {
-        // console.log(response)
         if (response.data && !response.data.error){
+          console.log("im in")
           localStorage.setItem('usertoken', response.data)
+          setLoggedIn(true)
+        } else {
+          console.log("response")
+          console.log(response)
         }
-        setLoggedIn(true)
       })
-      .catch(error => {
-        // console.log(error)
+      // .then(response => {
+      // })
+      .catch(response => {
+        console.log("response")
+        console.log(response)
+        // console.log(response.data.error)
       })
   }
     
@@ -61,6 +68,8 @@ const SignupForm = () => {
           type="text"
           value={form.name}
           onChange={updateField}
+          validations="isAlphanumeric"
+          validationErrors={{ isAlphanumeric: 'You are using invalid characters' }}
         />
         <Form.Input
           // error='Please enter your email address'
@@ -71,6 +80,8 @@ const SignupForm = () => {
           type="email"
           value={form.email}
           onChange={updateField}
+          validations="isEmail"
+          validationErrors={{ isEmail: 'Email is not valid' }}
         />
         <Form.Input
           // error='Please enter password'
@@ -81,6 +92,8 @@ const SignupForm = () => {
           type="password"
           value={form.password}
           onChange={updateField}
+          validations={"minLength:8"}
+          validationErrors={{ minLength: 'Password must be at least 8 characters long' }}
         />
         <Form.Input
           // error='Repeat password here'
@@ -91,6 +104,8 @@ const SignupForm = () => {
           type="password"
           value={form.repeat_password}
           onChange={updateField}
+          validations={"minLength:8"}
+          validationErrors={{ minLength: 'Password must be at least 8 characters long' }}
         />
         <Button type='submit'>Submit</Button>
         <Divider hidden />
