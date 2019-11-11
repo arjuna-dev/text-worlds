@@ -1,4 +1,4 @@
-# text-worlds
+# Text Worlds
 ###### A text-based, creative, collaborative experience.
 
 **Here is it how it works:**
