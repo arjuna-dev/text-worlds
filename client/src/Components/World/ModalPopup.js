@@ -2,11 +2,10 @@ import React, {useState} from 'react'
 import { useMutation } from '@apollo/react-hooks';
 import { Button, Header, Image, Modal } from 'semantic-ui-react'
 import { Form } from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 import { addCharacterMutation } from '../../queries/queries';
-import { createBrowserHistory } from "history"
 import jwt_decode from 'jwt-decode'
 
-const history = createBrowserHistory();
 
 const ModalPopup = (props) => {
     const [name, setName] = useState('');
@@ -35,7 +34,7 @@ const ModalPopup = (props) => {
 
     if (!localStorage.usertoken){
       return (
-        <Button neutral className = "join-world" onClick = {()=> {history.push('/login'); window.location.reload(true)}}> Log in & Join the world</Button>
+        <Link to = '/login'><Button neutral className = "join-world"> Log in & Join the world </Button></Link>
       )
     }
     

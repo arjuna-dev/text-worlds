@@ -9,8 +9,8 @@ const World = (props) => {
     const { loading, error, data } = useQuery(getWorldQuery, {
         variables: { id: props.match.params.id },
       });
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :(</p>;
+    if (loading) return <div className="ui active centered loader"></div>
+    if (error) return <div>Error :( Try again later</div>;
     console.log(data);
     return (
         <div>

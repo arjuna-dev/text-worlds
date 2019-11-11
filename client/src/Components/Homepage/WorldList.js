@@ -17,7 +17,9 @@ function WorldList() {
 const { loading, error, data } = useQuery(getAllWorlds);
 const picNames = [p1, p2, pf3, pf4, pp1];
 
-if (loading) return <p>Loading...</p>;
+if (loading) {
+    return <div className="ui active centered loader loading-screen"></div>
+};
 if (error) return <p>Error :(</p>;
     return (
       <div>
