@@ -40,6 +40,7 @@ const getWorldQuery = gql`
           }
           characters{
             _id
+            userId
             name
             story
             role
@@ -48,6 +49,13 @@ const getWorldQuery = gql`
               _id
               name
               description
+            }
+            posts{
+              title
+              text
+              character{
+                name
+              }
             }
           }
           events{

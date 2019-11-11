@@ -174,7 +174,7 @@ const PostType = new GraphQLObjectType({
         character: {
             type: CharacterType,
             resolve(parent, args){
-                return character.findOne({_id: parent.userId})
+                return character.findOne({_id: parent.characterId})
             }    
         },
         // type: {type: String, enum: ['World Narrator', 'Small Narrator', 'Me Speaking']},

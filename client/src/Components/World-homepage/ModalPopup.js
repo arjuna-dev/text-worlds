@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { useMutation } from '@apollo/react-hooks';
 import { Button, Header, Image, Modal } from 'semantic-ui-react'
 import { Form } from 'semantic-ui-react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import { addCharacterMutation } from '../../queries/queries';
 import jwt_decode from 'jwt-decode'
 
@@ -12,7 +12,10 @@ const ModalPopup = (props) => {
     const [story, setStory] = useState('');
     const [role, setRole] = useState('');
     const [gender, setGender] = useState('');
+    const [gateway, setGateway] = useState(false);
     const [addCharacter, { data }] = useMutation(addCharacterMutation);
+
+    let link = '/world/' + props.worldId + '/graph';
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -29,7 +32,9 @@ const ModalPopup = (props) => {
         setName('');
         setStory('');
         setRole('');
-        setGender('male');
+        setGender('');
+        setGateway(true);
+        
     }
 
     if (!localStorage.usertoken){
@@ -37,6 +42,11 @@ const ModalPopup = (props) => {
         <Link to = '/login'><Button neutral= "true" className = "join-world"> Log in & Join the world </Button></Link>
       )
     }
+
+    if (gateway){
+      return <Redirect to = {link} />
+    }
+    
     
     return(
   <Modal trigger={<Button positive className = "join-world">Join the world</Button>}>
