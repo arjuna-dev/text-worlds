@@ -4,6 +4,9 @@ import axios from 'axios';
 import { Redirect} from 'react-router'
 import { Link } from 'react-router-dom'
 import BackNavigation from '../BackNavigation'
+import { createBrowserHistory } from "history"
+
+const history = createBrowserHistory();
 
 const SignupForm = () => {
 
@@ -28,6 +31,7 @@ const SignupForm = () => {
         console.log(response)
         if (response.data && !response.data.error){
           localStorage.setItem('usertoken', response.data)
+          history.goBack()
         }
         setLoggedIn(true)
       })
@@ -36,10 +40,7 @@ const SignupForm = () => {
       })
   }
     
-    if (loggedIn === true){
-      return <Redirect to="/" />
-    }
-    if (localStorage.usertoken){
+    if (loggedIn || localStorage.usertoken){
       return <Redirect to="/" />
     }
 
