@@ -145,3 +145,22 @@
   width: 100vw;
   height: 100vh;
 }
+
+.world-graph{
+  margin-left: 12vw;
+  margin-top: 8vh;
+}
+
+.world-graph-items{
+  margin-bottom: 2vw;
+}
+
+.world-graph-title{
+  font-weight: bolder;
+}
+.linked-world-title{
+  display: flex;
+}
+.linked-world-characters{
+  display: flex;
+}
