@@ -1,6 +1,7 @@
 import React from 'react'
 import { Dropdown, Menu } from 'semantic-ui-react'
 import { createBrowserHistory } from "history"
+import {Link} from 'react-router-dom'
 
 const history = createBrowserHistory();
 
@@ -10,8 +11,8 @@ const MenuDropdownItem = () => {
   <Menu className = "menu-button" horizontal = "true">
     <Dropdown item text='Menu'>
       <Dropdown.Menu>
-        <Dropdown.Item onClick = {(e) => {history.push('/'); window.location.reload(true)}}>Explore World</Dropdown.Item>
-        <Dropdown.Item onClick = {(e) => {history.push('/add-world'); window.location.reload(true)}}>Add a World</Dropdown.Item>
+        <Link to = '/'><Dropdown.Item>Explore World</Dropdown.Item></Link>
+        <Link to = '/add-world'><Dropdown.Item>Add a World</Dropdown.Item></Link>
         <Dropdown.Item>Adopt a character</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
