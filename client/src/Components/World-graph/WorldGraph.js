@@ -6,6 +6,7 @@ import { Tab } from 'semantic-ui-react'
 import jwt_decode from 'jwt-decode'
 import { Redirect } from 'react-router-dom'
 import BackNavigation from '../BackNavigation';
+import PostBox from './PostBox';
 
 const WorldGraph = (props) => {
     const { loading, error, data } = useQuery(getWorldQuery, {
@@ -88,7 +89,7 @@ const WorldGraph = (props) => {
             </List>
         </div>
         <div className = "post-box">
-
+            <PostBox />
         </div>
     </div>
     );

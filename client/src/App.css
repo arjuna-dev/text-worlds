@@ -149,6 +149,7 @@
 .world-graph{
   margin-left: 12vw;
   margin-top: 8vh;
+  margin-bottom: 30vh;
 }
 
 .world-graph-items{
@@ -177,4 +178,11 @@
 }
 .tab{
   margin-left: 4vw;
+}
+
+.post-box{
+  position: fixed;
+  bottom: 1vh;
+  margin-left: 4vw;
+  width: 90vw;
 }
