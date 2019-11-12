@@ -3,7 +3,8 @@ import { useMutation } from '@apollo/react-hooks';
 import { Button, Header, Image, Modal } from 'semantic-ui-react'
 import { Form } from 'semantic-ui-react'
 import {Link, Redirect} from 'react-router-dom'
-import { addCharacterMutation } from '../../queries/queries';
+import { addCharacterMutation, getWorldQuery } from '../../queries/queries';
+import { Label } from 'semantic-ui-react'
 import jwt_decode from 'jwt-decode'
 
 
@@ -13,9 +14,12 @@ const ModalPopup = (props) => {
     const [role, setRole] = useState('');
     const [gender, setGender] = useState('');
     const [gateway, setGateway] = useState(false);
+    let alreadyJoined = false;
     const [addCharacter, { data }] = useMutation(addCharacterMutation);
 
-    let link = '/world/' + props.worldId + '/graph';
+    let link = '/world/' + props.world._id + '/graph';
+    let link2 = '/world/' + props.world._id;
+    console.log(link);
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -23,11 +27,11 @@ const ModalPopup = (props) => {
         addCharacter({variables: {
             name: name,
             story: story,
-            worldId: props.worldId,
+            worldId: props.world._id,
             userId: (jwt_decode(localStorage.usertoken))._id,
             role: role,
             gender: gender
-        }})
+        }, refetchQueries: [{ query: getWorldQuery , variables: {id: props.world._id}}]})
         console.log(data);
         setName('');
         setStory('');
@@ -36,18 +40,30 @@ const ModalPopup = (props) => {
         setGateway(true);
         
     }
-
+    //checking if authenticated
     if (!localStorage.usertoken){
       return (
         <Link to = '/login'><Button neutral= "true" className = "join-world"> Log in & Join the world </Button></Link>
       )
     }
+    // checking if already joined
+    props.world.characters.map((character) => {
+      if(character.userId === jwt_decode(localStorage.usertoken)._id){
+        alreadyJoined = true;
+      }
+      return;
+    })
 
+    if(alreadyJoined){
+      return <div> <Label as='a' color='olive' tag> Joined </Label> <Link to = {link}><Button positive className = "join-world">Get In!</Button></Link></div>
+    }
+
+    // redirecting to the graph after creating the character
     if (gateway){
-      return <Redirect to = {link} />
+      return <Redirect to = {link2} />
     }
     
-    
+    // modal popup to create a character
     return(
   <Modal trigger={<Button positive className = "join-world">Join the world</Button>}>
     <Modal.Header>Define your character</Modal.Header>
