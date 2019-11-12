@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import { Form } from 'semantic-ui-react'
 import { addWorldMutation, getAllWorlds } from '../../queries/queries';
 import BackNavigation from '../BackNavigation';

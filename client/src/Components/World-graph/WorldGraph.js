@@ -1,10 +1,8 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { getWorldQuery } from '../../queries/queries';
-import { List } from 'semantic-ui-react'
-import { Image, Popup } from 'semantic-ui-react'
-import p1 from '../../assets/Worlds/p1.png'
-import p2 from '../../assets/Worlds/p2.png'
+import { List, Container } from 'semantic-ui-react'
+import { Tab } from 'semantic-ui-react'
 import jwt_decode from 'jwt-decode'
 import { Redirect } from 'react-router-dom'
 import BackNavigation from '../BackNavigation';
@@ -29,6 +27,30 @@ const WorldGraph = (props) => {
     if (redirect){
         return <Redirect to = '/' />
     }
+    let panesWorld = [];
+
+    //world-events
+    data.world.events.map((event) => {
+        panesWorld.push({
+            menuItem: '[EVENT]  ' + event.title,
+            render: () => <Tab.Pane key = {event._id} attached={false}><Container text>{event.text}</Container></Tab.Pane>,
+        })
+        return
+    })
+    //world-events/posts
+    data.world.characters.map((character)=> (
+    character.posts.map((post) => {
+        let header = '[POST]  ' + post.title + ' ⟶ ' + post.character.name
+        panesWorld.push({
+            menuItem: header,
+            render: () => <Tab.Pane key = {post._id} attached={false}><Container text>{post.text}</Container></Tab.Pane>,
+        })
+        return
+    })
+    ))
+
+    
+        
 
     return (
     <div>
@@ -38,50 +60,35 @@ const WorldGraph = (props) => {
                 {/* World-title-graph */}
                 <div className = 'linked-world-title'>
                     <List.Item icon='map' content= {data.world.name} className = "world-graph-items world-graph-title"/>
-                    {data.world.events.map((event) => {
-                        return <Popup
-                        content={event.text}
-                        key={event._id}
-                        header={event.title}
-                        trigger={<div className = "graph-item-event"><Image src={p1} avatar /> {event.title}</div>}
-                      />
-                    })}
-                    {data.world.characters.map((character)=> (
-                    character.posts.map((post) => {
-                        let header = post.title + ' ⟶ ' + post.character.name
-                        return <Popup
-                        content={post.text}
-                        key={post._id}
-                        header={header}
-                        trigger={<div className = "graph-item-post"><Image src={p2} avatar /> {header}</div>}
-                      />
-                    
-                    })
-                    ))}
+                    <div className = "tab"><Tab  menu={{ secondary: true, pointing: true }} panes={panesWorld} /></div>
                 </div>
                 {/* World-character-graph */}
                 {data.world.characters.map((character) => {
+                    let paneCharacters = [];
+                    character.posts.map((post) => {
+                        paneCharacters.push({
+                            menuItem: post.title,
+                            render: () => <Tab.Pane attached={false}><Container text>{post.text}</Container></Tab.Pane>,
+                        })
+                        return
+                    })
                     return (
-                        <div className = "linked-world-characters">
+                        <div className = "linked-world-characters" key = {character._id}>
                             <List.Item key = {character._id} icon = "user" content = {character.name} className = "world-graph-items"/>
-                            {
-                                character.posts.map((post) =>{
-                                return <Popup
-                                content={post.text}
-                                key={post._id}
-                                header={post.title}
-                                trigger={<div className = "graph-item-post"><Image src={p2} avatar /> {post.title}</div>}
-                              />
-                            })}
+                            <div className = "tab" ><Tab  menu={{ secondary: true, pointing: true }} panes={paneCharacters} /></div>
                         </div>
                     )
                 })}
+        
                 {data.world.characters.map((character)=> (
                     character.places.map((place) => (
                         <List.Item key = {place._id} icon = "marker" content = {place.name} className = "world-graph-items"/>
                     ))
                 ))}
             </List>
+        </div>
+        <div className = "post-box">
+
         </div>
     </div>
     );
