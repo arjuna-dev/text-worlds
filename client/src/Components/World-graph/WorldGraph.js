@@ -13,21 +13,22 @@ const WorldGraph = (props) => {
     const { loading, error, data } = useQuery(getWorldQuery, {
         variables: { id: props.match.params.id },
     });
+    console.log('working');
     if (loading) return <div className="ui active centered loader"></div>
     if (error) return <div>Error :( Try again later</div>;
     console.log(data);
-
-    let redirect = true
+    
+    let redirect = true;
     data.world.characters.map((character) => {
         if (localStorage.usertoken && character.userId === jwt_decode(localStorage.usertoken)._id){
             redirect = false;
         }
         return;
     })
+    
     if (redirect){
         return <Redirect to = '/' />
     }
-
 
     return (
     <div>
