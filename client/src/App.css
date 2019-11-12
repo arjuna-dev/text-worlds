@@ -163,6 +163,7 @@
 }
 .linked-world-characters{
   display: flex;
+  margin-top: 6vw;
 }
 .graph-item-event{
   margin-right: 2vw;
@@ -173,4 +174,7 @@
   margin-right: 2vw;
   margin-left: 2vw;
   font-weight: bolder;
+}
+.tab{
+  margin-left: 4vw;
 }
