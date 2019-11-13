@@ -80,6 +80,33 @@ const addWorldMutation = gql`
         }
       } 
   }`
+const addPostMutation = gql`
+  mutation AddPost($title: String!, $text: String!, $characterId: String!){
+    addPost(title: $title, text: $text, characterId: $characterId){
+      _id
+      title
+      text
+      character{
+        name
+      }
+    }
+  }
+`
+const addEventMutation = gql`
+  mutation AddEvent($title: String!, $text: String!, $characterId: String!, $worldId: String!){
+    addEvent(title: $title, text: $text, characterId: $characterId, worldId: $worldId){
+      _id
+      title
+      text
+      character{
+        name
+      }
+      world{
+        name
+      }
+    }
+  }
+`
 
 const addCharacterMutation = gql`
     mutation AddCharacter ($name: String!, $story: String!, $userId: String!, $worldId: String!, $role: String, $gender: String ){
@@ -101,4 +128,4 @@ const addCharacterMutation = gql`
 `
 
 
-  export { getAllCharacters, addWorldMutation, getAllPlaces, getAllWorlds, getWorldQuery, addCharacterMutation };
+  export { getAllCharacters, addWorldMutation, addPostMutation, addEventMutation, getAllPlaces, getAllWorlds, getWorldQuery, addCharacterMutation };

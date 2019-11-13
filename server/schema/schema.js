@@ -352,7 +352,7 @@ const Mutation = new GraphQLObjectType({
             args: {
                 title: { type: new GraphQLNonNull(GraphQLString)},
                 text: { type: new GraphQLNonNull(GraphQLString)},
-                characterId: {type: new GraphQLNonNull(GraphQLID)}
+                characterId: {type: new GraphQLNonNull(GraphQLString)}
             },
             resolve(parent, args){
                 let newPost = new post({
@@ -384,8 +384,8 @@ const Mutation = new GraphQLObjectType({
             args: {
                     title: { type: new GraphQLNonNull(GraphQLString)},
                     text: { type: new GraphQLNonNull(GraphQLString)},
-                    characterId: {type: new GraphQLNonNull(GraphQLID)},
-                    worldId: {type: new GraphQLNonNull(GraphQLID)}
+                    characterId: {type: new GraphQLNonNull(GraphQLString)},
+                    worldId: {type: new GraphQLNonNull(GraphQLString)}
                 },
             resolve(parent, args){
                 let newEvent = new event({

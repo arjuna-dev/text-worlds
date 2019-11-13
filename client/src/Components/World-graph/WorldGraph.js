@@ -12,6 +12,7 @@ const WorldGraph = (props) => {
     const { loading, error, data } = useQuery(getWorldQuery, {
         variables: { id: props.match.params.id },
     });
+    let myCharacterId;
     console.log('working');
     if (loading) return <div className="ui active centered loader"></div>
     if (error) return <div>Error :( Try again later</div>;
@@ -34,17 +35,17 @@ const WorldGraph = (props) => {
     data.world.events.map((event) => {
         panesWorld.push({
             menuItem: '[EVENT]  ' + event.title,
-            render: () => <Tab.Pane key = {event._id} attached={false}><Container text>{event.text}</Container></Tab.Pane>,
+            render: () => <div className = "container-text"><Tab.Pane key = {event._id} attached={false}><Container text>{event.text}</Container></Tab.Pane></div>,
         })
         return
     })
     //world-events/posts
     data.world.characters.map((character)=> (
     character.posts.map((post) => {
-        let header = '[POST]  ' + post.title + ' ⟶ ' + post.character.name
+        let header = '[POST]  ' + post.title;
         panesWorld.push({
             menuItem: header,
-            render: () => <Tab.Pane key = {post._id} attached={false}><Container text>{post.text}</Container></Tab.Pane>,
+            render: () => <div className = "container-text"><Tab.Pane key = {post._id} attached={false} className = "container-text"><Container text><em>Posted by <strong>{post.character.name}</strong></em><br /> <br />{post.text}</Container></Tab.Pane></div>,
         })
         return
     })
@@ -65,11 +66,14 @@ const WorldGraph = (props) => {
                 </div>
                 {/* World-character-graph */}
                 {data.world.characters.map((character) => {
+                    if (character.userId === jwt_decode(localStorage.usertoken)._id){
+                        myCharacterId = character._id;
+                    }
                     let paneCharacters = [];
                     character.posts.map((post) => {
                         paneCharacters.push({
                             menuItem: post.title,
-                            render: () => <Tab.Pane attached={false}><Container text>{post.text}</Container></Tab.Pane>,
+                            render: () => <div><div className = "container-text"><Tab.Pane attached={false}><Container text>{post.text}</Container></Tab.Pane></div></div>,
                         })
                         return
                     })
@@ -89,7 +93,7 @@ const WorldGraph = (props) => {
             </List>
         </div>
         <div className = "post-box">
-            <PostBox />
+            <PostBox world = {data.world} myCharacterId = {myCharacterId}/>
         </div>
     </div>
     );
