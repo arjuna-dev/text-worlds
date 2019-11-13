@@ -34,12 +34,9 @@ const SignupForm = () => {
           console.log(response)
         }
       })
-      // .then(response => {
-      // })
       .catch(response => {
         console.log("response")
         console.log(response)
-        // console.log(response.data.error)
       })
   }
     
@@ -68,7 +65,10 @@ const SignupForm = () => {
               type="text"
               value={form.name}
               onChange={updateField}
-              validations="isAlphanumeric"
+              validations={{
+                "isAlphanumeric": "isAlphanumeric",
+                "minLength": "2"
+              }}
               validationErrors={{ isAlphanumeric: 'You are using invalid characters' }}
             />
             <Form.Input
