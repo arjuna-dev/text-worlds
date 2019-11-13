@@ -1,23 +1,22 @@
 import React, {useState} from 'react'
 import { useMutation } from '@apollo/react-hooks';
 import { Form } from 'semantic-ui-react'
-import {  getWorldQuery, addPostMutation } from '../../queries/queries';
-import {Redirect} from 'react-router-dom'
-import jwt_decode from 'jwt-decode'
+import {  getWorldQuery, addEventMutation } from '../../queries/queries';
 
-const PostForm = (props) => {
+const EventForm = (props) => {
     
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
-    const [addPost, { data }] = useMutation(addPostMutation);
+    const [addEvent, { data }] = useMutation(addEventMutation);
     
     const handleSubmit = (e) => {
          e.preventDefault();
          console.log(props.myCharacterId);
-        addPost({variables: {
+        addEvent({variables: {
             title: title,
             text: text,
             characterId: props.myCharacterId,
+            worldId: props.world._id
         }, refetchQueries: [{ query: getWorldQuery , variables: {id: props.world._id}}]
         })
         console.log(data)
@@ -34,10 +33,10 @@ const PostForm = (props) => {
           </Form.Group>
           <Form.Field label='Description' control='textarea' rows='3' value={text} onChange = {(e) => setText(e.target.value)} />
           <Form.Field control='button'>
-            Post
+            Add Event
           </Form.Field>
         </Form>
   </div>
 )
 }
-export default PostForm;
+export default EventForm;

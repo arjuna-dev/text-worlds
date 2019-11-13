@@ -1,8 +1,9 @@
 import React from 'react';
 import {Tab} from 'semantic-ui-react';
 import PostForm from './PostForm';
+import EventForm from './EventForm';
 
-const PostBox = () => {
+const PostBox = (props) => {
     const panes = [
         {
             menuItem: '...',
@@ -11,12 +12,14 @@ const PostBox = () => {
         {
           menuItem: 'Write a post',
           render: () => <Tab.Pane attached='top'>
-              <PostForm />
+              <PostForm world = {props.world} myCharacterId = {props.myCharacterId}/>
           </Tab.Pane>,
         },
         {
           menuItem: 'Create a major event',
-          render: () => <Tab.Pane attached='top'>Tab 2 Content</Tab.Pane>,
+          render: () => <Tab.Pane attached='top'>
+              <EventForm world = {props.world} myCharacterId = {props.myCharacterId}/>
+          </Tab.Pane>,
         },
     ]
     return <div className = "post-box"><Tab menu={{ attached: 'bottom'}} panes={panes} /></div>
