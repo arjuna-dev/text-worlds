@@ -14,11 +14,11 @@ const PostForm = (props) => {
     const handleSubmit = (e) => {
          e.preventDefault();
          console.log(props.myCharacterId);
-        addPost({variables: {
+          addPost({variables: {
             title: title,
             text: text,
             characterId: props.myCharacterId,
-        }, refetchQueries: [{ query: getWorldQuery , variables: {id: props.world._id}}]
+          }, refetchQueries: [{ query: getWorldQuery , variables: {id: props.world._id}}]
         })
         console.log(data)
         setTitle('');
