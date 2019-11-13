@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Redirect} from 'react-router'
 import { Link } from 'react-router-dom'
 import BackNavigation from '../BackNavigation'
-import { Form, Input, TextArea, Checkbox, Radio, RadioGroup, Dropdown, Select, } from 'formsy-semantic-ui-react';
+import { Form } from 'formsy-semantic-ui-react';
 
 const SignupForm = () => {
 
@@ -52,68 +52,68 @@ const SignupForm = () => {
 
   return(
     <div>
-    <BackNavigation />
-    <div className = "page-name">Sign Up</div>
-  <div className="ui grid">
-    <div className="four wide column"></div>
-    <div className="eight wide column">
-    <Link className = "signup-link" to = '/login'>Already have an account? Click here to log in</Link> <br /><br />
-      <Form onSubmit={submitHandler}>
-        <Form.Input
-          // error={{ content: 'Please enter a user name', pointing: 'below' }}
-          fluid
-          label='User name'
-          name='name'
-          placeholder='name'
-          type="text"
-          value={form.name}
-          onChange={updateField}
-          validations="isAlphanumeric"
-          validationErrors={{ isAlphanumeric: 'You are using invalid characters' }}
-        />
-        <Form.Input
-          // error='Please enter your email address'
-          fluid
-          label='email'
-          name='email'
-          placeholder='email'
-          type="email"
-          value={form.email}
-          onChange={updateField}
-          validations="isEmail"
-          validationErrors={{ isEmail: 'Email is not valid' }}
-        />
-        <Form.Input
-          // error='Please enter password'
-          fluid
-          label='password'
-          name='password'
-          placeholder='Password'
-          type="password"
-          value={form.password}
-          onChange={updateField}
-          validations={"minLength:8"}
-          validationErrors={{ minLength: 'Password must be at least 8 characters long' }}
-        />
-        <Form.Input
-          // error='Repeat password here'
-          fluid
-          label='confirm password'
-          name='repeat_password'
-          placeholder='Confirm password'
-          type="password"
-          value={form.repeat_password}
-          onChange={updateField}
-          validations={"minLength:8"}
-          validationErrors={{ minLength: 'Password must be at least 8 characters long' }}
-        />
-        <Button type='submit'>Submit</Button>
-        <Divider hidden />
-      </Form>
+      <BackNavigation />
+      <div className = "page-name">Sign Up</div>
+      <div className="ui grid">
+        <div className="four wide column"></div>
+        <div className="eight wide column">
+          <Link className = "signup-link" to = '/login'>Already have an account? Click here to log in</Link> <br /><br />
+          <Form onSubmit={submitHandler}>
+            <Form.Input
+              // error={{ content: 'Please enter a user name', pointing: 'below' }}
+              fluid
+              label='User name'
+              name='name'
+              placeholder='name'
+              type="text"
+              value={form.name}
+              onChange={updateField}
+              validations="isAlphanumeric"
+              validationErrors={{ isAlphanumeric: 'You are using invalid characters' }}
+            />
+            <Form.Input
+              // error='Please enter your email address'
+              fluid
+              label='email'
+              name='email'
+              placeholder='email'
+              type="email"
+              value={form.email}
+              onChange={updateField}
+              validations="isEmail"
+              validationErrors={{ isEmail: 'Email is not valid' }}
+            />
+            <Form.Input
+              // error='Please enter password'
+              fluid
+              label='password'
+              name='password'
+              placeholder='Password'
+              type="password"
+              value={form.password}
+              onChange={updateField}
+              validations={"minLength:8"}
+              validationErrors={{ minLength: 'Password must be at least 8 characters long' }}
+            />
+            <Form.Input
+              // error='Repeat password here'
+              fluid
+              label='confirm password'
+              name='repeat_password'
+              placeholder='Confirm password'
+              type="password"
+              value={form.repeat_password}
+              onChange={updateField}
+              validations={"minLength:8"}
+              validationErrors={{ minLength: 'Password must be at least 8 characters long' }}
+            />
+            <Button type='submit'>Submit</Button>
+            <Divider hidden />
+          </Form>
+        </div>
+        <div className="four wide column"></div>
+      </div>
     </div>
-    <div className="four wide column"></div>
-  </div>
-  </div>
   )
 }
 
