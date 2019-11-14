@@ -31,14 +31,14 @@ const ModalPopup = (props) => {
             userId: (jwt_decode(localStorage.usertoken))._id,
             role: role,
             gender: gender
-        }, refetchQueries: [{ query: getWorldQuery , variables: {id: props.world._id}}]})
-        console.log(data);
-        setName('');
-        setStory('');
-        setRole('');
-        setGender('');
-        setGateway(true);
-        
+        }, refetchQueries: [{ query: getWorldQuery , variables: {id: props.world._id}}]}).then(()=>{
+          setName('');
+          setStory('');
+          setRole('');
+          setGender('');
+          setGateway(true);
+        })
+        return null
     }
     //checking if authenticated
     if (!localStorage.usertoken){
@@ -60,7 +60,7 @@ const ModalPopup = (props) => {
 
     // redirecting to the graph after creating the character
     if (gateway){
-      return <Redirect to = {link2} />
+      return <Redirect to = {link} />
     }
     
     // modal popup to create a character
