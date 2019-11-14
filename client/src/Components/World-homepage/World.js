@@ -19,7 +19,7 @@ const World = (props) => {
             <div className = "world">
                 <div className = "world-title">
                     <div><strong>{data.world.name}</strong></div>
-                    <div className = "join-world"><ModalPopup worldId = {data.world._id} /></div>
+                    <div className = "join-world"><ModalPopup world = {data.world} /></div>
                 </div>
                 <div className = "world-details">
                     {data.world.description}

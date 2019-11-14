@@ -4,6 +4,7 @@ import World from './Components/World-homepage/World';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import WorldList from './Components/Homepage/WorldList';
 import AddWorld from './Components/AddWorld/AddWorld';
+import WorldGraph from './Components/World-graph/WorldGraph'
 import Signup from './Components/Forms/Signup';
 import Login from './Components/Forms/Login';
 
@@ -25,6 +26,7 @@ function Container({ location }) {
                 <Route exact path = '/signup' component = {Signup} />
                 <Route exact path = '/login' component = {Login} />
                 <Route exact path = '/world/:id' component = {World}/>
+                <Route exact path = '/world/:id/graph' component = {WorldGraph} />
             </Switch>
             </section>
             </CSSTransition>

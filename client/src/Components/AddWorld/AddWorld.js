@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import { Form } from 'semantic-ui-react'
-import { addWorldMutation } from '../../queries/queries';
+import { addWorldMutation, getAllWorlds } from '../../queries/queries';
 import BackNavigation from '../BackNavigation';
 import {Redirect} from 'react-router-dom'
 import jwt_decode from 'jwt-decode'
@@ -10,6 +10,7 @@ const AddWorld = () => {
     
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
+    const [created, setCreated] = useState(false)
     const [addWorld, { data }] = useMutation(addWorldMutation);
     
     const handleSubmit = (e) => {
@@ -19,12 +20,18 @@ const AddWorld = () => {
             name: name,
             description: description,
             userId: (jwt_decode(localStorage.usertoken))._id
-        }})
+        }, refetchQueries: [{ query: getAllWorlds}]
+        })
         console.log(data)
         setName('');
         setDescription('');
+        setCreated(true)
     }
     
+    if (created){
+      return (<Redirect to = '/' />)
+    }
+
     if (!localStorage.usertoken){
       return (<Redirect to = '/login' />)
     }
