@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom'
 import BackNavigation from '../BackNavigation'
 import { Form } from 'formsy-semantic-ui-react';
 import { Label, Message } from 'semantic-ui-react';
+import { createBrowserHistory } from "history"
+
+const history = createBrowserHistory();
 
 const SignupForm = () => {
   
@@ -43,6 +46,7 @@ const SignupForm = () => {
         if (response.data && !response.data.error){
           localStorage.setItem('usertoken', response.data)
           setLoggedIn(true)
+          history.goBack()
         }
       })
       .catch(response => {
@@ -51,10 +55,7 @@ const SignupForm = () => {
       })
   }
     
-    if (loggedIn === true){
-      return <Redirect to="/" />
-    }
-    if (localStorage.usertoken){
+    if (loggedIn || localStorage.usertoken){
       return <Redirect to="/" />
     }
 

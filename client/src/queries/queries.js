@@ -22,6 +22,7 @@ const getAllWorlds = gql`
         _id
         name
         description
+        userId
       } 
   }`
 
@@ -40,6 +41,7 @@ const getWorldQuery = gql`
           }
           characters{
             _id
+            userId
             name
             story
             role
@@ -48,6 +50,13 @@ const getWorldQuery = gql`
               _id
               name
               description
+            }
+            posts{
+              title
+              text
+              character{
+                name
+              }
             }
           }
           events{
@@ -62,8 +71,10 @@ const getWorldQuery = gql`
 const addWorldMutation = gql`
     mutation AddWorld ($name: String!, $description: String!, $userId: String!){
     addWorld(name: $name, description: $description, userId: $userId){
+        _id
         name
         description
+        userId
         user {
             name
         }
@@ -75,6 +86,16 @@ const addCharacterMutation = gql`
       addCharacter(name: $name, story: $story, userId: $userId, worldId: $worldId, role: $role, gender: $gender){
         name
         story
+        world{
+          _id
+          name
+          description
+          characters{
+            _id
+            userId
+            name
+          }
+        }
       }
     }
 `
