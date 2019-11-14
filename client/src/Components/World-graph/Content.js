@@ -1,19 +1,21 @@
 import React from 'react'
-import { Accordion } from 'semantic-ui-react'
+import { Header, Segment } from 'semantic-ui-react'
 
 const Content = (props) => {
-    let panesPost = [];
     if (props.posts){
-        props.posts.map((post) => {
-            panesPost.push({
-                key: post._id,
-                title: post.title,
-                content: post.text
-            })
-            return
-        })
+    return props.posts.map((post) =>{
+        return (<div>
+            <Header as='h2' attached='top'>
+                {post.title}
+            </Header>
+            <Segment attached>
+                <strong><i> posted by {post.character.name}</i> </strong><br /><br />
+                {post.text}
+            </Segment>
+        </div>)
+    })
     }
-    return <Accordion defaultActiveIndex={0} panels={panesPost} />
+    return null
 }
 
 export default Content

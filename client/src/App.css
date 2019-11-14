@@ -185,9 +185,9 @@
 
 .post-box{
   position: fixed;
-  bottom: 1vh;
-  margin-left: 4vw;
-  width: 90vw;
+  bottom: 0.5vh;
+  margin-left: 25vw;
+  width: 50vw;
 }
 
 .container-text{
