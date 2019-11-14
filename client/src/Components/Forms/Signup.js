@@ -5,7 +5,7 @@ import { Redirect} from 'react-router'
 import { Link } from 'react-router-dom'
 import BackNavigation from '../BackNavigation'
 import { Form } from 'formsy-semantic-ui-react';
-import { Label } from 'semantic-ui-react';
+import { Label, Message } from 'semantic-ui-react';
 
 const SignupForm = () => {
   
@@ -16,11 +16,26 @@ const SignupForm = () => {
     password: '',
     repeat_password: ''
   });
+  const [firstPassword, setFirstPassword] = useState("");
+  const [passwordsMatch, setPasswordsMatch] = useState(true);
+
 
   const updateField = (e) => setValues({
     ...form,
     [e.target.name]: e.target.value
   })
+    
+  const checkFirstPassword = (e) => {
+      setFirstPassword(e.target.value)
+  }
+
+  const comparePass = (e) => {
+    if (firstPassword != e.target.value){
+      setPasswordsMatch(false)
+    } else {
+      setPasswordsMatch(true)
+    }
+  }
   
   const onValidSubmit = e => {
     axios.post('http://localhost:4000/api/user/signup', e)
@@ -92,7 +107,7 @@ const SignupForm = () => {
               placeholder='Password'
               type="password"
               value={form.password}
-              onChange={updateField}
+              onChange={updateField, checkFirstPassword}
               validations={"minLength:8"}
               validationErrors={{ minLength: 'Password must be at least 8 characters long' }}
               errorLabel={ <Label color="red" pointing/> }
@@ -105,11 +120,14 @@ const SignupForm = () => {
               placeholder='Confirm password'
               type="password"
               value={form.repeat_password}
-              onChange={updateField}
+              onChange={updateField, comparePass}
               validations={"minLength:8"}
-              validationErrors={{ minLength: 'Password must be at least 8 characters long' }}
+              validationErrors={{ 
+                minLength: 'Password must be at least 8 characters long' 
+              }}
               errorLabel={ <Label color="red" pointing/> }
             />
+            {passwordsMatch ?  <p></p> : <Message color='pink'><p>Passwords do not match</p></Message>}
             <Button type='submit'>Submit</Button>
             <Divider hidden />
           </Form>
