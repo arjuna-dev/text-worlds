@@ -43,17 +43,17 @@ const WorldGraph = (props) => {
                         content={event.text}
                         key={event._id}
                         header={event.title}
-                        trigger={<div className = "graph-item-event"><Image src={p1} avatar /> {event.title}</div>}
+                        trigger={<div className = "graph-item-event"><Image src={p1} avatar /></div>}
                       />
                     })}
                     {data.world.characters.map((character)=> (
                     character.posts.map((post) => {
-                        let header = post.title + ' ⟶ ' + post.character.name
+                        let header = post.title + '  (by ' + post.character.name + ')'
                         return <Popup
                         content={post.text}
                         key={post._id}
                         header={header}
-                        trigger={<div className = "graph-item-post"><Image src={p2} avatar /> {header}</div>}
+                        trigger={<div className = "graph-item-post"><Image src={p2} avatar /></div>}
                       />
                     
                     })
@@ -70,7 +70,7 @@ const WorldGraph = (props) => {
                                 content={post.text}
                                 key={post._id}
                                 header={post.title}
-                                trigger={<div className = "graph-item-post"><Image src={p2} avatar /> {post.title}</div>}
+                                trigger={<div className = "graph-item-post"><Image src={p2} avatar /></div>}
                               />
                             })}
                         </div>
