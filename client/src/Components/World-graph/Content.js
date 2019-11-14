@@ -8,7 +8,7 @@ const Content = (props) => {
             panesPost.push({
                 key: post._id,
                 title: post.title,
-                content: <div>{post.text}</div>,
+                content: post.text
             })
             return
         })
