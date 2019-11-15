@@ -19,10 +19,11 @@ const PostForm = (props) => {
             text: text,
             characterId: props.myCharacterId,
           }, refetchQueries: [{ query: getWorldQuery , variables: {id: props.world._id}}]
+        }).then(() => {
+          console.log(data)
+          setTitle('');
+          setText('');
         })
-        console.log(data)
-        setTitle('');
-        setText('');
     }
     
     

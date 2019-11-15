@@ -52,6 +52,15 @@ const getWorldQuery = gql`
               description
             }
             posts{
+              _id
+              title
+              text
+              character{
+                name
+              }
+            }
+            events{
+              _id
               title
               text
               character{

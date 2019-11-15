@@ -149,7 +149,7 @@
 .world-graph{
   margin-left: 12vw;
   margin-top: 8vh;
-  margin-bottom: 50vh;
+  margin-bottom: 4vh;
 }
 
 .world-graph-items{
@@ -194,3 +194,12 @@
   position: relative;
 }
 
+.sidebar{
+  height: 60vh;
+  overflow-y: scroll;
+}
+
+.sidebar-content{
+  height: 60vh;
+  overflow-y: scroll;
+}
