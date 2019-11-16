@@ -33,14 +33,15 @@ const WorldGraph = (props) => {
        
 
     return (
-    <div>
+    <div className = "world-graph-page">
         <BackNavigation />
-        <div className = "world-graph">
-            <SideBar world = {data.world} />
-        </div>
         <div className = "post-box">
             <PostBox world = {data.world} myCharacterId = {myCharacterId}/>
         </div>
+        <div className = "world-graph">
+            <SideBar world = {data.world} />
+        </div>
+        
         
     </div>
     );

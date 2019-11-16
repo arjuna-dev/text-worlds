@@ -186,8 +186,8 @@
 
 .post-box{
   position: fixed;
-  bottom: 0.5vh;
-  margin-left: 25vw;
+  top: 19.5vh;
+  margin-left: 70vw;
   width: 50vw;
 }
 
@@ -196,12 +196,12 @@
 }
 
 .sidebar{
-  height: 60vh;
+  height: 65vh;
   overflow-y: scroll;
 }
 
 .sidebar-content{
-  height: 50vh;
+  height: 55vh;
   overflow-y: scroll;
 }
 .sidebar-menu{
