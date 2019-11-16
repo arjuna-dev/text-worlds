@@ -28,9 +28,9 @@ const World = (props) => {
                 <div className = "world-events">
                     <strong>EVENTS</strong> <br></br>
                     <div className = "world-elements-inside">
-                        {data.world.events.map((event)=> (
-                            <div key = {event._id}>
-                                <CardEvent event = {event}/>
+                        {data.world.posts.map((post)=> (
+                            <div key = {post._id}>
+                                {post.type === 'Event'?<CardEvent event = {post}/>:null}
                             </div>
                         ))}
                     </div>
