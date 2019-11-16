@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { getWorldQuery } from '../../queries/queries';
 import { List, Container } from 'semantic-ui-react'

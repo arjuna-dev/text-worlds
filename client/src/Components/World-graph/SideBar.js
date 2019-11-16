@@ -1,9 +1,17 @@
-import React, { useState } from 'react'
-import { Grid, Menu, Segment, Header, Label } from 'semantic-ui-react'
+import React, { useState, useEffect} from 'react'
+import { Grid, Menu, Segment, Header, Label, Message } from 'semantic-ui-react'
 
 const SideBar = (props) => {
-    const [activeItem, setActiveItem] = useState('');
+
+    const [activeItem, setActiveItem] = useState(props.world.name);
     const [activeContent, setActiveContent] = useState(props.world);
+
+
+    useEffect(() => {
+      setActiveItem(props.world.name);
+      setActiveContent(props.world)
+    },[props.world])
+
 
     return (
       <Grid>
@@ -14,7 +22,7 @@ const SideBar = (props) => {
               name={props.world.name}
               key={props.world._id}
               active={activeItem === props.world.name}
-              onClick={(e) => {setActiveItem(props.world.name); setActiveContent(props.world)}}
+              onClick={(e) => {setActiveItem(props.world.name); setActiveContent(props.world);}}
             />
             {props.world.characters.map((character) => {
                 return (
@@ -22,7 +30,7 @@ const SideBar = (props) => {
                         key = {character._id}
                         name={character.name}
                         active={activeItem === character.name}
-                        onClick={(e) => {setActiveItem(character.name); setActiveContent(character)}}
+                        onClick={(e) => {setActiveItem(character.name); setActiveContent(character);}}
                     />
                 )
             })}
@@ -31,6 +39,14 @@ const SideBar = (props) => {
         </Grid.Column>
 
         <Grid.Column stretched width={12}>
+          {/* {world/character description} */}
+          <div className = "sidebar-header">
+              {activeContent==props.world?(
+                    <Message header = {activeContent.name} content = {activeContent.description}/>
+                  ):(
+                    <Message header = {activeContent.name} content = {activeContent.story} />
+              )}
+              </div>
           <div className = "sidebar-content">
           <Segment>
               {/* world events */}
