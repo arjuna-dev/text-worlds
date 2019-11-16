@@ -146,13 +146,13 @@
   height: 100vh;
 }
 
-.world-graph{
-  margin-left: 12vw;
-  margin-top: 8vh;
+.segment{
+  height: 60vh;
+  overflow: scroll;
+  /* overflow-y: scroll; */
 }
 
-.world-graph-list{
-  overflow-x: scroll;
+.graph-list{
 }
 
 .row-title{
@@ -170,5 +170,7 @@
   font-weight: bolder;
   margin-left: 2vw;
 }
+
+
 
 
