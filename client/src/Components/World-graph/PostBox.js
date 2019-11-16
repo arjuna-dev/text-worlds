@@ -1,28 +1,21 @@
 import React from 'react';
-import {Tab} from 'semantic-ui-react';
+import {Tab, Popup, Button, Grid} from 'semantic-ui-react';
 import PostForm from './PostForm';
 import EventForm from './EventForm';
 
 const PostBox = (props) => {
-    const panes = [
-        {
-            menuItem: '...',
-            render: () => <Tab.Pane attached='top'>Switch to write a post or create an event</Tab.Pane>,
-          },
-        {
-          menuItem: 'Write a post',
-          render: () => <Tab.Pane attached='top'>
-              <PostForm world = {props.world} myCharacterId = {props.myCharacterId}/>
-          </Tab.Pane>,
-        },
-        {
-          menuItem: 'Create a major event',
-          render: () => <Tab.Pane attached='top'>
-              <EventForm world = {props.world} myCharacterId = {props.myCharacterId}/>
-          </Tab.Pane>,
-        },
-    ]
-    return <div className = "post-box"><Tab menu={{ attached: 'bottom'}} panes={panes} /></div>
+    return <Button.Group size='large'>
+    <Popup
+    on='click'
+    trigger={<Button>Write a post</Button>}
+  > <PostForm world = {props.world} myCharacterId = {props.myCharacterId} /> </Popup>
+    <Button.Or />
+    <Popup
+    on='click'
+    trigger={<Button>Create an event</Button>}
+  > <EventForm world = {props.world} myCharacterId = {props.myCharacterId} /> </Popup>
+  </Button.Group>
 }
+
 
 export default PostBox;
