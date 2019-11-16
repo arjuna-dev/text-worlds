@@ -4,6 +4,7 @@ const getAllCharacters = gql`
     query {
     characters{
         name
+        dateCreated
         story
       } 
   }`
@@ -40,6 +41,7 @@ const getWorldQuery = gql`
             name
           }
           characters{
+            dateCreated
             _id
             userId
             name
@@ -122,6 +124,7 @@ const addCharacterMutation = gql`
       addCharacter(name: $name, story: $story, userId: $userId, worldId: $worldId, role: $role, gender: $gender){
         name
         story
+        dateCreated
         world{
           _id
           name

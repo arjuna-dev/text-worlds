@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react'
-import { Grid, Menu, Segment, Header, Label, Message } from 'semantic-ui-react'
+import { Grid, Menu, Segment, Header, Label, List } from 'semantic-ui-react'
 
 const SideBar = (props) => {
 
@@ -12,23 +12,24 @@ const SideBar = (props) => {
       setActiveContent(props.world)
     },[props.world])
 
-
+    let worldName = '🌍' + props.world.name
     return (
       <Grid>
         <Grid.Column width={4}>
           <div className = "sidebar">
           <Menu fluid vertical tabular>
-            <Menu.Item
-              name={props.world.name}
-              key={props.world._id}
-              active={activeItem === props.world.name}
-              onClick={(e) => {setActiveItem(props.world.name); setActiveContent(props.world);}}
-            />
+              <Menu.Item
+                name= {worldName}
+                key={props.world._id}
+                active={activeItem === props.world.name}
+                onClick={(e) => {setActiveItem(props.world.name); setActiveContent(props.world);}}
+              />
             {props.world.characters.map((character) => {
+                let characterName = '👤' + character.name;
                 return (
                     <Menu.Item
                         key = {character._id}
-                        name={character.name}
+                        name= {characterName}
                         active={activeItem === character.name}
                         onClick={(e) => {setActiveItem(character.name); setActiveContent(character);}}
                     />
@@ -42,9 +43,15 @@ const SideBar = (props) => {
           {/* {world/character description} */}
           <div className = "sidebar-header">
               {activeContent==props.world?(
-                    <Message header = {activeContent.name} content = {activeContent.description}/>
+                    <div>
+                      <Header  attached = "top"> 🌍 {activeContent.name} </Header>
+                      <Segment attached content = {activeContent.description}/>
+                    </div>
                   ):(
-                    <Message header = {activeContent.name} content = {activeContent.story} />
+                    <div>
+                      <Header attached = "top"> 👤 {activeContent.name}</Header>
+                      <Segment attached content = {activeContent.story}/>
+                    </div>
               )}
               </div>
           <div className = "sidebar-content">

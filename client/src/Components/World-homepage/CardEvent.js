@@ -30,7 +30,7 @@ const CardEvent = (props) => {
         <Card.Content>
           <Card.Header>{props.character.name}</Card.Header>
           <Card.Meta>
-            <span className='date'>Joined in 2019</span>
+            <span className='date'> Joined {props.character.dateCreated}</span>
           </Card.Meta>
           <Card.Description>
             {props.character.story}
