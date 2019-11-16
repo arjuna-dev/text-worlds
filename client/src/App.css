@@ -151,6 +151,11 @@
   margin-top: 8vh;
 }
 
+.world-graph-list{
+  overflow-x: scroll;
+  overflow: auto;
+}
+
 .world-graph-items{
   margin-bottom: 2vw;
 }
@@ -159,18 +164,16 @@
   font-weight: bolder;
 }
 .linked-world-title{
-  display: flex;
+  /* display: flex; */
+  height: 15vh;
+  flex-shrink: 0;
 }
 .linked-world-characters{
   display: flex;
 }
-.graph-item-event{
-  margin-right: 2vw;
-  margin-left: 2vw;
+.graph-item{
+  display: inline-block;
   font-weight: bolder;
 }
-.graph-item-post{
-  margin-right: 2vw;
-  margin-left: 2vw;
-  font-weight: bolder;
-}
+
+

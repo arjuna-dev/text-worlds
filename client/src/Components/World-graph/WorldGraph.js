@@ -34,7 +34,7 @@ const WorldGraph = (props) => {
     <div>
         <BackNavigation />
         <div className = "world-graph">
-            <List>
+            <List className = "world-graph-list">
                 {/* World-title-graph */}
                 <div className = 'linked-world-title'>
                     <List.Item icon='map' content= {data.world.name} className = "world-graph-items world-graph-title"/>
@@ -43,7 +43,7 @@ const WorldGraph = (props) => {
                         content={event.text}
                         key={event._id}
                         header={event.title}
-                        trigger={<div className = "graph-item-event"><Image src={p1} avatar /></div>}
+                        trigger={<div className = "graph-item"><Image src={p1} avatar /></div>}
                       />
                     })}
                     {data.world.characters.map((character)=> (
@@ -53,7 +53,7 @@ const WorldGraph = (props) => {
                         content={post.text}
                         key={post._id}
                         header={header}
-                        trigger={<div className = "graph-item-post"><Image src={p2} avatar /></div>}
+                        trigger={<div className = "graph-item"><Image src={p2} avatar /></div>}
                       />
                     
                     })
@@ -70,7 +70,7 @@ const WorldGraph = (props) => {
                                 content={post.text}
                                 key={post._id}
                                 header={post.title}
-                                trigger={<div className = "graph-item-post"><Image src={p2} avatar /></div>}
+                                trigger={<div className = "graph-item"><Image src={p2} avatar /></div>}
                               />
                             })}
                         </div>
