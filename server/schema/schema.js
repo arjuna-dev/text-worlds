@@ -72,7 +72,7 @@ const WorldType = new GraphQLObjectType({
                 return character.find({worldId: parent._id}, function(err, data){
                     if (err) console.log(err)
                     return data
-                })
+                }).sort({name: 1});
             }
         },
         events: {
@@ -81,7 +81,7 @@ const WorldType = new GraphQLObjectType({
                 return event.find({worldId: parent._id}, function(err, data){
                     if (err) console.log(err)
                     return data
-                })
+                }).sort({dateCreated: -1});
             }
         }
     })
@@ -108,6 +108,7 @@ const CharacterType = new GraphQLObjectType({
                 return world.findOne({_id: parent.worldId})
             }
         },
+        dateCreated: {type: GraphQLString},
         name: { type: GraphQLString },
         role: {type: GraphQLString},
         gender: {type: GraphQLString},
@@ -125,19 +126,19 @@ const CharacterType = new GraphQLObjectType({
         posts: {
             type: new GraphQLList(PostType),
             resolve(parent, args){
-                return post.find({characterId: parent._id})
+                return post.find({characterId: parent._id}).sort({dateCreated: -1})
             }
         },
         events: {
             type: new GraphQLList(EventType),
             resolve(parent, args){
-                return event.find({characterId: parent._id})
+                return event.find({characterId: parent._id}).sort({dateCreated: -1})
             }
         },
         places: {
             type: new GraphQLList(PlaceType),
             resolve(parent, args){
-                return place.find({charactersId: {$elemMatch: {$eq: parent._id}}})
+                return place.find({charactersId: {$elemMatch: {$eq: parent._id}}}).sort({dateCreated: -1})
             }
         },
     })
