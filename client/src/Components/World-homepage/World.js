@@ -4,6 +4,7 @@ import CardEvent from './CardEvent';
 import { getWorldQuery } from '../../queries/queries';
 import ModalPopup from './ModalPopup';
 import BackNavigation from '../BackNavigation';
+import {Message} from 'semantic-ui-react';
 
 const World = (props) => {
     const { loading, error, data } = useQuery(getWorldQuery, {
@@ -22,7 +23,7 @@ const World = (props) => {
                     <div className = "join-world"><ModalPopup world = {data.world} /></div>
                 </div>
                 <div className = "world-details">
-                    {data.world.description}
+                    <Message size='large'>{data.world.description}</Message>
                 </div>
                 <div className = "world-events">
                     <strong>EVENTS</strong> <br></br>

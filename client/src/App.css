@@ -96,6 +96,7 @@
 .world-elements-inside{
   display: flex;
   margin-top: 1vw;
+  margin-right: 2vw;
   overflow-x: scroll;
 }
 .add-character{
@@ -148,7 +149,7 @@
 
 .world-graph{
   margin-left: 12vw;
-  margin-top: 8vh;
+  margin-top: 5vh;
   margin-bottom: 4vh;
 }
 
@@ -200,6 +201,6 @@
 }
 
 .sidebar-content{
-  height: 60vh;
+  height: 50vh;
   overflow-y: scroll;
 }
