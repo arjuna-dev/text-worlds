@@ -36,58 +36,56 @@ const WorldGraph = (props) => {
         <div class="ui grid">
             <div class="two wide column"></div>
             <div class="twelve wide column">
-                <div className = "segmento">
-                    <Segment raised>
-                        <List className = "graph-list">
-                            {/* World-title-graph */}
-                            <div className = 'item-row'>
-                                <List.Item icon='map' content= {data.world.name} className = "row-title"/>
-                                {data.world.events.map((event) => {
-                                    return <Popup
-                                    content={event.text}
-                                    key={event._id}
-                                    header={event.title}
-                                    trigger={<div className = "graph-item"><Image src={p1} avatar /></div>}
-                                />
-                                })}
-                                {data.world.characters.map((character)=> (
-                                character.posts.map((post) => {
-                                    let header = post.title + '  (by ' + post.character.name + ')'
-                                    return <Popup
-                                    content={post.text}
-                                    key={post._id}
-                                    header={header}
-                                    trigger={<div className = "graph-item"><Image src={p2} avatar /></div>}
-                                />
-                                
-                                })
-                                ))}
-                            </div>
-                            {/* World-character-graph */}
-                            {data.world.characters.map((character) => {
-                                return (
-                                    <div className = 'item-row'>
-                                        <List.Item key = {character._id} icon = "user" content = {character.name} className = "row-title"/>
-                                        {
-                                            character.posts.map((post) =>{
-                                            return <Popup
-                                            content={post.text}
-                                            key={post._id}
-                                            header={post.title}
-                                            trigger={<div className = "graph-item"><Image src={p2} avatar /></div>}
-                                        />
-                                        })}
-                                    </div>
-                                )
+                <Segment raised className = "segmento">
+                    <List className = "graph-list">
+                        {/* World-title-graph */}
+                        <div className = 'item-row'>
+                            <List.Item icon='map' content= {data.world.name} className = "row-title"/>
+                            {data.world.events.map((event) => {
+                                return <Popup
+                                content={event.text}
+                                key={event._id}
+                                header={event.title}
+                                trigger={<div className = "graph-item"><Image src={p1} avatar /></div>}
+                            />
                             })}
                             {data.world.characters.map((character)=> (
-                                character.places.map((place) => (
-                                    <List.Item key = {place._id} icon = "marker" content = {place.name} className = "row-title"/>
-                                ))
+                            character.posts.map((post) => {
+                                let header = post.title + '  (by ' + post.character.name + ')'
+                                return <Popup
+                                content={post.text}
+                                key={post._id}
+                                header={header}
+                                trigger={<div className = "graph-item"><Image src={p2} avatar /></div>}
+                            />
+                            
+                            })
                             ))}
-                        </List>
-                    </Segment>
-                </div>
+                        </div>
+                        {/* World-character-graph */}
+                        {data.world.characters.map((character) => {
+                            return (
+                                <div className = 'item-row'>
+                                    <List.Item key = {character._id} icon = "user" content = {character.name} className = "row-title"/>
+                                    {
+                                        character.posts.map((post) =>{
+                                        return <Popup
+                                        content={post.text}
+                                        key={post._id}
+                                        header={post.title}
+                                        trigger={<div className = "graph-item"><Image src={p2} avatar /></div>}
+                                    />
+                                    })}
+                                </div>
+                            )
+                        })}
+                        {data.world.characters.map((character)=> (
+                            character.places.map((place) => (
+                                <List.Item key = {place._id} icon = "marker" content = {place.name} className = "row-title"/>
+                            ))
+                        ))}
+                    </List>
+                </Segment>
             </div>
             <div class="two wide column"></div>
         </div>
