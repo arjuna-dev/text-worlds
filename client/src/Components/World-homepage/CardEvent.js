@@ -12,7 +12,7 @@ const CardEvent = (props) => {
           <Card.Content>
             <Card.Header>{props.event.title}</Card.Header>
             <Card.Meta>
-              <span className='date'>Happened in 2019</span>
+              <span className='date'>Happened on {props.event.dateCreated}</span>
             </Card.Meta>
             <Card.Description>
               {props.event.text}
@@ -52,7 +52,7 @@ const CardEvent = (props) => {
           <Card.Content>
             <Card.Header>{props.place.name}</Card.Header>
             <Card.Meta>
-              <span className='date'>Found in 2019</span>
+              <span className='date'>Found in {props.place.dateCreated}</span>
             </Card.Meta>
             <Card.Description>
               {props.place.description}

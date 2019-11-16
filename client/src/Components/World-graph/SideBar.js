@@ -67,6 +67,7 @@ const SideBar = (props) => {
                                 {post.title}
                             </Header>
                             <Segment attached>
+                                <strong><em>Happened on {post.dateCreated}</em></strong><br/><br />
                                 {post.text}
                             </Segment>
                         </div>)  
@@ -78,6 +79,7 @@ const SideBar = (props) => {
                             {post.title}
                         </Header>
                         <Segment attached>
+                            <strong><em>posted by {post.character.name} <br /> on {post.dateCreated}</em></strong><br/><br />
                             {post.text}
                         </Segment>
                     </div>)
@@ -92,6 +94,7 @@ const SideBar = (props) => {
                           {post.title}
                       </Header>
                       <Segment attached>
+                          <strong><em>posted on {post.dateCreated}</em></strong><br/><br />
                           {post.text}
                       </Segment>
                   </div>)

@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+var moment = require('moment');
 
 const postSchema = new Schema({
     id: Number,
     title: String,
-    dateCreated: { type: Date, default: Date.now },
+    date: {type: Date, default: Date.now()},
+    dateCreated: { type: String, default: moment().format('lll')},
     text: String,
     characterId: String,
     worldId: String,
