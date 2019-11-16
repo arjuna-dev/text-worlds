@@ -43,6 +43,7 @@ const getWorldQuery = gql`
           posts{
             _id
             title
+            dateCreated
             type
             text
             character{
@@ -61,10 +62,12 @@ const getWorldQuery = gql`
               _id
               name
               description
+              dateCreated
             }
             posts{
               _id
               title
+              dateCreated
               type
               text
               character{

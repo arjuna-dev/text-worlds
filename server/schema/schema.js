@@ -4,6 +4,7 @@ const place = require('../models/place');
 const post = require('../models/post');
 const user = require('../models/user');
 const world = require('../models/world');
+var moment = require('moment');
 
 const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLSchema, GraphQLList, GraphQLNonNull, GraphQLInt, GraphQLBoolean } = graphql;
 
@@ -71,7 +72,7 @@ const WorldType = new GraphQLObjectType({
                 return post.find({worldId: parent._id}, function(err, data){
                     if (err) console.log(err)
                     return data
-                }).sort({dateCreated: -1})
+                }).sort({date: -1})
             }
         },
         characters: {
@@ -125,7 +126,7 @@ const CharacterType = new GraphQLObjectType({
         posts: {
             type: new GraphQLList(PostType),
             resolve(parent, args){
-                return post.find({characterId: parent._id}).sort({dateCreated: -1})
+                return post.find({characterId: parent._id}).sort({date: -1})
             }
         },
         places: {
@@ -145,6 +146,7 @@ const PlaceType = new GraphQLObjectType({
         charactersId: { type : GraphQLList(GraphQLID)},
         parentPlace: { type: GraphQLString },
         description: { type: GraphQLString },
+        dateCreated: {type: GraphQLString},
         characters: {
             type: new GraphQLList(CharacterType),
             resolve(parent, args){
@@ -163,6 +165,7 @@ const PostType = new GraphQLObjectType({
         _id: { type: GraphQLID },
         characterId: {type: GraphQLID},
         title: { type: GraphQLString },
+        dateCreated: {type: GraphQLString},
         worldId: {type: GraphQLID},
         type: {type: GraphQLString},
         // dateCreated: { type: Date, default: Date.now },
@@ -294,7 +297,8 @@ const Mutation = new GraphQLObjectType({
                 gender: {type: GraphQLString},
                 role: {type: GraphQLString},
                 age: { type: GraphQLInt },
-                occupation: { type: GraphQLString } 
+                occupation: { type: GraphQLString },
+                dateCreated: {type: GraphQLString},
                 // add more later
             },
             resolve(parent, args){
@@ -306,7 +310,8 @@ const Mutation = new GraphQLObjectType({
                     gender: args.gender,
                     role: args.role,
                     age: args.age,
-                    occupation: args.occupation
+                    occupation: args.occupation,
+                    dateCreated: moment().format('MMM Do YYYY'),
                 });
                 return newCharacter.save()
             }
@@ -318,7 +323,7 @@ const Mutation = new GraphQLObjectType({
                 text: { type: new GraphQLNonNull(GraphQLString)},
                 characterId: {type: new GraphQLNonNull(GraphQLString)},
                 type: {type: new GraphQLNonNull(GraphQLString)},
-                worldId: {type: new GraphQLNonNull(GraphQLString)}
+                worldId: {type: new GraphQLNonNull(GraphQLString)},
             },
             resolve(parent, args){
                 let newPost = new post({
@@ -326,7 +331,9 @@ const Mutation = new GraphQLObjectType({
                     text: args.text,
                     type: args.type,
                     characterId: args.characterId,
-                    worldId: args.worldId
+                    worldId: args.worldId,
+                    dateCreated: moment().format('lll'),
+                    date: Date.now()
                 });
                 return newPost.save()
             }
