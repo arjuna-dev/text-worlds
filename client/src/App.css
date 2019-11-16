@@ -153,27 +153,22 @@
 
 .world-graph-list{
   overflow-x: scroll;
-  overflow: auto;
 }
 
-.world-graph-items{
+.row-title{
+  display: inline-block;
+  font-weight: bolder;
+}
+
+.item-row{
+  white-space:nowrap;
   margin-bottom: 2vw;
 }
 
-.world-graph-title{
-  font-weight: bolder;
-}
-.linked-world-title{
-  /* display: flex; */
-  height: 15vh;
-  flex-shrink: 0;
-}
-.linked-world-characters{
-  display: flex;
-}
 .graph-item{
   display: inline-block;
   font-weight: bolder;
+  margin-left: 2vw;
 }
 
 

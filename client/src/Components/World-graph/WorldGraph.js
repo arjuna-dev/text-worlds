@@ -36,8 +36,8 @@ const WorldGraph = (props) => {
         <div className = "world-graph">
             <List className = "world-graph-list">
                 {/* World-title-graph */}
-                <div className = 'linked-world-title'>
-                    <List.Item icon='map' content= {data.world.name} className = "world-graph-items world-graph-title"/>
+                <div className = 'item-row'>
+                    <List.Item icon='map' content= {data.world.name} className = "row-title"/>
                     {data.world.events.map((event) => {
                         return <Popup
                         content={event.text}
@@ -62,8 +62,8 @@ const WorldGraph = (props) => {
                 {/* World-character-graph */}
                 {data.world.characters.map((character) => {
                     return (
-                        <div className = "linked-world-characters">
-                            <List.Item key = {character._id} icon = "user" content = {character.name} className = "world-graph-items"/>
+                        <div className = 'item-row'>
+                            <List.Item key = {character._id} icon = "user" content = {character.name} className = "row-title"/>
                             {
                                 character.posts.map((post) =>{
                                 return <Popup
@@ -78,7 +78,7 @@ const WorldGraph = (props) => {
                 })}
                 {data.world.characters.map((character)=> (
                     character.places.map((place) => (
-                        <List.Item key = {place._id} icon = "marker" content = {place.name} className = "world-graph-items"/>
+                        <List.Item key = {place._id} icon = "marker" content = {place.name} className = "row-title"/>
                     ))
                 ))}
             </List>
