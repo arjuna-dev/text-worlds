@@ -14,10 +14,13 @@ const PostForm = (props) => {
     const handleSubmit = (e) => {
          e.preventDefault();
          console.log(props.myCharacterId);
+         console.log(props.world._id);
           addPost({variables: {
             title: title,
             text: text,
             characterId: props.myCharacterId,
+            worldId: props.world._id,
+            type: 'Post'
           }, refetchQueries: [{ query: getWorldQuery , variables: {id: props.world._id}}]
         }).then(() => {
           console.log(data)

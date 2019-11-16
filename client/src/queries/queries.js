@@ -40,6 +40,15 @@ const getWorldQuery = gql`
           user{
             name
           }
+          posts{
+            _id
+            title
+            type
+            text
+            character{
+              name
+            }
+          }
           characters{
             dateCreated
             _id
@@ -56,24 +65,12 @@ const getWorldQuery = gql`
             posts{
               _id
               title
+              type
               text
               character{
                 name
               }
             }
-            events{
-              _id
-              title
-              text
-              character{
-                name
-              }
-            }
-          }
-          events{
-            _id
-            title
-            text
           }
       }
   }
@@ -92,27 +89,13 @@ const addWorldMutation = gql`
       } 
   }`
 const addPostMutation = gql`
-  mutation AddPost($title: String!, $text: String!, $characterId: String!){
-    addPost(title: $title, text: $text, characterId: $characterId){
+  mutation AddPost($title: String!, $text: String!, $characterId: String!, $type: String!, $worldId: String!){
+    addPost(title: $title, text: $text, characterId: $characterId, type: $type, worldId: $worldId){
       _id
       title
       text
+      type
       character{
-        name
-      }
-    }
-  }
-`
-const addEventMutation = gql`
-  mutation AddEvent($title: String!, $text: String!, $characterId: String!, $worldId: String!){
-    addEvent(title: $title, text: $text, characterId: $characterId, worldId: $worldId){
-      _id
-      title
-      text
-      character{
-        name
-      }
-      world{
         name
       }
     }
@@ -140,4 +123,4 @@ const addCharacterMutation = gql`
 `
 
 
-  export { getAllCharacters, addWorldMutation, addPostMutation, addEventMutation, getAllPlaces, getAllWorlds, getWorldQuery, addCharacterMutation };
+  export { getAllCharacters, addWorldMutation, addPostMutation, getAllPlaces, getAllWorlds, getWorldQuery, addCharacterMutation };

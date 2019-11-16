@@ -57,42 +57,30 @@ const SideBar = (props) => {
           <div className = "sidebar-content">
           <Segment>
               {/* world events */}
-              {(props.world && activeContent == props.world)?(
-                    activeContent.characters.map((character) => {
-                    if (character.events){
-                      return character.events.map((event)=> {
-                        return (<div key = {event._id}>
-                            <Header as='h2' attached='top'>
-                            <Label color='blue' ribbon> Event </Label>
-                                {event.title}
-                            </Header>
-                            <Segment attached>
-                                {event.text}
-                            </Segment>
-                        </div>)
-                        
-                      })
-                    }
-                  }
-                    )
-              ): (null)}
-              {/* world posts */}
-              {(props.world && activeContent == props.world)?(
-                    activeContent.characters.map((character) => {
-                    if (character.posts){
-                      return character.posts.map((post)=> {
+              {(activeContent == props.world)?(
+                    activeContent.posts.map((post) => {
+                    console.log('yaayyeyeee');
+                    if (post.type === 'Event'){
                         return (<div key = {post._id}>
                             <Header as='h2' attached='top'>
-                            <Label color='orange' ribbon> Post </Label>
+                            <Label color='blue' ribbon> Event </Label>
                                 {post.title}
                             </Header>
                             <Segment attached>
-                                <strong><i> posted by {post.character.name}</i> </strong><br /><br />
                                 {post.text}
                             </Segment>
-                        </div>)
-                        
-                      })
+                        </div>)  
+                    }
+                    else{
+                      return (<div key = {post._id}>
+                        <Header as='h2' attached='top'>
+                        <Label color='orange' ribbon> Post </Label>
+                            {post.title}
+                        </Header>
+                        <Segment attached>
+                            {post.text}
+                        </Segment>
+                    </div>)
                     }
                   }
                     )
