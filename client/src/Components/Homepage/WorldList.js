@@ -25,20 +25,19 @@ if (error) return <p>Error :(</p>;
       <div>
         <Header />
         <div className = "world-list">
-          {data.worlds.map(( world ) => (
-            <List size='massive' key={world._id}>
-              <List.Item style={{ marginBottom: '9vh' }}>
-              <Link to = {'/world/' + world._id} >
-                <Image style={{ display: 'inline-block' }} avatar src={ picNames[Math.floor(Math.random() * Math.floor(4))] } size="small" /></Link>
+          <List size='massive'>
+            {data.worlds.map(( world ) => (
+              <List.Item style={{ marginBottom: '9vh' }} key={world._id}>
+                <Link to = {'/world/' + world._id} ><Image style={{ display: 'inline-block' }} avatar src={ picNames[Math.floor(Math.random() * Math.floor(4))] } size="small" /></Link>
                 <List.Content style={{ display: 'inline-block', marginLeft: "2vw" }}>
-                <Link to = {'/world/' + world._id}><List.Header><div className = "world-header">{ world.name }</div></List.Header></Link>
-                  <List.Description>
-                      <WorldDescription>{ world.description }</WorldDescription>
-                  </List.Description>
+                  <Link to = {'/world/' + world._id}><List.Header><div className = "world-header">{ world.name }</div></List.Header></Link>
+                    <List.Description>
+                        <WorldDescription>{ world.description }</WorldDescription>
+                    </List.Description>
                 </List.Content>
               </List.Item>
-            </List>
-          ))}
+            ))}
+          </List>
         </div>
       </div>
     );
