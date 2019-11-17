@@ -1,5 +1,5 @@
 import React from 'react';
-import {Tab, Popup, Button, Grid} from 'semantic-ui-react';
+import {Popup, Button} from 'semantic-ui-react';
 import PostForm from './PostForm';
 import EventForm from './EventForm';
 
