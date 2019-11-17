@@ -72,6 +72,9 @@ const getWorldQuery = gql`
               text
               character{
                 name
+                user{
+                  _id
+                }
               }
             }
           }
@@ -125,5 +128,13 @@ const addCharacterMutation = gql`
     }
 `
 
+const deletePostMutation = gql`
+    mutation DeletePost ($id: ID!){
+      deletePost(id: $id){
+        title
+      }
+    }
+`
 
-  export { getAllCharacters, addWorldMutation, addPostMutation, getAllPlaces, getAllWorlds, getWorldQuery, addCharacterMutation };
+
+  export { getAllCharacters, addWorldMutation, addPostMutation,deletePostMutation, getAllPlaces, getAllWorlds, getWorldQuery, addCharacterMutation };

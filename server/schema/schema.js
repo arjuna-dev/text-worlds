@@ -353,6 +353,15 @@ const Mutation = new GraphQLObjectType({
                 });
                 return newPlace.save()
             }
+        },
+        deletePost: {
+            type: PostType,
+            args: {
+                id: {type: new GraphQLNonNull(GraphQLID)}
+            },
+            resolve(parent, args){
+                return (post.findByIdAndDelete(args.id))
+            }
         }
     }
 })
