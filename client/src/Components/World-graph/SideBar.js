@@ -45,7 +45,7 @@ const SideBar = (props) => {
                         active={activeItem === character.name}
                         onClick={(e) => {setActiveItem(character.name); setActiveContent(character);}}
                     >{character.userId === jwt_decode(localStorage.usertoken)._id? 
-                    (<List.Item icon='user' content= {character.name} />):(<List.Item icon='user' content= {user} />)
+                    (<List.Item icon='user' content= {user} />):(<List.Item icon='user' content= {character.name} />)
                     }
                     </Menu.Item>
                 )
@@ -109,7 +109,7 @@ const SideBar = (props) => {
                 (activeContent.posts)?(
                   activeContent.posts.map((post)=>{
                     return (<div key = {post._id}>
-                      <Header as='h2' attached='top'>
+                      <Header as='h2' attached='top' className = "header-char-post">
                           {post.title}
                           {/* post delete functionality only if its user's post */}
                           {(post.character.user && post.character.user._id === jwt_decode(localStorage.usertoken)._id)?<Button icon='delete' onClick = {() => handleClick(post._id)} />: null}
