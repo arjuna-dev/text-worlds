@@ -2,8 +2,6 @@ import React, {useState} from 'react'
 import { useMutation } from '@apollo/react-hooks';
 import { Form } from 'semantic-ui-react'
 import {  getWorldQuery, addPostMutation } from '../../queries/queries';
-import {Redirect} from 'react-router-dom'
-import jwt_decode from 'jwt-decode'
 
 const PostForm = (props) => {
     

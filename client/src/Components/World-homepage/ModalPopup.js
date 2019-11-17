@@ -31,13 +31,16 @@ const ModalPopup = (props) => {
             userId: (jwt_decode(localStorage.usertoken))._id,
             role: role,
             gender: gender
-        }, refetchQueries: [{ query: getWorldQuery , variables: {id: props.world._id}}]})
-        console.log(data);
-        setName('');
-        setStory('');
-        setRole('');
-        setGender('');
-        setGateway(true);
+        }, refetchQueries: [{ query: getWorldQuery , variables: {id: props.world._id}}]}).then(()=>{
+          console.log(data);
+          if (error) console.log(error);
+          setName('');
+          setStory('');
+          setRole('');
+          setGender('');
+          setGateway(true);
+        })
+        
         
     }
     //checking if authenticated
@@ -51,7 +54,7 @@ const ModalPopup = (props) => {
       if(character.userId === jwt_decode(localStorage.usertoken)._id){
         alreadyJoined = true;
       }
-      return;
+      return null;
     })
 
     if(alreadyJoined){

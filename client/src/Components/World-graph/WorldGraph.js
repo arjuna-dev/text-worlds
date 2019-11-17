@@ -1,8 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { getWorldQuery } from '../../queries/queries';
-import { List, Container } from 'semantic-ui-react'
-import { Tab } from 'semantic-ui-react'
 import jwt_decode from 'jwt-decode'
 import { Redirect } from 'react-router-dom'
 import BackNavigation from '../BackNavigation';
@@ -24,7 +22,7 @@ const WorldGraph = (props) => {
             myCharacterId = character._id;
             redirect = false;
         }
-        return;
+        return null;
     })
     
     if (redirect){
