@@ -212,3 +212,8 @@
   display: flex;
   justify-content: space-between
 }
+
+.header-char-post{
+  display: flex;
+  justify-content: space-between
+}
