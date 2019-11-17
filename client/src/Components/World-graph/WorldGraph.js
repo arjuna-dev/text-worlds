@@ -37,7 +37,7 @@ const WorldGraph = (props) => {
             <PostBox world = {data.world} myCharacterId = {myCharacterId}/>
         </div>
         <div className = "world-graph">
-            <SideBar world = {data.world} />
+            <SideBar world = {data.world} myCharacterId = {myCharacterId} />
         </div>
         
         

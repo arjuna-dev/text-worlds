@@ -10,10 +10,12 @@ const postSchema = new Schema({
     text: String,
     characterId: String,
     worldId: String,
+    likesCharsId: [String],
+    deletesCharsId: [String],
     type: {type: String, enum: ['Event', 'Post']},
     tagged_channels: [String],
-    likes: Number,
-    deletes: Number,
+    likes: {type: Number, default: 1},
+    deletes: {type: Number, default: 1},
     report: Number,
     fork: Number
 });
