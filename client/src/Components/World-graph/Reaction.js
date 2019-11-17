@@ -4,6 +4,8 @@ import { useMutation } from '@apollo/react-hooks';
 import { updatePostMutation, getWorldQuery } from '../../queries/queries';
 
 const Reaction = (props) => {
+
+
     console.log(props)
     const reactions = {
         likes: props.post.likes,
@@ -12,6 +14,15 @@ const Reaction = (props) => {
         deletesCharsId: props.post.deletesCharsId || [],
     }
     const [updatePost] = useMutation(updatePostMutation);
+
+    var likeColor = ''
+    if (reactions.likesCharsId.includes(props.myCharacterId)){
+        likeColor = 'blue'
+    }
+    var deleteColor = ''
+    if (reactions.deletesCharsId.includes(props.myCharacterId)){
+        deleteColor = 'red'
+    }
 
     function updateReactions(){
         updatePost({
@@ -29,7 +40,7 @@ const Reaction = (props) => {
     return (
         <div>
             <Button
-            content='Like it'
+            color = {likeColor}
             icon='thumbs up outline'
             label={{ as: 'a', basic: true, content: reactions.likes }}
             labelPosition='right'
@@ -48,7 +59,7 @@ const Reaction = (props) => {
             }}
             />
             <Button
-            content='Remove it'
+            color = {deleteColor}
             icon='thumbs down outline'
             label={{ as: 'a', basic: true, pointing: 'right', content: reactions.deletes }}
             labelPosition='left'

@@ -37,13 +37,17 @@ const SideBar = (props) => {
                 onClick={(e) => {setActiveItem(props.world.name); setActiveContent(props.world);}}
               ><List.Item icon='map' content= {props.world.name} /></Menu.Item>
             {props.world.characters.map((character) => {
+                var user = character.name + ' (you)'
                 return (
                     <Menu.Item
                         name = {character.name}
                         key = {character._id}
                         active={activeItem === character.name}
                         onClick={(e) => {setActiveItem(character.name); setActiveContent(character);}}
-                    ><List.Item icon='user' content= {character.name} /></Menu.Item>
+                    >{character.userId === jwt_decode(localStorage.usertoken)._id? 
+                    (<List.Item icon='user' content= {character.name} />):(<List.Item icon='user' content= {user} />)
+                    }
+                    </Menu.Item>
                 )
             })}
           </Menu>
@@ -56,12 +60,12 @@ const SideBar = (props) => {
               {activeContent===props.world?(
                     <div>
                       <Header  attached = "top"> <List.Item icon='map' content= {activeContent.name} /> </Header>
-                      <Segment attached content = {activeContent.description}/>
+                      <Segment attached > <strong>ABOUT THE WORLD: </strong><br></br>{activeContent.description} </Segment>
                     </div>
                   ):(
                     <div>
                       <Header attached = "top"> <List.Item icon='user' content= {activeContent.name} /> </Header>
-                      <Segment attached content = {activeContent.story}/>
+                      <Segment attached > <strong>ABOUT ME: </strong><br></br>{activeContent.story} </Segment>
                     </div>
               )}
               </div>
