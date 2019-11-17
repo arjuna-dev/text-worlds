@@ -17,6 +17,8 @@ const EventForm = (props) => {
             text: text,
             characterId: props.myCharacterId,
             worldId: props.world._id,
+            likes: 0,
+            deletes: 0,
             type: 'Event'
         }, refetchQueries: [{ query: getWorldQuery , variables: {id: props.world._id}}]
         })

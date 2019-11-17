@@ -49,6 +49,10 @@ const getWorldQuery = gql`
             character{
               name
             }
+            likes
+            deletes
+            likesCharsId
+            deletesCharsId
           }
           characters{
             dateCreated
@@ -76,6 +80,8 @@ const getWorldQuery = gql`
                   _id
                 }
               }
+              likes
+              deletes
             }
           }
       }
@@ -95,15 +101,19 @@ const addWorldMutation = gql`
       } 
   }`
 const addPostMutation = gql`
-  mutation AddPost($title: String!, $text: String!, $characterId: String!, $type: String!, $worldId: String!){
-    addPost(title: $title, text: $text, characterId: $characterId, type: $type, worldId: $worldId){
+  mutation AddPost($title: String!, $text: String!, $characterId: String!, $type: String!, $worldId: String!, $likes: Int, $deletes: Int){
+    addPost(title: $title, text: $text, characterId: $characterId, type: $type, worldId: $worldId, likes: $likes, deletes: $deletes){
       _id
       title
       text
+      likes
+      deletes
       type
       character{
         name
       }
+      likesCharsId
+      deletesCharsId
     }
   }
 `
@@ -135,6 +145,13 @@ const deletePostMutation = gql`
       }
     }
 `
+const updatePostMutation = gql`
+    mutation UpdatePost ($id: ID!, $likes: Int, $deletes: Int, $likesCharsId: [String], $deletesCharsId: [String]){
+      updatePost(id: $id, likes: $likes, deletes: $deletes, likesCharsId: $likesCharsId, deletesCharsId: $deletesCharsId){
+        title
+      }
+    }
+`
 
 
-  export { getAllCharacters, addWorldMutation, addPostMutation,deletePostMutation, getAllPlaces, getAllWorlds, getWorldQuery, addCharacterMutation };
+  export { getAllCharacters, addWorldMutation, addPostMutation,deletePostMutation, updatePostMutation, getAllPlaces, getAllWorlds, getWorldQuery, addCharacterMutation };

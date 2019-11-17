@@ -3,6 +3,7 @@ import { Grid, Menu, Segment, Header, Label, List, Button} from 'semantic-ui-rea
 import { useMutation } from '@apollo/react-hooks';
 import { deletePostMutation, getWorldQuery } from '../../queries/queries';
 import jwt_decode from 'jwt-decode'
+import Reaction from './Reaction';
 
 const SideBar = (props) => {
 
@@ -72,9 +73,11 @@ const SideBar = (props) => {
                     console.log('yaayyeyeee');
                     if (post.type === 'Event'){
                         return (<div key = {post._id}>
-                            <Header as='h2' attached='top'>
-                            <Label color='blue' ribbon> Event </Label>
+                            <Header as='h2' attached='top' className = "event-header">
+                                <Label color='blue' ribbon> Event </Label>
                                 {post.title}
+                                {/* added reaction */}
+                                <Reaction post = {post} worldId = {props.world._id} myCharacterId = {props.myCharacterId}/>
                             </Header>
                             <Segment attached>
                                 <strong><em>Happened on {post.dateCreated}</em></strong><br/><br />
@@ -104,7 +107,8 @@ const SideBar = (props) => {
                     return (<div key = {post._id}>
                       <Header as='h2' attached='top'>
                           {post.title}
-                          {(post.character.user._id === jwt_decode(localStorage.usertoken)._id)?<Button icon='delete' onClick = {() => handleClick(post._id)} />: null}
+                          {/* post delete functionality only if its user's post */}
+                          {(post.character.user && post.character.user._id === jwt_decode(localStorage.usertoken)._id)?<Button icon='delete' onClick = {() => handleClick(post._id)} />: null}
                       </Header>
                       <Segment attached>
                           <strong><em>posted on {post.dateCreated}</em></strong><br/><br />

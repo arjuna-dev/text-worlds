@@ -166,6 +166,8 @@ const PostType = new GraphQLObjectType({
         characterId: {type: GraphQLID},
         title: { type: GraphQLString },
         dateCreated: {type: GraphQLString},
+        likes: {type: GraphQLInt},
+        deletes: {type: GraphQLInt},
         worldId: {type: GraphQLID},
         type: {type: GraphQLString},
         // dateCreated: { type: Date, default: Date.now },
@@ -186,6 +188,8 @@ const PostType = new GraphQLObjectType({
         // tagged_channels: [String],
         likes: { type: GraphQLInt },
         deletes: { type: GraphQLInt },
+        likesCharsId: {type: new GraphQLList(GraphQLString)},
+        deletesCharsId: {type: new GraphQLList(GraphQLString)},
         report: { type: GraphQLInt },
         fork: { type: GraphQLInt },
     })
@@ -324,6 +328,8 @@ const Mutation = new GraphQLObjectType({
                 characterId: {type: new GraphQLNonNull(GraphQLString)},
                 type: {type: new GraphQLNonNull(GraphQLString)},
                 worldId: {type: new GraphQLNonNull(GraphQLString)},
+                likes: {type:  GraphQLInt},
+                deletes: {type: GraphQLInt}
             },
             resolve(parent, args){
                 let newPost = new post({
@@ -332,6 +338,8 @@ const Mutation = new GraphQLObjectType({
                     type: args.type,
                     characterId: args.characterId,
                     worldId: args.worldId,
+                    likes: args.likes,
+                    deletes: args.deletes,
                     dateCreated: moment().format('lll'),
                     date: Date.now()
                 });
@@ -361,6 +369,19 @@ const Mutation = new GraphQLObjectType({
             },
             resolve(parent, args){
                 return (post.findByIdAndDelete(args.id))
+            }
+        },
+        updatePost: {
+            type: PostType,
+            args: {
+                id: {type: new GraphQLNonNull(GraphQLID)},
+                likes: {type: GraphQLInt},
+                deletes: {type: GraphQLInt},
+                likesCharsId: {type: new GraphQLList(GraphQLString)},
+                deletesCharsId: {type: new GraphQLList(GraphQLString)},
+            },
+            resolve(parent, args){
+                return post.findByIdAndUpdate(args.id, {likes: args.likes, deletes: args.deletes, likesCharsId: args.likesCharsId, deletesCharsId: args.deletesCharsId})
             }
         }
     }
