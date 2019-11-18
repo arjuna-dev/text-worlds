@@ -7,6 +7,8 @@ const Reaction = (props) => {
 
 
     console.log(props)
+    const [likes, setLikes] = useState(props.post.likes);
+    const [deletes, setDeletes] = useState(props.post.deletes);
     const reactions = {
         likes: props.post.likes,
         deletes: props.post.deletes,
@@ -29,7 +31,7 @@ const Reaction = (props) => {
             variables: {
                 id: props.post._id,
                 likes: reactions.likesCharsId.length,
-                deletes: reactions.deletes,
+                deletes: -reactions.deletesCharsId.length ,
                 likesCharsId: reactions.likesCharsId,
                 deletesCharsId: reactions.deletesCharsId
         }, refetchQueries:[{ query: getWorldQuery , variables: {id: props.worldId}}]
@@ -42,16 +44,16 @@ const Reaction = (props) => {
             <Button
             color = {likeColor}
             icon='thumbs up outline'
-            label={{ as: 'a', basic: true, content: reactions.likes }}
+            label={{ as: 'a', basic: true, content: likes }}
             labelPosition='right'
             onClick = {(e) => {
                 if (!reactions.likesCharsId || !reactions.likesCharsId.includes(props.myCharacterId)){
-                    reactions.likes = props.post.likes + 1
+                    setLikes(likes + 1)
                     reactions.likesCharsId.push(props.myCharacterId)
                     updateReactions()
                 }
                 else{
-                    reactions.likes = props.post.likes - 1
+                    setLikes(likes - 1)
                     let index = reactions.likesCharsId.indexOf(props.myCharacterId)
                     reactions.likesCharsId.splice(index, 1)
                     updateReactions()
@@ -61,16 +63,16 @@ const Reaction = (props) => {
             <Button
             color = {deleteColor}
             icon='thumbs down outline'
-            label={{ as: 'a', basic: true, pointing: 'right', content: reactions.deletes }}
+            label={{ as: 'a', basic: true, pointing: 'right', content: deletes }}
             labelPosition='left'
             onClick = {(e) => {
                 if (!reactions.deletesCharsId || !reactions.deletesCharsId.includes(props.myCharacterId)){
-                    reactions.deletes = props.post.deletes + 1
+                    setDeletes(deletes - 1)
                     reactions.deletesCharsId.push(props.myCharacterId)
                     updateReactions()
                 }
                 else{
-                    reactions.deletes = props.post.deletes - 1
+                    setDeletes(deletes + 1)
                     let index = reactions.deletesCharsId.indexOf(props.myCharacterId)
                     reactions.deletesCharsId.splice(index, 1)
                     updateReactions()
