@@ -13,7 +13,6 @@ const WorldGraph = (props) => {
     const { loading, error, data } = useQuery(getWorldQuery, {
         variables: { id: props.match.params.id },
     });
-    console.log('working');
     if (loading) return <div className="ui active centered loader"></div>
     if (error) return <div>Error :( Try again later</div>;
     console.log(data);
