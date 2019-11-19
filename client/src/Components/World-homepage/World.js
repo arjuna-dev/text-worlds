@@ -4,7 +4,7 @@ import CardEvent from './CardEvent';
 import { getWorldQuery } from '../../queries/queries';
 import ModalPopup from './ModalPopup';
 import BackNavigation from '../BackNavigation';
-import {Segment} from 'semantic-ui-react';
+import {Segment, Header, Icon, Card} from 'semantic-ui-react';
 
 const World = (props) => {
     const { loading, error, data } = useQuery(getWorldQuery, {
@@ -16,36 +16,48 @@ const World = (props) => {
     return (
         <div>
             <BackNavigation />
-            <div className = "page-name">Inside This World</div>
             <div className = "world">
-                <div className = "world-title">
-                    <div><strong>{data.world.name}</strong></div>
+            <div className = "world-title">
+            <Header as='h2' icon>
+                <Icon name='world' />
+                {data.world.name}
+                <Header.Subheader>
+                {data.world.description}
+                </Header.Subheader>
+            </Header>
                     <div className = "join-world"><ModalPopup world = {data.world} /></div>
                 </div>
-                <div className = "world-details">
-                    <Segment size='big'>{data.world.description}</Segment>
-                </div>
-                <div className = "world-events">
-                    <strong>EVENTS</strong> <br></br>
-                    <div className = "world-elements-inside">
-                        {data.world.posts.map((post)=> (
-                            <div key = {post._id}>
-                                {post.type === 'Event'?<CardEvent event = {post}/>:null}
-                            </div>
-                        ))}
+                <div className = "world-info">
+                    <div className = "world-events-parent">
+                    <Header as='h3' dividing>
+                        <Icon name = 'history' />World Timeline
+                    </Header>
+                    <br />
+                        <div className = "world-events">
+                        <Card.Group>
+                            {data.world.posts.map((post)=> (
+                                <div key = {post._id}>
+                                    {post.type === 'Event'?<CardEvent event = {post}/>:null}
+                                </div>
+                            ))}
+                        </Card.Group>
+                        </div>
+                    </div>
+                    <div className = "world-characters-parent">
+                    <Header as='h3' dividing>
+                        <Icon name = 'users' />All Characters
+                    </Header>
+                    <br />
+                        <div className = "world-characters">
+                        <Card.Group>
+                            {data.world.characters.map((character)=> (
+                                    <CardEvent character = {character} key = {character._id}/>
+                            ))}
+                        </Card.Group>
+                        </div>
                     </div>
                 </div>
-                <div className = "world-characters">
-                    <strong>CHARACTERS</strong> <br></br>
-                    <div className = "world-elements-inside">
-                        {data.world.characters.map((character)=> (
-                            <div key = {character._id}>
-                                <CardEvent character = {character}/>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                <div className = "world-places">
+                {/* <div className = "world-places">
                     <strong>PLACES</strong> <br></br>
                     <div className = "world-elements-inside">
                         {data.world.characters.map((character)=> (
@@ -56,7 +68,7 @@ const World = (props) => {
                             ))
                         ))}
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     );

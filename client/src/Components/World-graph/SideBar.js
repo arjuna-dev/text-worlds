@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react'
-import { Grid, Menu, Segment, Header, Label, List, Button} from 'semantic-ui-react'
+import { Grid, Menu, Segment, Header, Label, List, Button, Icon} from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks';
 import { deletePostMutation, getWorldQuery } from '../../queries/queries';
 import jwt_decode from 'jwt-decode'
@@ -30,25 +30,45 @@ const SideBar = (props) => {
         <Grid.Column width={4}>
           <div className = "sidebar">
           <Menu fluid vertical tabular>
+              <h4> World </h4>
               <Menu.Item
                 
                 key={props.world._id}
                 active={activeItem === props.world.name}
                 onClick={(e) => {setActiveItem(props.world.name); setActiveContent(props.world);}}
-              ><List.Item icon='map' content= {props.world.name} /></Menu.Item>
-            {props.world.characters.map((character) => {
+              ><div><Icon name = "world" /> {props.world.name}</div></Menu.Item>
+              <h4>Characters</h4>
+
+              {/* My character */}
+              {props.world.characters.map((character) => {
                 var user = character.name + ' (you)'
-                return (
-                    <Menu.Item
-                        name = {character.name}
-                        key = {character._id}
-                        active={activeItem === character.name}
-                        onClick={(e) => {setActiveItem(character.name); setActiveContent(character);}}
-                    >{character.userId === jwt_decode(localStorage.usertoken)._id? 
-                    (<List.Item icon='user' content= {user} />):(<List.Item icon='user' content= {character.name} />)
-                    }
-                    </Menu.Item>
-                )
+                return (character.userId === jwt_decode(localStorage.usertoken)._id)?
+                (
+                  <Menu.Item
+                      name = {character.name}
+                      key = {character._id}
+                      active={activeItem === character.name}
+                      onClick={(e) => {setActiveItem(character.name); setActiveContent(character);}}
+                  >
+                  <div><Icon name = "user" /> {user}</div>
+                  </Menu.Item>
+              ):null
+                
+            })}
+
+              {/* other characters */}
+            {props.world.characters.map((character) => {
+                return (character.userId === jwt_decode(localStorage.usertoken)._id)?
+                null:(
+                  <Menu.Item
+                      name = {character.name}
+                      key = {character._id}
+                      active={activeItem === character.name}
+                      onClick={(e) => {setActiveItem(character.name); setActiveContent(character);}}
+                  >
+                  <div><Icon name = "user" /> {character.name}</div>
+                  </Menu.Item>
+              )
             })}
           </Menu>
           </div>
@@ -59,13 +79,13 @@ const SideBar = (props) => {
           <div className = "sidebar-header">
               {activeContent===props.world?(
                     <div>
-                      <Header  attached = "top"> <List.Item icon='map' content= {activeContent.name} /> </Header>
+                      <Header  attached = "top"> <Icon name = "world" />&nbsp;{activeContent.name} </Header>
                       <Segment attached > <strong>ABOUT THE WORLD: </strong><br></br>{activeContent.description} </Segment>
                     </div>
                   ):(
                     <div>
-                      <Header attached = "top"> <List.Item icon='user' content= {activeContent.name} /> </Header>
-                      <Segment attached > <strong>ABOUT ME: </strong><br></br>{activeContent.story} </Segment>
+                      <div><Header attached = "top"> <Icon name = "user" />&nbsp;{activeContent.name}  </Header></div>
+                      <div><Segment attached > <strong>ABOUT ME: </strong><br></br>{activeContent.story} </Segment></div>
                     </div>
               )}
               </div>
@@ -78,7 +98,7 @@ const SideBar = (props) => {
                     if (post.type === 'Event'){
                         return (<div key = {post._id}>
                             <Header as='h2' attached='top' className = "event-header">
-                                <Label color='blue' ribbon> Event </Label>
+                                <Label color='blue' ribbon> World <br /> Timeline </Label>
                                 {post.title}
                                 {/* added reaction */}
                                 <Reaction post = {post} worldId = {props.world._id} myCharacterId = {props.myCharacterId}/>

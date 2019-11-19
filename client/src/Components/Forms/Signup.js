@@ -114,8 +114,8 @@ const SignupForm = () => {
               type="password"
               value={form.password}
               onChange={(e) => {updateField(e)}}
-              validations={"minLength:8"}
-              validationErrors={{ minLength: 'Password must be at least 8 characters long' }}
+              validations={"minLength:6"}
+              validationErrors={{ minLength: 'Password must be at least 6 characters long' }}
               errorLabel={ <Message color="pink"/> }
             />
             <Form.Input
@@ -138,7 +138,7 @@ const SignupForm = () => {
             <Divider hidden />
           </Form>
         </div>
-        <div> hello{Form.Input.repeat_password}</div>
+        <div> {Form.Input.repeat_password}</div>
         <div className="four wide column"></div>
       </div>
     </div>
