@@ -25,6 +25,7 @@ if (error) return <p>Error :(</p>;
       <div>
         <Header />
         <div className = "world-list">
+          <div className = "world-list-header">ALL WORLDS</div>
           <List size='massive'>
             {data.worlds.map(( world ) => (
               <List.Item style={{ marginBottom: '9vh' }} key={world._id}>

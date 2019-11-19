@@ -12,7 +12,7 @@ const PostBox = (props) => {
     <Button.Or />
     <Popup
     on='click'
-    trigger={<Button>Create an event</Button>}
+    trigger={<Button>Create a world timeline</Button>}
   > <EventForm world = {props.world} myCharacterId = {props.myCharacterId} /> </Popup>
   </Button.Group>
 }

@@ -1,5 +1,16 @@
 /* Title and menu */
 
+* {
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+.world-list-header{
+  font-size: 2vw;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+}
+
 .topbar {
   margin-top: 10vh;
 }
@@ -64,17 +75,25 @@
 
 .world{
   margin-left: 10vw;
-  margin-top: 10vh;
   padding: 2vw;
+  margin-top: -5vh;
 }
 .world-title{
   font-size: 2.5vw;
   padding: 2vw;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.join-world{
-  margin-left: 4vw;
-  margin-top: -0.5vw;
+
+.world-info{
+  display: flex;
+  justify-content: space-between
+}
+
+.world-top{
+  display: flex;
 }
 
 .world-details{
@@ -84,10 +103,17 @@
 .world-events{
   font-size: 1.5vw;
   padding: 2vw;
+  width: 30vw;
+  height: 70vh;
+  overflow-y: scroll;
 }
 .world-characters{
   font-size: 1.5vw;
   padding: 2vw;
+  width: 30vw;
+  height: 70vh;
+  overflow-y: scroll;
+
 }
 .world-places{
   font-size: 1.5vw;
