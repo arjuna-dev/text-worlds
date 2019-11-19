@@ -18,7 +18,6 @@ const ModalPopup = (props) => {
     const [addCharacter, { data, error }] = useMutation(addCharacterMutation);
 
     let link = '/world/' + props.world._id + '/graph';
-    let link2 = '/world/' + props.world._id;
     console.log(link);
     
     const handleSubmit = (e) => {

@@ -32,7 +32,7 @@ const LoginForm = () => {
         else{
           console.log(response.data)
           localStorage.setItem('usertoken', response.data)
-          history.goBack();
+          return history.goBack();
         }
       })
       .catch(error => {
