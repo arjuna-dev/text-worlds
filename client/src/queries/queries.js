@@ -4,6 +4,7 @@ const getAllCharacters = gql`
     query {
     characters{
         name
+        dateCreated
         story
       } 
   }`
@@ -39,7 +40,22 @@ const getWorldQuery = gql`
           user{
             name
           }
+          posts{
+            _id
+            title
+            dateCreated
+            type
+            text
+            character{
+              name
+            }
+            likes
+            deletes
+            likesCharsId
+            deletesCharsId
+          }
           characters{
+            dateCreated
             _id
             userId
             name
@@ -50,19 +66,23 @@ const getWorldQuery = gql`
               _id
               name
               description
+              dateCreated
             }
             posts{
+              _id
               title
+              dateCreated
+              type
               text
               character{
                 name
+                user{
+                  _id
+                }
               }
+              likes
+              deletes
             }
-          }
-          events{
-            _id
-            title
-            text
           }
       }
   }
@@ -80,12 +100,30 @@ const addWorldMutation = gql`
         }
       } 
   }`
+const addPostMutation = gql`
+  mutation AddPost($title: String!, $text: String!, $characterId: String!, $type: String!, $worldId: String!, $likes: Int, $deletes: Int){
+    addPost(title: $title, text: $text, characterId: $characterId, type: $type, worldId: $worldId, likes: $likes, deletes: $deletes){
+      _id
+      title
+      text
+      likes
+      deletes
+      type
+      character{
+        name
+      }
+      likesCharsId
+      deletesCharsId
+    }
+  }
+`
 
 const addCharacterMutation = gql`
     mutation AddCharacter ($name: String!, $story: String!, $userId: String!, $worldId: String!, $role: String, $gender: String ){
       addCharacter(name: $name, story: $story, userId: $userId, worldId: $worldId, role: $role, gender: $gender){
         name
         story
+        dateCreated
         world{
           _id
           name
@@ -100,5 +138,20 @@ const addCharacterMutation = gql`
     }
 `
 
+const deletePostMutation = gql`
+    mutation DeletePost ($id: ID!){
+      deletePost(id: $id){
+        title
+      }
+    }
+`
+const updatePostMutation = gql`
+    mutation UpdatePost ($id: ID!, $likes: Int, $deletes: Int, $likesCharsId: [String], $deletesCharsId: [String]){
+      updatePost(id: $id, likes: $likes, deletes: $deletes, likesCharsId: $likesCharsId, deletesCharsId: $deletesCharsId){
+        title
+      }
+    }
+`
 
-  export { getAllCharacters, addWorldMutation, getAllPlaces, getAllWorlds, getWorldQuery, addCharacterMutation };
+
+  export { getAllCharacters, addWorldMutation, addPostMutation,deletePostMutation, updatePostMutation, getAllPlaces, getAllWorlds, getWorldQuery, addCharacterMutation };
