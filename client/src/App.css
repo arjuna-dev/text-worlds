@@ -96,6 +96,7 @@
 .world-elements-inside{
   display: flex;
   margin-top: 1vw;
+  margin-right: 2vw;
   overflow-x: scroll;
 }
 .add-character{
@@ -146,10 +147,10 @@
   height: 100vh;
 }
 
-.segmento{
-  height: 60vh;
-  overflow: scroll;
-  /* overflow-y: scroll; */
+.world-graph{
+  margin-left: 12vw;
+  margin-top: 5vh;
+  margin-bottom: 4vh;
 }
 
 .graph-list{
@@ -159,18 +160,57 @@
   display: inline-block;
   font-weight: bolder;
 }
-
-.item-row{
-  white-space:nowrap;
-  margin-bottom: 2vw;
+.linked-world-title{
+  display: flex;
+}
+.linked-world-characters{
+  display: flex;
+  margin-top: 6vw;
+  margin-bottom: 6vw;
 }
 
 .graph-item{
   display: inline-block;
   font-weight: bolder;
   margin-left: 2vw;
+  font-weight: bolder;
+}
+.tab{
+  margin-left: 4vw;
+  width: 70vw;
+  overflow-x: scroll;
 }
 
+.post-box{
+  position: fixed;
+  top: 19.5vh;
+  margin-left: 70vw;
+  width: 50vw;
+}
 
+.container-text{
+  position: relative;
+}
 
+.sidebar{
+  height: 65vh;
+  overflow-y: scroll;
+}
 
+.sidebar-content{
+  height: 55vh;
+  overflow-y: scroll;
+}
+.sidebar-menu{
+  display: flex;
+}
+
+.event-header{
+  display: flex;
+  justify-content: space-between
+}
+
+.header-char-post{
+  display: flex;
+  justify-content: space-between
+}

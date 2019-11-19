@@ -15,7 +15,7 @@ const ModalPopup = (props) => {
     const [gender, setGender] = useState('');
     const [gateway, setGateway] = useState(false);
     let alreadyJoined = false;
-    const [addCharacter, { data }] = useMutation(addCharacterMutation);
+    const [addCharacter, { data, error }] = useMutation(addCharacterMutation);
 
     let link = '/world/' + props.world._id + '/graph';
     let link2 = '/world/' + props.world._id;
@@ -51,11 +51,11 @@ const ModalPopup = (props) => {
       if(character.userId === jwt_decode(localStorage.usertoken)._id){
         alreadyJoined = true;
       }
-      return;
+      return null;
     })
 
     if(alreadyJoined){
-      return <div> <Label as='a' color='olive' tag> Joined </Label> <Link to = {link}><Button positive className = "join-world">Get In!</Button></Link></div>
+      return <div> <Label color='olive' tag> Joined </Label> <Link to = {link}><Button positive className = "join-world">Get In!</Button></Link></div>
     }
 
     // redirecting to the graph after creating the character
