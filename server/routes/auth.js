@@ -92,7 +92,7 @@ router.post('/login',async (req, res) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password)
     console.log(validPassword)
     if (!validPassword){
-        errors.password = "Invalid password"
+        errors.password = "Invalid password 🤔"
         return res.json({error: errors})
     }
 
