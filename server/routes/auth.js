@@ -6,9 +6,12 @@ const jwt = require('jsonwebtoken');
 
 
 router.post('/signup',async (req, res) => {
+    
     //Check for errors
-    //const sgnpValidation = signupValidation(req.body)
-    //if (sgnpValidation[0]) return res.status(400).send(sgnpValidation[0].details[0].message)
+    const sgnpValidation = signupValidation(req.body)
+    if (sgnpValidation[0]) {
+        return res.status(400).send(sgnpValidation[0].details[0].message)
+    }
 
     //Check db for existing email
     const emailExists = await User.findOne({email: req.body.email})
@@ -50,7 +53,7 @@ router.post('/signup',async (req, res) => {
         );
 
     } catch (error) {
-        res.status(400).send(error);
+        res.status(400).send(sgnpValidation[0].details[0].message);
     }
 
 });

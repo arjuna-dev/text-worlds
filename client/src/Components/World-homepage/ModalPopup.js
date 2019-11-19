@@ -32,16 +32,13 @@ const ModalPopup = (props) => {
             role: role,
             gender: gender
         }, refetchQueries: [{ query: getWorldQuery , variables: {id: props.world._id}}]}).then(()=>{
-          console.log(data);
-          if (error) console.log(error);
           setName('');
           setStory('');
           setRole('');
           setGender('');
           setGateway(true);
         })
-        
-        
+        return null
     }
     //checking if authenticated
     if (!localStorage.usertoken){
@@ -63,7 +60,7 @@ const ModalPopup = (props) => {
 
     // redirecting to the graph after creating the character
     if (gateway){
-      return <Redirect to = {link2} />
+      return <Redirect to = {link} />
     }
     
     // modal popup to create a character

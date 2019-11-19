@@ -8,19 +8,20 @@ const signupValidation = data =>{
             .min(3)
             .max(30)
             .required(),
+
+        email: Joi.string()
+        .required()
+        .email({ minDomainSegments: 2}),
     
         password: Joi.string()
             .required()
             .pattern(/^[a-zA-Z0-9]{3,30}$/),
     
-        repeat_password: Joi.ref('password'),
+        repeat_password: Joi.ref('password')
         // access_token: [
         //     Joi.string(),
         //     Joi.number()
         // ],
-        email: Joi.string()
-            .required()
-            .email({ minDomainSegments: 2})
         });
 
     const { error, value } = schema.validate(data);
@@ -45,7 +46,3 @@ const loginValidation = data =>{
 
 module.exports.signupValidation = signupValidation;
 module.exports.loginValidation = loginValidation;
-
-//Test
-//Test
-//Testing
