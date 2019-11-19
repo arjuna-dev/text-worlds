@@ -1,21 +1,36 @@
 const router = require('express').Router();
+const cors = require("cors")
 const User = require('../models/user');
-const {signupValidation, loginValidation} = require('../validation');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
+router.use(cors())
+// Load input validation
+const validateRegisterInput = require("../Validators/register");
+const validateLoginInput = require("../Validators/login");
 
 
 router.post('/signup',async (req, res) => {
     
     //Check for errors
-    const sgnpValidation = signupValidation(req.body)
-    if (sgnpValidation[0]) {
-        return res.status(400).send(sgnpValidation[0].details[0].message)
+    //form validation
+    const { errors, isValid } = validateRegisterInput(req.body);
+    if (!isValid) {
+        return res.json({error: errors})
     }
 
+    //Check db for existing username
+    const nameCheck = await User.findOne({name: req.body.name})
+    if(nameCheck){
+        errors.name = "Username already exists"
+        return res.json({error: errors})
+    } 
     //Check db for existing email
-    const emailExists = await User.findOne({email: req.body.email})
-    if(emailExists) return res.status(400).send('Email already exists')
+    const emailCheck = await User.findOne({email: req.body.email})
+    if(emailCheck){
+        errors.email = "Email already exists"
+        return res.json({error: errors})
+    } 
 
     //Send for debugging in postman
     //res.send(sgnpValidation[1]);
@@ -53,23 +68,33 @@ router.post('/signup',async (req, res) => {
         );
 
     } catch (error) {
-        res.status(400).send(sgnpValidation[0].details[0].message);
+        res.status(400).json({errors: errors});
     }
 
 });
 
 router.post('/login',async (req, res) => {
     //Check for validation errors
-    const lgnValidation = loginValidation(req.body)
-    if (lgnValidation[0]) return res.status(400).send(lgnValidation[0].details[0].message)
+    const { errors, isValid } = validateLoginInput(req.body);
+    if (!isValid) {
+        return res.json({error: errors})
+    }
 
     //Check db for existing email
     const user = await User.findOne({email: req.body.email})
-    if(!user) return res.status(400).send('This email is not registered 🤔')
+
+    if(!user){
+        errors.email = "This email is not registered 🤔";
+        return res.json({error: errors})
+    }
 
     //Validate password
     const validPassword = await bcrypt.compare(req.body.password, user.password)
-    if (!validPassword) return res.status(400).send('Invalid password')
+    console.log(validPassword)
+    if (!validPassword){
+        errors.password = "Invalid password"
+        return res.json({error: errors})
+    }
 
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET)
 

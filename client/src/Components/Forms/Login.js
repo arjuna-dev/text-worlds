@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Button, Divider, Form } from 'semantic-ui-react';
+import { Button, Divider, Form, Message } from 'semantic-ui-react';
 import axios from 'axios';
 import { Redirect } from 'react-router'
 import BackNavigation from '../BackNavigation';
@@ -10,11 +10,11 @@ const history = createBrowserHistory();
 
 const LoginForm = () => {
 
-  const [loggedIn, setLoggedIn] = useState(false);
   const [form, setValues] = useState({
     email: '',
-    password: ''
+    password: '',
   });
+  const [errors, setErrors] = useState(null);
 
   const updateField = (e) => setValues({
     ...form,
@@ -25,18 +25,22 @@ const LoginForm = () => {
     e.preventDefault();
     axios.post('http://localhost:4000/api/user/login', form)
       .then(response => {
-        if (response.data && !response.data.error){
-            localStorage.setItem('usertoken', response.data)
-            history.goBack();
+        console.log(response.data)
+        if (response.data.error){
+          setErrors(response.data.error)
         }
-        setLoggedIn(true)
+        else{
+          console.log(response.data)
+          localStorage.setItem('usertoken', response.data)
+          history.goBack();
+        }
       })
       .catch(error => {
         console.log(error)
       })
   }
     
-    if (localStorage.usertoken || loggedIn){
+    if (localStorage.usertoken){
       return <Redirect to = '/' />
     }
 
@@ -48,6 +52,8 @@ const LoginForm = () => {
     <div className="four wide column"></div>
     <div className="eight wide column">
     <Link className = "signup-link" to = '/signup'>Haven't joined yet? Click here to Sign up</Link> <br /><br />
+    {(errors && errors.email)?<Message color = "pink">{errors.email}</Message>: null}
+    {(errors && errors.password)?<Message color = "pink">{errors.password}</Message>: null}
       <Form onSubmit={submitHandler}>
         <Form.Input
           // error='Please enter your email address'
@@ -73,7 +79,8 @@ const LoginForm = () => {
         <Divider hidden />
       </Form>
     </div>
-    <div className="four wide column"></div>
+    <div className="four wide column">
+    </div>
   </div>
   </div>
   )
