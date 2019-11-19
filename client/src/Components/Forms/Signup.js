@@ -12,15 +12,14 @@ const history = createBrowserHistory();
 
 const SignupForm = () => {
   
-  const [loggedIn, setLoggedIn] = useState(false);
   const [form, setValues] = useState({
     name: '',
     email: '',
     password: '',
     repeat_password: ''
   });
-  const [firstPassword, setFirstPassword] = useState("");
   const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const [errors, setErrors] = useState(null);
 
 
   const updateField = (e) => setValues({
@@ -28,12 +27,9 @@ const SignupForm = () => {
     [e.target.name]: e.target.value
   })
     
-  const checkFirstPassword = (e) => {
-      setFirstPassword(e.target.value)
-  }
 
   const comparePass = (e) => {
-    if (firstPassword != e.target.value){
+    if (form.password !== e.target.value){
       setPasswordsMatch(false)
     } else {
       setPasswordsMatch(true)
@@ -43,9 +39,12 @@ const SignupForm = () => {
   const onValidSubmit = e => {
     axios.post('http://localhost:4000/api/user/signup', e)
       .then(response => {
-        if (response.data && !response.data.error){
+        if (response.data.error){
+          console.log(response.data.error)
+          setErrors(response.data.error)
+        }
+        else{
           localStorage.setItem('usertoken', response.data)
-          setLoggedIn(true)
           history.goBack()
         }
       })
@@ -55,7 +54,7 @@ const SignupForm = () => {
       })
   }
     
-    if (loggedIn || localStorage.usertoken){
+    if (localStorage.usertoken){
       return <Redirect to="/" />
     }
 
@@ -67,6 +66,10 @@ const SignupForm = () => {
         <div className="four wide column"></div>
         <div className="eight wide column">
           <Link className = "signup-link" to = '/login'>Already have an account? Click here to log in</Link> <br /><br />
+          {(errors && errors.name)?<Message color = "pink">{errors.name}</Message>: null}
+          {(errors && errors.email)?<Message color = "pink">{errors.email}</Message>: null}
+          {(errors && errors.password)?<Message color = "pink">{errors.password}</Message>: null}
+          {(errors && errors.repeat_password)?<Message color = "pink">{errors.repeat_password}</Message>: null}
           <Form onValidSubmit={onValidSubmit}>
             <Form.Input
               // error={{ content: 'Please enter a user name', pointing: 'below' }}
@@ -78,14 +81,16 @@ const SignupForm = () => {
               value={form.name}
               onChange={updateField}
               validations={{
+                "isAlphanumeric": true,
                 // "isAlphanumeric": "isAlphanumeric"
                 "minLength": "2"
               }}
-              validationErrors={{ 
+              validationErrors={{
+                isExisty: 'Please input a user name',
                 isAlphanumeric: 'You are using invalid characters',
-                minLength: "Your user name should be at least 2 characters long"
+                minLength: "Your user name should be at least 2 characters long",
               }}
-              errorLabel={ <Label color="red" pointing/> }
+              errorLabel={ <Message color="pink"/> }
             />
             <Form.Input
               // error='Please enter your email address'
@@ -98,7 +103,7 @@ const SignupForm = () => {
               onChange={updateField}
               validations="isEmail"
               validationErrors={{ isEmail: 'Email is not valid' }}
-              errorLabel={ <Label color="red" pointing/> }
+              errorLabel={ <Message color="pink"/> }
             />
             <Form.Input
               // error='Please enter password'
@@ -108,10 +113,10 @@ const SignupForm = () => {
               placeholder='Password'
               type="password"
               value={form.password}
-              onChange={(e) => {updateField; checkFirstPassword}}
+              onChange={(e) => {updateField(e)}}
               validations={"minLength:8"}
               validationErrors={{ minLength: 'Password must be at least 8 characters long' }}
-              errorLabel={ <Label color="red" pointing/> }
+              errorLabel={ <Message color="pink"/> }
             />
             <Form.Input
               // error='Repeat password here'
@@ -121,12 +126,12 @@ const SignupForm = () => {
               placeholder='Confirm password'
               type="password"
               value={form.repeat_password}
-              onChange={(e) => {updateField; comparePass}}
-              validations={"minLength:8"}
+              onChange={(e) => {updateField(e); comparePass(e)}}
+              validations={"isExisty"}
               validationErrors={{ 
-                minLength: 'Password must be at least 8 characters long' 
+                isExisty: 'Please enter your password again' 
               }}
-              errorLabel={ <Label color="red" pointing/> }
+              errorLabel={ <Message color="pink"/> }
             />
             {passwordsMatch ?  <p></p> : <Message color='pink'><p>Passwords do not match</p></Message>}
             <Button type='submit'>Submit</Button>
