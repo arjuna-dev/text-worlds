@@ -108,7 +108,7 @@ const SignupForm = () => {
               placeholder='Password'
               type="password"
               value={form.password}
-              onChange={updateField, checkFirstPassword}
+              onChange={(e) => {updateField; checkFirstPassword}}
               validations={"minLength:8"}
               validationErrors={{ minLength: 'Password must be at least 8 characters long' }}
               errorLabel={ <Label color="red" pointing/> }
@@ -121,7 +121,7 @@ const SignupForm = () => {
               placeholder='Confirm password'
               type="password"
               value={form.repeat_password}
-              onChange={updateField, comparePass}
+              onChange={(e) => {updateField; comparePass}}
               validations={"minLength:8"}
               validationErrors={{ 
                 minLength: 'Password must be at least 8 characters long' 
