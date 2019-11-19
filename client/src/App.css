@@ -153,11 +153,11 @@
   margin-bottom: 4vh;
 }
 
-.world-graph-items{
-  margin-bottom: 2vw;
+.graph-list{
 }
 
-.world-graph-title{
+.row-title{
+  display: inline-block;
   font-weight: bolder;
 }
 .linked-world-title{
@@ -168,13 +168,10 @@
   margin-top: 6vw;
   margin-bottom: 6vw;
 }
-.graph-item-event{
-  margin-right: 2vw;
-  margin-left: 2vw;
+
+.graph-item{
+  display: inline-block;
   font-weight: bolder;
-}
-.graph-item-post{
-  margin-right: 2vw;
   margin-left: 2vw;
   font-weight: bolder;
 }
