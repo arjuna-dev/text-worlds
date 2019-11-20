@@ -59,12 +59,12 @@ const ModalPopup = (props) => {
     // modal popup to create a character
     return(
   <Modal trigger={<Button positive className = "join-world">Join the world</Button>}>
-    <Modal.Header>Define your character</Modal.Header>
-    <Modal.Content image>
+    <Modal.Header className = "add-character-form">Define your character</Modal.Header>
+    <Modal.Content image className = "add-character">
       <Image wrapped size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' />
       <Modal.Description>
         <Header>Fill out the form</Header>
-        <Form className = "add-character" onSubmit = {handleSubmit}>
+        <Form onSubmit = {handleSubmit}>
             <Form.Group widths='equal'>
                 <Form.Field label='Name of the character' control='input' value={name} onChange={(e) => setName(e.target.value)} />
             </Form.Group>
