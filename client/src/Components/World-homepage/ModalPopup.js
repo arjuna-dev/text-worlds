@@ -11,8 +11,6 @@ import jwt_decode from 'jwt-decode'
 const ModalPopup = (props) => {
     const [name, setName] = useState('');
     const [story, setStory] = useState('');
-    const [role, setRole] = useState('');
-    const [gender, setGender] = useState('');
     const [gateway, setGateway] = useState(false);
     let alreadyJoined = false;
     const [addCharacter, { data, error }] = useMutation(addCharacterMutation);
@@ -28,13 +26,9 @@ const ModalPopup = (props) => {
             story: story,
             worldId: props.world._id,
             userId: (jwt_decode(localStorage.usertoken))._id,
-            role: role,
-            gender: gender
         }, refetchQueries: [{ query: getWorldQuery , variables: {id: props.world._id}}]}).then(()=>{
           setName('');
           setStory('');
-          setRole('');
-          setGender('');
           setGateway(true);
         })
         return null
@@ -75,9 +69,6 @@ const ModalPopup = (props) => {
                 <Form.Field label='Name of the character' control='input' value={name} onChange={(e) => setName(e.target.value)} />
             </Form.Group>
             <Form.Field label='Your Background Story' control='textarea' rows='3' value={story} onChange = {(e) => setStory(e.target.value)} />
-            <Form.Group widths='equal'>
-                <Form.Field label='Role in the World' control='input' value={role} onChange={(e) => setRole(e.target.value)} />
-            </Form.Group>
             {/* <div onChange={event => setGender(event)}>
                 <input type="radio" value="Male" name="gender"/> Male
                 <input type="radio" value="Female" name="gender"/> Female
