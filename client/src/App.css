@@ -27,6 +27,7 @@
 
 .menu {
   display: flex;
+  margin-top: 4vh;
 }
 
 .auth-button{
