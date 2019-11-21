@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import { Button, Divider } from 'semantic-ui-react';
+import { Button, Divider, Form } from 'semantic-ui-react';
 import axios from 'axios';
 import { Redirect} from 'react-router'
 import { Link } from 'react-router-dom'
 import BackNavigation from '../BackNavigation'
-import { Form } from 'formsy-semantic-ui-react';
+// import { Form } from 'formsy-semantic-ui-react';
 import { Label, Message } from 'semantic-ui-react';
 import { createBrowserHistory } from "history"
 
@@ -19,6 +19,10 @@ const SignupForm = () => {
     repeat_password: ''
   });
   const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const [userNameLengthOk, setUserNameLengthOk] = useState(true);
+  const [isEmail, setIsEmail] = useState(true);
+  const [passwordLengthOk, setPasswordLengthOk] = useState(true);
+  const [allFieldsOk, setAllFieldsOk] = useState(true);
   const [errors, setErrors] = useState(null);
 
 
@@ -35,8 +39,42 @@ const SignupForm = () => {
       setPasswordsMatch(true)
     }
   }
+
+
+  const checkLengthIs2 = (e) => {
+    if (e.target.value.length < 2){
+      setUserNameLengthOk(false)
+    } else {
+      setUserNameLengthOk(true)
+    }
+  }
+
+  const checkLengthIs8 = (e) => {
+    if (e.target.value.length < 8){
+      setPasswordLengthOk(false)
+    } else {
+      setPasswordLengthOk(true)
+    }
+  }
+
+  const checkEmail = (e) => {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (!re.test(String(e.target.value).toLowerCase())){
+        setIsEmail(false)
+      } else {
+        setIsEmail(true)
+      }
+  }
+
+  const checkForInvalidFields = () => {
+    if (!isEmail || !passwordLengthOk || !userNameLengthOk || !passwordsMatch) {
+      setAllFieldsOk(false)
+    } else {
+      setAllFieldsOk(true)
+    }
+  }
   
-  const onValidSubmit = e => {
+  const onSubmit = e => {
     axios.post('http://localhost:4000/api/user/signup', e)
       .then(response => {
         if (response.data.error){
@@ -66,79 +104,61 @@ const SignupForm = () => {
         <div className="four wide column"></div>
         <div className="eight wide column">
           <Link className = "signup-link" to = '/login'>Already have an account? Click here to log in</Link> <br /><br />
-          {(errors && errors.name)?<Message color = "pink">{errors.name}</Message>: null}
-          {(errors && errors.email)?<Message color = "pink">{errors.email}</Message>: null}
-          {(errors && errors.password)?<Message color = "pink">{errors.password}</Message>: null}
-          {(errors && errors.repeat_password)?<Message color = "pink">{errors.repeat_password}</Message>: null}
-          <Form onValidSubmit={onValidSubmit}>
+          {(errors && errors.name)?<Message color = "orange">{errors.name}</Message>: null}
+          {(errors && errors.email)?<Message color = "orange">{errors.email}</Message>: null}
+          {(errors && errors.password)?<Message color = "orange">{errors.password}</Message>: null}
+          {(errors && errors.repeat_password)?<Message color = "orange">{errors.repeat_password}</Message>: null}
+          <Form onSubmit={onSubmit}>
             <Form.Input
-              // error={{ content: 'Please enter a user name', pointing: 'below' }}
               fluid
               label='User name'
               name='name'
-              placeholder='name'
+              placeholder='user name'
               type="text"
               value={form.name}
-              onChange={updateField}
-              validations={{
-                "isAlphanumeric": true,
-                // "isAlphanumeric": "isAlphanumeric"
-                "minLength": "2"
-              }}
-              validationErrors={{
-                isExisty: 'Please input a user name',
-                isAlphanumeric: 'You are using invalid characters',
-                minLength: "Your user name should be at least 2 characters long",
-              }}
-              errorLabel={ <Message color="pink"/> }
+              onChange={(e) => {updateField(e); checkLengthIs2(e); checkForInvalidFields()}}
             />
             <Form.Input
-              // error='Please enter your email address'
               fluid
               label='email'
               name='email'
               placeholder='email'
               type="email"
               value={form.email}
-              onChange={updateField}
-              validations="isEmail"
-              validationErrors={{ isEmail: 'Email is not valid' }}
-              errorLabel={ <Message color="pink"/> }
+              onChange={(e) => {updateField(e); checkEmail(e); checkForInvalidFields()}}
             />
             <Form.Input
-              // error='Please enter password'
               fluid
               label='password'
               name='password'
               placeholder='Password'
               type="password"
               value={form.password}
-              onChange={(e) => {updateField(e)}}
-              validations={"minLength:8"}
-              validationErrors={{ minLength: 'Password must be at least 8 characters long' }}
-              errorLabel={ <Message color="pink"/> }
+              onChange={(e) => {updateField(e); checkLengthIs8(e); checkForInvalidFields()}}
             />
             <Form.Input
-              // error='Repeat password here'
               fluid
               label='confirm password'
               name='repeat_password'
               placeholder='Confirm password'
               type="password"
               value={form.repeat_password}
-              onChange={(e) => {updateField(e); comparePass(e)}}
-              validations={"isExisty"}
-              validationErrors={{ 
-                isExisty: 'Please enter your password again' 
-              }}
-              errorLabel={ <Message color="pink"/> }
+              onChange={(e) => {updateField(e); comparePass(e); checkForInvalidFields()}}
             />
-            {passwordsMatch ?  <p></p> : <Message color='red'><p>- Passwords do not match</p></Message>}
+            {allFieldsOk   ?  null : 
+              <Message color='orange'>
+                {passwordsMatch     ?  <p></p> : <p>• Passwords do not match</p>}
+                {userNameLengthOk   ?  <p></p> : <p>• User name is too short</p>}
+                {isEmail            ?  <p></p> : <p>• Not a valid email</p>}
+                {passwordLengthOk   ?  <p></p> : <p>• Password should be at least 8 characters</p>}
+              </Message>
+            }
+            
             <Button type='submit'>Submit</Button>
             <Divider hidden />
           </Form>
         </div>
-        <div> hello{Form.Input.repeat_password}</div>
+        <div>{Form.Input.repeat_password}</div>
         <div className="four wide column"></div>
       </div>
     </div>
