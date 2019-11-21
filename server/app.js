@@ -48,7 +48,7 @@ app.use('/graphql', graphqlHTTP({
     graphiql: true
 }));
 
-app.listen(process.env.PORT, 4000 )
+app.listen(process.env.PORT, 5000 )
 
 
 app.get('/*', (req, res) => {
