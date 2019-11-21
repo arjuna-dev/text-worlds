@@ -128,7 +128,7 @@ const SignupForm = () => {
               }}
               errorLabel={ <Label color="red" pointing/> }
             />
-            {passwordsMatch ?  <p></p> : <Message color='pink'><p>Passwords do not match</p></Message>}
+            {passwordsMatch ?  <p></p> : <Message color='red'><p>- Passwords do not match</p></Message>}
             <Button type='submit'>Submit</Button>
             <Divider hidden />
           </Form>
