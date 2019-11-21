@@ -9,9 +9,11 @@ const cors = require('cors')
 const dotenv = require('dotenv');
 const authRoute = require('./routes/auth')
 
-const getUser = require('./routes/sampleGetLoggedInUser')
-
 app.use(cors())
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 dotenv.config();
 
 //Middleware
@@ -28,6 +30,10 @@ app.use(
     }) 
 )
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+  });
+
 mongoose.connect(process.env.DB_CONNECT, { 
     useUnifiedTopology: true,    
     useNewUrlParser: true 
@@ -42,9 +48,7 @@ app.use('/graphql', graphqlHTTP({
     graphiql: true
 }));
 
-app.listen(4000, () => {
-    console.log('now listening for request on port 4000');
-})
+app.listen(process.env.PORT, 4000 )
 
 
 app.get('/*', (req, res) => {
