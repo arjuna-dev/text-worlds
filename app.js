@@ -12,13 +12,16 @@ const authRoute = require('./routes/auth')
 const getUser = require('./routes/sampleGetLoggedInUser')
 
 app.use(cors())
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 dotenv.config();
 
 //Middleware
 app.use(express.json())
 //Routes Middleware
 app.use('/api/user', authRoute)
-app.use('/api/sampleget', getUser)
 
 app.use(bodyParser.json())
 
@@ -27,6 +30,9 @@ app.use(
         extended: false
     }) 
 )
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 mongoose.connect(process.env.DB_CONNECT, { 
     useUnifiedTopology: true,    
@@ -42,12 +48,4 @@ app.use('/graphql', graphqlHTTP({
     graphiql: true
 }));
 
-app.listen(4000, () => {
-    console.log('now listening for request on port 4000');
-})
-
-
-app.get('/*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
-    res.send("Hello there")
-});
+app.listen(process.env.PORT, 4000)
