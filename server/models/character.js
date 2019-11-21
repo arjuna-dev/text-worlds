@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var moment = require('moment');
 var Schema = mongoose.Schema;
 
 var characterSchema = new Schema({
@@ -15,7 +16,7 @@ var characterSchema = new Schema({
   hobbies: String,
   fobias: String,
   funFact: String,
-  dateCreated: { type: Date, default: Date.now },
+  dateCreated: { type: String, default: moment().format('MMM Do YYYY')},
   tagged: [Date],
   // birthmarks: [String],
   onAdoption: Boolean

@@ -1,16 +1,21 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+var moment = require('moment');
 
 const postSchema = new Schema({
     id: Number,
     title: String,
-    dateCreated: { type: Date, default: Date.now },
+    date: {type: Date, default: Date.now()},
+    dateCreated: { type: String, default: moment().format('lll')},
     text: String,
     characterId: String,
-    type: {type: String, enum: ['World Narrator', 'Small Narrator', 'Me Speaking']},
+    worldId: String,
+    likesCharsId: Array,
+    deletesCharsId: Array,
+    type: {type: String, enum: ['Event', 'Post']},
     tagged_channels: [String],
-    likes: Number,
-    deletes: Number,
+    likes: {type: Number, default: 1},
+    deletes: {type: Number, default: 1},
     report: Number,
     fork: Number
 });

@@ -16,10 +16,13 @@
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
     "graphql": "^14.5.8",
+    "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
     "mongoose": "^5.7.6",
     "nodemon": "^1.19.4",
-    "packages": "0.0.8"
+    "packages": "0.0.8",
+    "validator": "^12.0.0"
   },
   "devDependencies": {},
   "description": ""
