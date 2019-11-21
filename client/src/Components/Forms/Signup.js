@@ -37,7 +37,7 @@ const SignupForm = () => {
   }
   
   const onValidSubmit = e => {
-    axios.post('http://localhost:4000/api/user/signup', e)
+    axios.post('https://textworlds.herokuapp.com/api/user/signup', e)
       .then(response => {
         if (response.data.error){
           console.log(response.data.error)

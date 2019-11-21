@@ -23,7 +23,7 @@ const LoginForm = () => {
 
   const submitHandler = e => {
     e.preventDefault();
-    axios.post('http://localhost:4000/api/user/login', form)
+    axios.post('https://textworlds.herokuapp.com/api/user/login', form)
       .then(response => {
         console.log(response.data)
         if (response.data.error){
