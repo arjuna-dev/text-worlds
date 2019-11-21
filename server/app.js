@@ -40,7 +40,7 @@ mongoose.connect(process.env.DB_CONNECT, {
 });
 
 mongoose.connection.once('open', () => {
-    console.log('connected to the database');
+    console.log('connected to the data');
 })
 
 app.use('/graphql', graphqlHTTP({
