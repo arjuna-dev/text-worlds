@@ -3,6 +3,7 @@ const graphqlHTTP = require('express-graphql');
 const schema = require('./schema/schema');
 const mongoose = require('mongoose');
 var bodyParser = require("body-parser");
+const path = require('path');
 //const key = require('./key.js')
 const app = express();
 const cors = require('cors')
