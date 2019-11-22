@@ -10,7 +10,6 @@ const cors = require('cors')
 const dotenv = require('dotenv');
 const authRoute = require('./routes/auth')
 
-const getUser = require('./routes/sampleGetLoggedInUser')
 
 app.use(cors())
 
