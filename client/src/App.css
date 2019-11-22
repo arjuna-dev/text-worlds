@@ -188,8 +188,6 @@
   margin-bottom: 4vh;
 }
 
-.graph-list{
-}
 
 .row-title{
   display: inline-block;
@@ -217,7 +215,7 @@
 }
 
 .post-box{
-  position: fixed;
+  position: absolute;
   top: 19.5vh;
   margin-left: 70vw;
   width: 50vw;
