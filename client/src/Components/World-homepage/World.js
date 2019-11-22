@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import CardEvent from './CardEvent';
+import ReadMore from '../ReadMore';
 import { getWorldQuery } from '../../queries/queries';
 import ModalPopup from './ModalPopup';
 import BackNavigation from '../BackNavigation';
@@ -21,8 +22,10 @@ const World = (props) => {
             <Header as='h2' icon>
                 <Icon name='world' />
                 {data.world.name}
-                <Header.Subheader>
+                <Header.Subheader style = {{fontSize: "0.8em"}}>
+                <ReadMore line = {2}>
                 {data.world.description}
+                </ReadMore>
                 </Header.Subheader>
             </Header>
                     <div className = "join-world"><ModalPopup world = {data.world} /></div>

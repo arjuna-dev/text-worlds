@@ -4,6 +4,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { deletePostMutation, getWorldQuery } from '../../queries/queries';
 import jwt_decode from 'jwt-decode'
 import Reaction from './Reaction';
+import ReadMore from '../ReadMore';
 
 const SideBar = (props) => {
 
@@ -79,13 +80,13 @@ const SideBar = (props) => {
           <div className = "sidebar-header">
               {activeContent===props.world?(
                     <div>
-                      <Header  attached = "top"> <Icon name = "world" />&nbsp;{activeContent.name} </Header>
-                      <Segment attached > <strong>ABOUT THE WORLD: </strong><br></br>{activeContent.description} </Segment>
+                      <Header  attached = "top" style = {{fontSize: "1.2em"}}> <Icon name = "world" />&nbsp;{activeContent.name} </Header>
+                      <Segment attached style = {{fontSize: "1em"}}> <strong>ABOUT THE WORLD: </strong><br></br><ReadMore>{activeContent.description}</ReadMore> </Segment>
                     </div>
                   ):(
                     <div>
-                      <div><Header attached = "top"> <Icon name = "user" />&nbsp;{activeContent.name}  </Header></div>
-                      <div><Segment attached > <strong>ABOUT ME: </strong><br></br>{activeContent.story} </Segment></div>
+                      <div><Header attached = "top"style = {{fontSize: "1.2em"}}> <Icon name = "user" />&nbsp;{activeContent.name}  </Header></div>
+                      <div><Segment attached style = {{fontSize: "1em"}}> <strong>ABOUT ME: </strong><br></br><ReadMore>{activeContent.story} </ReadMore></Segment></div>
                     </div>
               )}
               </div>
@@ -105,7 +106,7 @@ const SideBar = (props) => {
                             </Header>
                             <Segment attached>
                                 <strong><em>Happened on {post.dateCreated}</em></strong><br/><br />
-                                {post.text}
+                                <span style = {{fontSize: "1.3em"}}><ReadMore line = {2}>{post.text}</ReadMore></span>
                             </Segment>
                         </div>)  
                     }
@@ -118,7 +119,7 @@ const SideBar = (props) => {
                         </Header>
                         <Segment attached>
                             <strong><em>posted by {post.character.name} <br /> on {post.dateCreated}</em></strong><br/><br />
-                            {post.text}
+                            <span style = {{fontSize: "1.3em"}}><ReadMore line = {2}>{post.text}</ReadMore></span>
                         </Segment>
                     </div>)
                     }
@@ -129,15 +130,34 @@ const SideBar = (props) => {
                 (activeContent.posts)?(
                   activeContent.posts.map((post)=>{
                     return (<div key = {post._id}>
+                      {post.type === "Post"?
+                      <div>
                       <Header as='h2' attached='top' className = "header-char-post">
                           {post.title}
                           {/* post delete functionality only if its user's post */}
-                          {(post.character.user && post.character.user._id === jwt_decode(localStorage.usertoken)._id)?<Button icon='delete' onClick = {() => handleClick(post._id)} />: null}
+                          {(post.character.userId === jwt_decode(localStorage.usertoken)._id)?<div><Button className = "delete-button" icon='delete' onClick = {() => handleClick(post._id)} /></div>: null}
                       </Header>
                       <Segment attached>
-                          <strong><em>posted on {post.dateCreated}</em></strong><br/><br />
-                          {post.text}
+                          <strong><em>Posted on {post.dateCreated}</em></strong><br/><br />
+                          <span style = {{fontSize: "1.3em"}}><ReadMore>{post.text}</ReadMore></span>
                       </Segment>
+                      </div>: null
+                      }
+                      {/* for event */}
+                      {post.type === "Event" && post.character.userId === jwt_decode(localStorage.usertoken)._id?
+                      <div>
+                      <Header as='h2' attached='top' className = "header-char-post">
+                          {post.title} <span style = {{color:"grey", fontSize: "0.9em"}}>(only visible to you)</span>
+                          <div><Button className = "delete-button" icon='delete' onClick = {() => handleClick(post._id)} /></div>
+                      </Header>
+                      <Segment attached>
+                          <strong><em>Created on {post.dateCreated}</em></strong><br/><br />
+                          <span style = {{fontSize: "1.3em"}}><ReadMore>{post.text} </ReadMore></span>
+                      </Segment>
+                      </div>: null
+                      }
+
+                      
                   </div>)
                   })
                 ):(null)

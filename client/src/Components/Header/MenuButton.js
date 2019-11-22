@@ -11,7 +11,6 @@ const MenuDropdownItem = () => {
       <Dropdown.Menu>
         <Link to = '/'><Dropdown.Item>Explore World</Dropdown.Item></Link>
         <Link to = '/add-world'><Dropdown.Item>Add a World</Dropdown.Item></Link>
-        <Dropdown.Item>Adopt a character</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   </Menu>

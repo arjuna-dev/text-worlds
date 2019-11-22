@@ -5,12 +5,16 @@
 }
 
 .world-list-header{
-  font-size: 2vw;
+  font-size: 1.5em;
   font-weight: bold;
   display: flex;
-  justify-content: center;
-}
 
+  margin-bottom: 5vh;
+  
+}
+.description-list{
+  width: 45vw;
+}
 .topbar {
   margin-top: 10vh;
 }
@@ -244,4 +248,8 @@
 .header-char-post{
   display: flex;
   justify-content: space-between
+}
+.delete-button{
+  width: 2.5em;
+  height: 2.5em;
 }
