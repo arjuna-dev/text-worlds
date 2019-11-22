@@ -54,9 +54,9 @@ const SignupForm = () => {
       })
   }
     
-    if (localStorage.usertoken){
-      return
-    }
+    // if (localStorage.usertoken){
+    //   return window.location.reload(history.goBack())
+    // }
 
   return(
     <div>
