@@ -32,7 +32,8 @@ const LoginForm = () => {
         else{
           console.log(response.data)
           localStorage.setItem('usertoken', response.data)
-          return history.goBack();
+          window.location.reload(history.goBack());
+          return
         }
       })
       .catch(error => {
@@ -40,12 +41,11 @@ const LoginForm = () => {
       })
   }
     
-    if (localStorage.usertoken){
-      return <Redirect to = '/' />
-    }
+  if (localStorage.usertoken){
+    return window.location.reload(history.goBack());
+  }
 
-  return(
-  <div>
+  return (<div>
     <BackNavigation />
     <div className = "page-name">Log In</div>
   <div className="ui grid">

@@ -45,7 +45,7 @@ const SignupForm = () => {
         }
         else{
           localStorage.setItem('usertoken', response.data)
-          history.goBack()
+          window.location.reload(history.goBack())
         }
       })
       .catch(response => {
@@ -55,7 +55,7 @@ const SignupForm = () => {
   }
     
     if (localStorage.usertoken){
-      return <Redirect to="/" />
+      return
     }
 
   return(
