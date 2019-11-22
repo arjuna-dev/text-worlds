@@ -2,6 +2,7 @@ import React from 'react'
 import { Card } from 'semantic-ui-react'
 import meteorCrash from '../../assets/Events/meteorCrash.png'
 import placeholder from '../../assets/placeholder.png'
+import ReadMore from '../ReadMore';
 
 const CardEvent = (props) => {
   if (props.event){
@@ -13,12 +14,15 @@ const CardEvent = (props) => {
               <span className='date'>Happened on {props.event.dateCreated}</span>
             </Card.Meta>
             <Card.Description>
+              <ReadMore line = {2}>
               {props.event.text}
+              </ReadMore>
             </Card.Description>
           </Card.Content>
         </Card>
     )
   }
+
 
   if (props.character){
       return (
@@ -30,13 +34,16 @@ const CardEvent = (props) => {
             <span className='date'> Joined {props.character.dateCreated}</span>
           </Card.Meta>
           <Card.Description>
-            <br /><strong>Background </strong><br /><br />
+            <br /><strong>Background Story</strong><br /><br />
+            <ReadMore line = {2}>
             {props.character.story}
+            </ReadMore>
           </Card.Description>
         </Card.Content>
       </Card>
       </div>
     )}
+
 
   // if (props.place){
   //   return(

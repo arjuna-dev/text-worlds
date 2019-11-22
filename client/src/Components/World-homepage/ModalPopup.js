@@ -13,7 +13,7 @@ const ModalPopup = (props) => {
     const [story, setStory] = useState('');
     const [gateway, setGateway] = useState(false);
     let alreadyJoined = false;
-    const [addCharacter, { data, error }] = useMutation(addCharacterMutation);
+    const [addCharacter] = useMutation(addCharacterMutation);
 
     let link = '/world/' + props.world._id + '/graph';
     console.log(link);
