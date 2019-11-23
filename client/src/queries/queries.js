@@ -154,7 +154,7 @@ const updatePostMutation = gql`
     }
 `
 
-const addPlace = gql`
+const addPlaceMutation = gql`
     mutation AddPlace ($user: String, $id: Number, $name: String, $parentPlace: String, $description: String){
       addAPlace(user: $user, id: $id, name: $name, parentPlace: $parentPlace, description: $description){
         user
@@ -167,4 +167,4 @@ const addPlace = gql`
 `
 
 
-  export { getAllCharacters, addWorldMutation, addPostMutation,deletePostMutation, updatePostMutation, getAllPlaces, getAllWorlds, getWorldQuery, addCharacterMutation, addPlace };
+  export { getAllCharacters, addWorldMutation, addPostMutation,deletePostMutation, updatePostMutation, getAllPlaces, getAllWorlds, getWorldQuery, addCharacterMutation, addPlaceMutation };
