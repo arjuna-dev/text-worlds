@@ -150,7 +150,7 @@ const PlaceType = new GraphQLObjectType({
         childPlaces: { 
             type: new GraphQLList(PlaceType),
             resolve(parent, args){
-                return place.find({parentPlaceId: {$elemMatch: {$eq: parent._id}}})
+                return place.find({parentPlaceId: parent._id})
             }
         },
         world: { type: WorldType },
@@ -354,14 +354,16 @@ const Mutation = new GraphQLObjectType({
                 name: { type: new GraphQLNonNull(GraphQLString)},
                 description: { type: new GraphQLNonNull(GraphQLString)},
                 charactersId: { type: GraphQLList(GraphQLString) },
-                parentPlace: {type: GraphQLString}
+                parentPlace: {type: GraphQLString},
+                parentPlaceId: {type: GraphQLString}
             },
             resolve(parent, args){
                 let newPlace = new place({
                     name: args.name,
                     description: args.description,
                     charactersId: args.charactersId,
-                    parentPlace: args.parentPlace
+                    parentPlace: args.parentPlace,
+                    parentPlaceId: args.parentPlaceId
                 });
                 return newPlace.save()
             }
