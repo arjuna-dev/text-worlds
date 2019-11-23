@@ -158,15 +158,6 @@ const PlaceType = new GraphQLObjectType({
         //Edit ends
         description: { type: GraphQLString },
         dateCreated: {type: GraphQLString},
-        characters: {
-            type: new GraphQLList(CharacterType),
-            resolve(parent, args){
-                return character.find({_id: {$in: parent.charactersId}}, function(err,data){
-                    if (err) console.log(err)
-                    return data
-                })
-            }
-        }
     })
 })
 

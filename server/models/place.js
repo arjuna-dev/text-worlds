@@ -7,7 +7,9 @@ const placeSchema = new Schema({
     id: Number,
     name: String,
     charactersId: [String],
+    parentPlaceId: String,
     parentPlace: String,
+    childPlaces: [String],
     description: String,
     dateCreated: { type: String, default: moment().format('MMM Do YYYY') },
 });
