@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 var moment = require('moment');
 
 const placeSchema = new Schema({
+    user: String,
     id: Number,
     name: String,
     charactersId: [String],

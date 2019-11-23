@@ -100,6 +100,7 @@ const addWorldMutation = gql`
         }
       } 
   }`
+
 const addPostMutation = gql`
   mutation AddPost($title: String!, $text: String!, $characterId: String!, $type: String!, $worldId: String!, $likes: Int, $deletes: Int){
     addPost(title: $title, text: $text, characterId: $characterId, type: $type, worldId: $worldId, likes: $likes, deletes: $deletes){
@@ -153,5 +154,17 @@ const updatePostMutation = gql`
     }
 `
 
+const addPlace = gql`
+    mutation AddPlace ($user: String, $id: Number, $name: String, $parentPlace: String, $description: String){
+      addAPlace(user: $user, id: $id, name: $name, parentPlace: $parentPlace, description: $description){
+        user
+        name
+        parentPlace
+        description
 
-  export { getAllCharacters, addWorldMutation, addPostMutation,deletePostMutation, updatePostMutation, getAllPlaces, getAllWorlds, getWorldQuery, addCharacterMutation };
+      }
+    }
+`
+
+
+  export { getAllCharacters, addWorldMutation, addPostMutation,deletePostMutation, updatePostMutation, getAllPlaces, getAllWorlds, getWorldQuery, addCharacterMutation, addPlace };
