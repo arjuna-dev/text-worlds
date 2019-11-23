@@ -161,7 +161,7 @@ const addPlaceMutation = gql`
         name
         parentPlace
         description
-
+        childPlaces
       }
     }
 `
