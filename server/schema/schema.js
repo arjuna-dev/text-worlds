@@ -145,7 +145,14 @@ const PlaceType = new GraphQLObjectType({
         name: { type: GraphQLString },
         charactersId: { type : GraphQLList(GraphQLID)},
         //Arjuna Alejandro edited
+        parentPlaceId: { type: GraphQLID },
         parentPlace: { type: PlaceType },
+        childPlaces: { 
+            type: new GraphQLList(PlaceType),
+            resolve(parent, args){
+                return place.find({parentPlaceId: {$elemMatch: {$eq: parent._id}}})
+            }
+        },
         world: { type: WorldType },
         // parentPlace: { type: GraphQLString },
         //Edit ends
