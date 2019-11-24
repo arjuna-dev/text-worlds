@@ -161,12 +161,13 @@
 .back-standard{
   display: flex;
   flex-direction: column;
-  margin-left: 8vw;
-  margin-top: 8vh;
+  margin-top: 4vh;
+  padding: 10px;
 }
 
 .logo-small{
-  width: 250px;
+  width: 20vw;
+  padding: 0 5px;
 }
 .page-name{
   font-size: 2vw;
@@ -183,7 +184,7 @@
 }
 
 .world-graph{
-  margin-left: 12vw;
+  margin-left: 2vw;
   margin-top: 5vh;
   margin-bottom: 4vh;
 }
@@ -221,26 +222,29 @@
   width: 50vw;
 }
 
-.container-text{
-  position: relative;
-}
-
 .sidebar{
   height: 65vh;
+  width: 20vw;
+  padding: 15px;
   overflow-y: scroll;
 }
 
 .sidebar-content{
   height: 55vh;
+  padding: 0 30px;
   overflow-y: scroll;
 }
 .sidebar-menu{
   display: flex;
 }
 
+.sidebar-header{
+  padding: 30px;
+}
+
 .event-header{
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
 .header-char-post{

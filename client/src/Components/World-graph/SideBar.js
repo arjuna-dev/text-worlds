@@ -5,6 +5,7 @@ import { deletePostMutation, getWorldQuery } from '../../queries/queries';
 import jwt_decode from 'jwt-decode'
 import Reaction from './Reaction';
 import ReadMore from '../ReadMore';
+import BackNavigation from '../BackNavigation';
 
 const SideBar = (props) => {
 
@@ -28,16 +29,15 @@ const SideBar = (props) => {
 
     return (
       <Grid>
-        <Grid.Column width={4}>
+        <Grid.Column width = {3}>
+        <BackNavigation />
           <div className = "sidebar">
           <Menu fluid vertical tabular>
-              <h4> World </h4>
-              <Menu.Item
-                
+              <Menu.Item         
                 key={props.world._id}
                 active={activeItem === props.world.name}
                 onClick={(e) => {setActiveItem(props.world.name); setActiveContent(props.world);}}
-              ><div><Icon name = "world" /> {props.world.name}</div></Menu.Item>
+              ><div style = {{fontSize: "18px"}}> All activities </div></Menu.Item>
               <h4>Characters</h4>
 
               {/* My character */}
@@ -75,7 +75,7 @@ const SideBar = (props) => {
           </div>
         </Grid.Column>
 
-        <Grid.Column stretched width={12}>
+        <Grid.Column stretched width={13}>
           {/* {world/character description} */}
           <div className = "sidebar-header">
               {activeContent===props.world?(
