@@ -1,11 +1,14 @@
 import React, { useState, useEffect} from 'react'
-import { Grid, Menu, Segment, Header, Label, List, Button, Icon} from 'semantic-ui-react'
+import { Grid, Menu, Segment, Header, Label,Modal, Form,TextArea, Button, Icon} from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks';
 import { deletePostMutation, getWorldQuery } from '../../queries/queries';
 import jwt_decode from 'jwt-decode'
 import Reaction from './Reaction';
 import ReadMore from '../ReadMore';
 import BackNavigation from '../BackNavigation';
+import PostForm from './PostForm';
+import EventForm from './EventForm'
+import PostBox from './PostBox';
 
 const SideBar = (props) => {
 
@@ -37,12 +40,11 @@ const SideBar = (props) => {
                 key={props.world._id}
                 active={activeItem === props.world.name}
                 onClick={(e) => {setActiveItem(props.world.name); setActiveContent(props.world);}}
-              ><div style = {{fontSize: "18px"}}> All activities </div></Menu.Item>
+              ><div style = {{fontSize: "18px"}}><Icon name = "bolt" /> All activities </div></Menu.Item>
               <h4>Characters</h4>
 
               {/* My character */}
               {props.world.characters.map((character) => {
-                var user = character.name + ' (you)'
                 return (character.userId === jwt_decode(localStorage.usertoken)._id)?
                 (
                   <Menu.Item
@@ -51,7 +53,7 @@ const SideBar = (props) => {
                       active={activeItem === character.name}
                       onClick={(e) => {setActiveItem(character.name); setActiveContent(character);}}
                   >
-                  <div><Icon name = "user" /> {user}</div>
+                  <div><Icon name = "user" /> {character.name + " (you)"}</div>
                   </Menu.Item>
               ):null
                 
@@ -89,6 +91,24 @@ const SideBar = (props) => {
                       <div><Segment attached style = {{fontSize: "1em"}}> <strong>ABOUT ME: </strong><br></br><ReadMore>{activeContent.story} </ReadMore></Segment></div>
                     </div>
               )}
+              </div>
+              <div className = "create-action">
+              <Button.Group size='large'>
+                <Modal trigger = {<Button> Write a post</Button>} closeIcon>
+                  <Header content='Write a post' />
+                  <Modal.Content>
+                    <PostForm world = {props.world} myCharacterId = {props.myCharacterId}/>
+                  </Modal.Content>
+                </Modal>
+                <Button.Or />
+                <Modal trigger = {<Button> Create a world timeline </Button>} closeIcon>
+              <Header content='Create a world timeline' />
+              <Modal.Content>
+                <EventForm world = {props.world} myCharacterId = {props.myCharacterId}/>
+              </Modal.Content>
+              </Modal>
+              </Button.Group>
+              
               </div>
           <div className = "sidebar-content">
           <Segment>

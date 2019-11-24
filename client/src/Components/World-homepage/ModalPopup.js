@@ -48,7 +48,7 @@ const ModalPopup = (props) => {
     })
 
     if(alreadyJoined){
-      return <div> <Label color='olive' tag> Joined </Label> <Link to = {link}><Button positive className = "join-world">Enter</Button></Link></div>
+      return <div> <Link to = {link}><Button positive className = "join-world">Enter the world</Button></Link></div>
     }
 
     // redirecting to the graph after creating the character
