@@ -22,6 +22,7 @@ const EventForm = (props) => {
             type: 'Event'
         }, refetchQueries: [{ query: getWorldQuery , variables: {id: props.world._id}}]
         })
+        props.closeModal();
         console.log(data)
         setTitle('');
         setText('');

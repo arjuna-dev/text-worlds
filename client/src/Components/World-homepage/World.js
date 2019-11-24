@@ -22,7 +22,7 @@ const World = (props) => {
     let alreadyJoined = false;
     // checking if already joined
     data.world.characters.map((character) => {
-        if(character.userId === jwt_decode(localStorage.usertoken)._id){
+        if(localStorage.usertoken && character.userId === jwt_decode(localStorage.usertoken)._id){
           alreadyJoined = true;
         }
         return null;

@@ -8,13 +8,15 @@ import ReadMore from '../ReadMore';
 import BackNavigation from '../BackNavigation';
 import PostForm from './PostForm';
 import EventForm from './EventForm'
-import PostBox from './PostBox';
+import { set } from 'mongoose';
 
 const SideBar = (props) => {
 
     const [activeItem, setActiveItem] = useState(props.world.name);
     const [activeContent, setActiveContent] = useState(props.world);
     const [deletePost] = useMutation(deletePostMutation);
+    const [showModalPost, setShowModalPost] = useState(false);
+    const [showModalEvent, setShowModalEvent] = useState(false);
 
     useEffect(() => {
       setActiveItem(props.world.name);
@@ -28,6 +30,12 @@ const SideBar = (props) => {
           id: postId
         }, refetchQueries:[{ query: getWorldQuery , variables: {id: props.world._id}}]
       })
+    }
+    function closeModalPost(){
+      setShowModalPost(false);
+    }
+    function closeModalEvent(){
+      setShowModalEvent(false);
     }
 
     return (
@@ -92,24 +100,29 @@ const SideBar = (props) => {
                     </div>
               )}
               </div>
+
+
+              {/* write a post /create a timeline buttons */}
               <div className = "create-action">
               <Button.Group size='large'>
-                <Modal trigger = {<Button> Write a post</Button>} closeIcon>
+                <Modal closeIcon onClose={() => closeModalPost()} open={showModalPost}  trigger = {<Button onClick = {() => setShowModalPost(true)}> Write a post</Button>} >
                   <Header content='Write a post' />
                   <Modal.Content>
-                    <PostForm world = {props.world} myCharacterId = {props.myCharacterId}/>
+                    <PostForm world = {props.world} myCharacterId = {props.myCharacterId} closeModal = {closeModalPost}/>
                   </Modal.Content>
                 </Modal>
                 <Button.Or />
-                <Modal trigger = {<Button> Create a world timeline </Button>} closeIcon>
+                <Modal trigger = {<Button onClick = {() => setShowModalEvent(true)}> Create a world timeline </Button>} closeIcon onClose={() => closeModalEvent()} open={showModalEvent}>
               <Header content='Create a world timeline' />
               <Modal.Content>
-                <EventForm world = {props.world} myCharacterId = {props.myCharacterId}/>
+                <EventForm world = {props.world} myCharacterId = {props.myCharacterId} closeModal = {closeModalEvent}/>
               </Modal.Content>
               </Modal>
               </Button.Group>
-              
               </div>
+
+
+              {/* Main content based on the menu */}
           <div className = "sidebar-content">
           <Segment>
               {/* world-all-events */}

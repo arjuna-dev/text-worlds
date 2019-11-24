@@ -21,6 +21,7 @@ const PostForm = (props) => {
             type: 'Post'
           }, refetchQueries: [{ query: getWorldQuery , variables: {id: props.world._id}}]
         }).then(() => {
+          props.closeModal();
           console.log(data)
           setTitle('');
           setText('');
