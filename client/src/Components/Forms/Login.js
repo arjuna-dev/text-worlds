@@ -15,13 +15,14 @@ const LoginForm = () => {
     password: '',
   });
   const [errors, setErrors] = useState(null);
+  const [local, setLocal] = useState(false);
 
   const updateField = (e) => setValues({
     ...form,
     [e.target.name]: e.target.value
   })
 
-  const submitHandler = e => {
+  const submitHandler = (e) => {
     e.preventDefault();
     axios.post('https://textworlds.herokuapp.com/api/user/login', form)
       .then(response => {
@@ -32,17 +33,13 @@ const LoginForm = () => {
         else{
           console.log(response.data)
           localStorage.setItem('usertoken', response.data)
-          window.location.reload(history.goBack());
-          return
+          console.log(history.goBack());
         }
       })
-      .catch(error => {
-        console.log(error)
-      })
   }
-    
+
   if (localStorage.usertoken){
-    return window.location.reload(history.goBack());
+    return window.location.reload(() => history.goBack());
   }
 
   return (<div>

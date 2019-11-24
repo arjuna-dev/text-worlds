@@ -22,6 +22,7 @@ const SignupForm = () => {
   const [errors, setErrors] = useState(null);
 
 
+
   const updateField = (e) => setValues({
     ...form,
     [e.target.name]: e.target.value
@@ -36,7 +37,7 @@ const SignupForm = () => {
     }
   }
   
-  const onValidSubmit = e => {
+  const onValidSubmit = (e) => {
     axios.post('https://textworlds.herokuapp.com/api/user/signup', e)
       .then(response => {
         if (response.data.error){
@@ -45,18 +46,14 @@ const SignupForm = () => {
         }
         else{
           localStorage.setItem('usertoken', response.data)
-          window.location.reload(history.goBack())
+          window.location.reload(() => history.goBack());
         }
       })
-      .catch(response => {
-        console.log("response")
-        console.log(response)
-      })
   }
-    
-    // if (localStorage.usertoken){
-    //   return window.location.reload(history.goBack())
-    // }
+
+  if (localStorage.usertoken){
+    return <Redirect to = '/' />
+  }
 
   return(
     <div>
