@@ -7,6 +7,7 @@ import BackNavigation from '../BackNavigation';
 import { Header, Icon, Menu, List, Label} from 'semantic-ui-react';
 import jwt_decode from 'jwt-decode'
 import { Timeline, TimelineItem }  from 'vertical-timeline-component-for-react';
+import _ from 'lodash'
 
 const World = (props) => {
 
@@ -58,7 +59,7 @@ const World = (props) => {
                         <Menu.Item
                             active={activeItem === 'All characters'}
                             onClick={(e) => {setActiveItem("All characters"); setActiveContent("All characters");}}
-                        ><Header as='h3'><Icon name = 'users' />All Characters</Header> </Menu.Item>
+                        ><Header as='h3'><Icon name = 'users' />All Characters ({_.size(data.world.characters)})</Header> </Menu.Item>
                     </Menu>
                     {(activeContent === "World Timeline")? (
                         <Timeline lineColor = {'#ddd'}>
