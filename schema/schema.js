@@ -72,7 +72,7 @@ const WorldType = new GraphQLObjectType({
                 return post.find({worldId: parent._id}, function(err, data){
                     if (err) console.log(err)
                     return data
-                }).sort({date: -1})
+                }).sort({date: 1})
             }
         },
         characters: {
