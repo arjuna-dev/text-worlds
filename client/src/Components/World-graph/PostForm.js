@@ -33,7 +33,7 @@ const PostForm = (props) => {
         <div>
         <Form className = "add-post" onSubmit = {handleSubmit}>
           <Form.Group widths='equal'>
-            <Form.Field label='Title of the post' control='input' value={title} onChange={(e) => setTitle(e.target.value)} />
+            <Form.Field label='Title of the narration' control='input' value={title} onChange={(e) => setTitle(e.target.value)} />
           </Form.Group>
           <Form.Field label='Description' control='textarea' rows='3' value={text} onChange = {(e) => setText(e.target.value)} />
           <Form.Field control='button'>
