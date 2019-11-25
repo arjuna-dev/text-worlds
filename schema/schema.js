@@ -126,7 +126,7 @@ const CharacterType = new GraphQLObjectType({
         posts: {
             type: new GraphQLList(PostType),
             resolve(parent, args){
-                return post.find({characterId: parent._id}).sort({date: -1})
+                return post.find({characterId: parent._id}).sort({date: 1})
             }
         },
         places: {
