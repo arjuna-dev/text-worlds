@@ -33,13 +33,14 @@ const LoginForm = () => {
         else{
           console.log(response.data)
           localStorage.setItem('usertoken', response.data)
+          history.goBack();
         }
       })
   }
 
-  if (localStorage.usertoken){
-    return window.location.reload(() => history.goBack());
-  }
+  // if (localStorage.usertoken){
+  //   return window.location.reload(() => history.goBack());
+  // }
 
   return (<div>
     <BackNavigation />
