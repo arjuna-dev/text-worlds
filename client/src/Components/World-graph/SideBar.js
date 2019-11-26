@@ -147,7 +147,7 @@ const SideBar = (props) => {
                       // world-all-posts
                       return (<div key = {post._id}>
                         <Header as='h2' attached='top'>
-                        <Label color='orange' ribbon> Character <br /> Narration </Label>
+                        <Label color='orange' ribbon> Character <br /> Post </Label>
                             {post.title}
                         </Header>
                         <Segment attached>
