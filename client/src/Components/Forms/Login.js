@@ -39,7 +39,7 @@ const LoginForm = () => {
   }
 
   // if (localStorage.usertoken){
-  //   return window.location.reload(() => history.goBack());
+  //   return <Redirect to = '/' />;
   // }
 
   return (<div>
@@ -48,7 +48,7 @@ const LoginForm = () => {
   <div className="ui grid">
     <div className="four wide column"></div>
     <div className="eight wide column">
-    <Link className = "signup-link" to = '/signup'>Haven't joined yet? Click here to Sign up</Link> <br /><br />
+    {/* <Link className = "signup-link" to = '/signup'>Haven't joined yet? Click here to Sign up</Link> <br /><br /> */}
     {(errors && errors.email)?<Message color = "pink">{errors.email}</Message>: null}
     {(errors && errors.password)?<Message color = "pink">{errors.password}</Message>: null}
       <Form onSubmit={submitHandler}>
