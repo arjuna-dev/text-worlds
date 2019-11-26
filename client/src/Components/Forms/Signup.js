@@ -38,7 +38,7 @@ const SignupForm = () => {
   }
   
   const onValidSubmit = (e) => {
-    axios.post('https://textworlds.herokuapp.com/api/user/signup', e)
+    axios.post('https://textworlds.herokuapp.com/api/user/signup', form)
       .then(response => {
         if (response.data.error){
           console.log(response.data.error)
@@ -46,14 +46,15 @@ const SignupForm = () => {
         }
         else{
           localStorage.setItem('usertoken', response.data)
-          window.location.reload(() => history.goBack());
+          console.log("ywaytewls")
+          history.goBack()
         }
       })
   }
 
-  if (localStorage.usertoken){
-    return <Redirect to = '/' />
-  }
+  // if (localStorage.usertoken){
+  //   history.goBack()
+  // }
 
   return(
     <div>
