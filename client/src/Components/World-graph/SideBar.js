@@ -105,15 +105,15 @@ const SideBar = (props) => {
               {/* write a post /create a timeline buttons */}
               <div className = "create-action">
               <Button.Group size='large'>
-                <Modal closeIcon onClose={() => closeModalPost()} open={showModalPost}  trigger = {<Button onClick = {() => setShowModalPost(true)}> Narrate as your character</Button>} >
-                  <Header content='Narrate as your character' />
+                <Modal closeIcon onClose={() => closeModalPost()} open={showModalPost}  trigger = {<Button onClick = {() => setShowModalPost(true)}> Write as your character</Button>} >
+                  <Header content='Write as your character' />
                   <Modal.Content>
                     <PostForm world = {props.world} myCharacterId = {props.myCharacterId} closeModal = {closeModalPost}/>
                   </Modal.Content>
                 </Modal>
                 <Button.Or />
-                <Modal trigger = {<Button onClick = {() => setShowModalEvent(true)}> Narrate a world timeline </Button>} closeIcon onClose={() => closeModalEvent()} open={showModalEvent}>
-              <Header content='Narrate a world timeline' />
+                <Modal trigger = {<Button onClick = {() => setShowModalEvent(true)}> Write a world timeline </Button>} closeIcon onClose={() => closeModalEvent()} open={showModalEvent}>
+              <Header content='Write a world timeline' />
               <Modal.Content>
                 <EventForm world = {props.world} myCharacterId = {props.myCharacterId} closeModal = {closeModalEvent}/>
               </Modal.Content>
