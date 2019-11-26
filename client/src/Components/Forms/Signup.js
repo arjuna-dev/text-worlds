@@ -63,7 +63,7 @@ const SignupForm = () => {
       <div className="ui grid">
         <div className="four wide column"></div>
         <div className="eight wide column">
-          <Link className = "signup-link" to = '/login'>Already have an account? Click here to log in</Link> <br /><br />
+          {/* <Link className = "signup-link" to = '/login'>Already have an account? Click here to log in</Link> <br /><br /> */}
           {(errors && errors.name)?<Message color = "pink">{errors.name}</Message>: null}
           {(errors && errors.email)?<Message color = "pink">{errors.email}</Message>: null}
           {(errors && errors.password)?<Message color = "pink">{errors.password}</Message>: null}
