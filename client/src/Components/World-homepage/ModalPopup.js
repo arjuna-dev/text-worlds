@@ -36,7 +36,15 @@ const ModalPopup = (props) => {
     //checking if authenticated
     if (!localStorage.usertoken){
       return (
-        <Link to = '/login'><Button neutral= "true" className = "join-world"> Log in to Join the world </Button></Link>
+        <Modal size = "mini" trigger = {<Button neutral = 'true' className = "join-world">Join the world</Button>}>
+          <Modal.Header>Login or Sign up first to join the world</Modal.Header>
+        <Modal.Content>
+          <div className = "redirect-auth">
+          <Link to = '/login'><Button primary size = "large"> Login </Button></Link> <br />
+          <Link to = '/signup'><Button secondary size = "large"> Sign up </Button></Link>
+          </div>
+        </Modal.Content>
+      </Modal>
       )
     }
     // checking if already joined

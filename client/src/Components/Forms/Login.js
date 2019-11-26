@@ -33,7 +33,6 @@ const LoginForm = () => {
         else{
           console.log(response.data)
           localStorage.setItem('usertoken', response.data)
-          console.log(history.goBack());
         }
       })
   }
