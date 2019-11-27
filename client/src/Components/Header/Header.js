@@ -35,8 +35,6 @@ const Header = () =>
                             </div>
                         </div>
                     <div className = "four wide column">
-                        <SearchBar />
-                        <br />
                         <div className = "menu">
                         <MenuButton />
                         <div className = "auth-button">

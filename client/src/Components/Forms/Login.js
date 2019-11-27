@@ -15,15 +15,16 @@ const LoginForm = () => {
     password: '',
   });
   const [errors, setErrors] = useState(null);
+  const [local, setLocal] = useState(false);
 
   const updateField = (e) => setValues({
     ...form,
     [e.target.name]: e.target.value
   })
 
-  const submitHandler = e => {
+  const submitHandler = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:4000/api/user/login', form)
+    axios.post('https://textworlds.herokuapp.com/api/user/login', form)
       .then(response => {
         console.log(response.data)
         if (response.data.error){
@@ -32,26 +33,22 @@ const LoginForm = () => {
         else{
           console.log(response.data)
           localStorage.setItem('usertoken', response.data)
-          return history.goBack();
+          history.goBack();
         }
       })
-      .catch(error => {
-        console.log(error)
-      })
   }
-    
-    if (localStorage.usertoken){
-      return <Redirect to = '/' />
-    }
 
-  return(
-  <div>
+  // if (localStorage.usertoken){
+  //   return <Redirect to = '/' />;
+  // }
+
+  return (<div>
     <BackNavigation />
     <div className = "page-name">Log In</div>
   <div className="ui grid">
     <div className="four wide column"></div>
     <div className="eight wide column">
-    <Link className = "signup-link" to = '/signup'>Haven't joined yet? Click here to Sign up</Link> <br /><br />
+    {/* <Link className = "signup-link" to = '/signup'>Haven't joined yet? Click here to Sign up</Link> <br /><br /> */}
     {(errors && errors.email)?<Message color = "pink">{errors.email}</Message>: null}
     {(errors && errors.password)?<Message color = "pink">{errors.password}</Message>: null}
       <Form onSubmit={submitHandler}>

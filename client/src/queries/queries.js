@@ -75,10 +75,7 @@ const getWorldQuery = gql`
               type
               text
               character{
-                name
-                user{
-                  _id
-                }
+                userId
               }
               likes
               deletes
