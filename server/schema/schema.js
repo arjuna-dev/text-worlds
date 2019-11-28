@@ -142,21 +142,38 @@ const PlaceType = new GraphQLObjectType({
     name: 'Place',
     fields: () => ({
         _id: { type: GraphQLID },
-        name: { type: GraphQLString },
-        charactersId: { type : GraphQLList(GraphQLID)},
-        //Arjuna Alejandro edited
+        userId: { type: GraphQLID },
+        worldId: { type: GraphQLID },
         parentPlaceId: { type: GraphQLID },
-        parentPlace: { type: PlaceType },
+        name: { type: GraphQLString },
+        description: { type: GraphQLString },
+        user: {
+            type: UserType,
+            resolve(parent, args){
+                return user.findOne({_id: parent.userId}, function(err, data){
+                    if (err) console.log(err)
+                    return data
+                })
+            }
+        },
+        world: {
+            type: WorldType,
+            resolve(parent, args){
+                return world.findOne({_id: parent.worldId})
+            }
+        },
+        parentPlace: {
+            type: PlaceType,
+            resolve(parent, args){
+                return place.findOne({_id: parent.parentPlaceId})
+            }
+        },
         childPlaces: { 
             type: new GraphQLList(PlaceType),
             resolve(parent, args){
                 return place.find({parentPlaceId: parent._id})
             }
         },
-        world: { type: WorldType },
-        // parentPlace: { type: GraphQLString },
-        //Edit ends
-        description: { type: GraphQLString },
         dateCreated: {type: GraphQLString},
     })
 })
