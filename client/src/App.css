@@ -1,5 +1,20 @@
 /* Title and menu */
 
+* {
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+.world-list-header{
+  font-size: 1.5em;
+  font-weight: bold;
+  display: flex;
+
+  margin-bottom: 5vh;
+  
+}
+.description-list{
+  width: 45vw;
+}
 .topbar {
   margin-top: 10vh;
 }
@@ -16,6 +31,7 @@
 
 .menu {
   display: flex;
+  margin-top: 4vh;
 }
 
 .auth-button{
@@ -63,18 +79,41 @@
 /* World Homepage */
 
 .world{
-  margin-left: 10vw;
-  margin-top: 10vh;
-  padding: 2vw;
+  
+  padding: 1vw 3vw;
+  margin-top: -5vh;
 }
+
+.redirect-auth{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  align-content: space-between;
+}
+
+.menu-link, .menu-link:hover{
+  color: black;
+}
+
+
 .world-title{
   font-size: 2.5vw;
-  padding: 2vw;
+  margin-left: 10vw;
+  padding: 3vw;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.join-world{
-  margin-left: 4vw;
-  margin-top: -0.5vw;
+
+.world-info{
+  display: flex;
+  justify-content: space-between
+}
+
+.world-top{
+  display: flex;
 }
 
 .world-details{
@@ -84,10 +123,17 @@
 .world-events{
   font-size: 1.5vw;
   padding: 2vw;
+  width: 30vw;
+  height: 70vh;
+  overflow-y: scroll;
 }
 .world-characters{
   font-size: 1.5vw;
   padding: 2vw;
+  width: 30vw;
+  height: 70vh;
+  overflow-y: scroll;
+
 }
 .world-places{
   font-size: 1.5vw;
@@ -102,8 +148,12 @@
 .add-character{
   display: flex;
   flex-direction: column;
+}
+.add-character-form{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 .card-character{
   margin-right: 20px;
@@ -126,12 +176,13 @@
 .back-standard{
   display: flex;
   flex-direction: column;
-  margin-left: 8vw;
-  margin-top: 8vh;
+  margin-top: 4vh;
+  padding: 10px;
 }
 
 .logo-small{
-  width: 250px;
+  width: 20vw;
+  padding: 0 5px;
 }
 .page-name{
   font-size: 2vw;
@@ -148,12 +199,14 @@
 }
 
 .world-graph{
-  margin-left: 12vw;
-  margin-top: 5vh;
+  margin-left: 1vw;
+  margin-top: 2vh;
   margin-bottom: 4vh;
 }
-
-.graph-list{
+.create-action{
+  display: flex;
+  justify-content: center;
+  padding: 10px;
 }
 
 .row-title{
@@ -182,35 +235,42 @@
 }
 
 .post-box{
-  position: fixed;
+  position: absolute;
   top: 19.5vh;
   margin-left: 70vw;
   width: 50vw;
 }
 
-.container-text{
-  position: relative;
-}
-
 .sidebar{
   height: 65vh;
+  width: 20vw;
+  padding: 15px;
   overflow-y: scroll;
 }
 
 .sidebar-content{
   height: 55vh;
+  padding: 0 30px;
   overflow-y: scroll;
 }
 .sidebar-menu{
   display: flex;
 }
 
+.sidebar-header{
+  padding: 40px 30px 10px 40px;
+}
+
 .event-header{
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
 .header-char-post{
   display: flex;
   justify-content: space-between
+}
+.delete-button{
+  width: 2.5em;
+  height: 2.5em;
 }

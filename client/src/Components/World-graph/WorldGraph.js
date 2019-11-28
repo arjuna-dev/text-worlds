@@ -4,7 +4,6 @@ import { getWorldQuery } from '../../queries/queries';
 import jwt_decode from 'jwt-decode'
 import { Redirect } from 'react-router-dom'
 import BackNavigation from '../BackNavigation';
-import PostBox from './PostBox';
 import SideBar from './SideBar';
 
 const WorldGraph = (props) => {
@@ -31,10 +30,9 @@ const WorldGraph = (props) => {
 
     return (
     <div className = "world-graph-page">
-        <BackNavigation />
-        <div className = "post-box">
+        {/* <div className = "post-box">
             <PostBox world = {data.world} myCharacterId = {myCharacterId}/>
-        </div>
+        </div> */}
         <div className = "world-graph">
             <SideBar world = {data.world} myCharacterId = {myCharacterId} />
         </div>
