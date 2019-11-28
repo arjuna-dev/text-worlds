@@ -22,6 +22,7 @@ const SignupForm = () => {
   const [errors, setErrors] = useState(null);
 
 
+
   const updateField = (e) => setValues({
     ...form,
     [e.target.name]: e.target.value
@@ -36,8 +37,8 @@ const SignupForm = () => {
     }
   }
   
-  const onValidSubmit = e => {
-    axios.post('http://localhost:4000/api/user/signup', e)
+  const onValidSubmit = (e) => {
+    axios.post('https://textworlds.herokuapp.com/api/user/signup', form)
       .then(response => {
         if (response.data.error){
           console.log(response.data.error)
@@ -45,18 +46,15 @@ const SignupForm = () => {
         }
         else{
           localStorage.setItem('usertoken', response.data)
+          console.log("ywaytewls")
           history.goBack()
         }
       })
-      .catch(response => {
-        console.log("response")
-        console.log(response)
-      })
   }
-    
-    if (localStorage.usertoken){
-      return <Redirect to="/" />
-    }
+
+  // if (localStorage.usertoken){
+  //   history.goBack()
+  // }
 
   return(
     <div>
@@ -65,7 +63,7 @@ const SignupForm = () => {
       <div className="ui grid">
         <div className="four wide column"></div>
         <div className="eight wide column">
-          <Link className = "signup-link" to = '/login'>Already have an account? Click here to log in</Link> <br /><br />
+          {/* <Link className = "signup-link" to = '/login'>Already have an account? Click here to log in</Link> <br /><br /> */}
           {(errors && errors.name)?<Message color = "pink">{errors.name}</Message>: null}
           {(errors && errors.email)?<Message color = "pink">{errors.email}</Message>: null}
           {(errors && errors.password)?<Message color = "pink">{errors.password}</Message>: null}
@@ -114,8 +112,8 @@ const SignupForm = () => {
               type="password"
               value={form.password}
               onChange={(e) => {updateField(e)}}
-              validations={"minLength:8"}
-              validationErrors={{ minLength: 'Password must be at least 8 characters long' }}
+              validations={"minLength:6"}
+              validationErrors={{ minLength: 'Password must be at least 6 characters long' }}
               errorLabel={ <Message color="pink"/> }
             />
             <Form.Input
@@ -138,7 +136,7 @@ const SignupForm = () => {
             <Divider hidden />
           </Form>
         </div>
-        <div> hello{Form.Input.repeat_password}</div>
+        <div> {Form.Input.repeat_password}</div>
         <div className="four wide column"></div>
       </div>
     </div>
