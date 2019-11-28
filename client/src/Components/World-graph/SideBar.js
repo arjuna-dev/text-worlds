@@ -8,7 +8,6 @@ import ReadMore from '../ReadMore';
 import BackNavigation from '../BackNavigation';
 import PostForm from './PostForm';
 import EventForm from './EventForm'
-import { set } from 'mongoose';
 
 const SideBar = (props) => {
 
