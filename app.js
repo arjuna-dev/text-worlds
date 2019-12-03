@@ -1,0 +1,64 @@
+const express = require('express');
+const graphqlHTTP = require('express-graphql');
+const schema = require('./schema/schema');
+const mongoose = require('mongoose');
+var bodyParser = require("body-parser");
+const path = require('path');
+//const key = require('./key.js')
+const app = express();
+const cors = require('cors')
+const dotenv = require('dotenv');
+const authRoute = require('./routes/auth')
+
+app.use(cors())
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+dotenv.config();
+
+//Middleware
+app.use(express.json())
+//Routes Middleware
+app.use('/api/user', authRoute)
+
+app.use(bodyParser.json())
+
+app.use(
+    bodyParser.urlencoded({
+        extended: false
+    }) 
+)
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+  });
+
+mongoose.connect(process.env.DB_CONNECT, { 
+    useUnifiedTopology: true,    
+    useNewUrlParser: true 
+});
+
+mongoose.connection.once('open', () => {
+    console.log('connected to the data');
+})
+
+app.use('/graphql', graphqlHTTP({
+    schema,
+    graphiql: true
+}));
+
+<<<<<<< HEAD:server/app.js
+app.listen(process.env.PORT, 5000 )
+
+
+app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    res.send("Hello there")
+});
+=======
+app.listen(process.env.PORT, 4000)
+>>>>>>> feature-new-design:app.js
