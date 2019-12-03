@@ -51,14 +51,4 @@ app.use('/graphql', graphqlHTTP({
     graphiql: true
 }));
 
-<<<<<<< HEAD:server/app.js
-app.listen(process.env.PORT, 5000 )
-
-
-app.get('/*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
-    res.send("Hello there")
-});
-=======
 app.listen(process.env.PORT, 4000)
->>>>>>> feature-new-design:app.js
