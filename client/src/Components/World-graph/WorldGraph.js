@@ -3,7 +3,6 @@ import { useQuery } from '@apollo/react-hooks';
 import { getWorldQuery } from '../../queries/queries';
 import jwt_decode from 'jwt-decode'
 import { Redirect } from 'react-router-dom'
-import BackNavigation from '../BackNavigation';
 import SideBar from './SideBar';
 
 const WorldGraph = (props) => {

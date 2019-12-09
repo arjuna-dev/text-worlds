@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react'
-import { Grid, Menu, Segment, Header, Label,Modal, Form,TextArea, Button, Icon} from 'semantic-ui-react'
+import { Grid, Menu, Segment, Header, Label,Modal, Button, Icon} from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks';
 import { deletePostMutation, getWorldQuery } from '../../queries/queries';
 import jwt_decode from 'jwt-decode'
@@ -8,7 +8,6 @@ import ReadMore from '../ReadMore';
 import BackNavigation from '../BackNavigation';
 import PostForm from './PostForm';
 import EventForm from './EventForm'
-import { set } from 'mongoose';
 
 const SideBar = (props) => {
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import logo from '../../assets/logo.png';
-import SearchBar from './SearchBar.js'
 import MenuButton from './MenuButton';
 import {Link} from 'react-router-dom';
 

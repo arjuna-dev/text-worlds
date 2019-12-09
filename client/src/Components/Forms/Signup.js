@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
 import { Button, Divider } from 'semantic-ui-react';
 import axios from 'axios';
-import { Redirect} from 'react-router'
-import { Link } from 'react-router-dom'
 import BackNavigation from '../BackNavigation'
 import { Form } from 'formsy-semantic-ui-react';
-import { Label, Message } from 'semantic-ui-react';
+import { Message } from 'semantic-ui-react';
 import { createBrowserHistory } from "history"
 
 const history = createBrowserHistory();
