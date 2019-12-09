@@ -1,0 +1,8 @@
+
+{
+    "config":{
+    "url": "https://app.textworlds.live",
+    "name": "Testing my new server",
+    "selectedQueries": ["getAllWorlds", "getAllCharacters"]
+    }
+}
