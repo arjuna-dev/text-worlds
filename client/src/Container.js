@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import styled from "styled-components";
-import World from './Components/World-homepage/World';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import WorldList from './Components/Homepage/WorldList';
-import AddWorld from './Components/AddWorld/AddWorld';
-import WorldGraph from './Components/World-graph/WorldGraph'
-import Signup from './Components/Forms/Signup';
-import Login from './Components/Forms/Login';
-
 import { Route, withRouter, Switch } from 'react-router-dom';
+
+const World =  lazy(() => import('./Components/World-homepage/World'));
+const WorldList = lazy(() => import('./Components/Homepage/WorldList'));
+const AddWorld = lazy(() => import('./Components/AddWorld/AddWorld'));
+const WorldGraph = lazy(() => import('./Components/World-graph/WorldGraph'));
+const Signup = lazy(() => import('./Components/Forms/Signup'));
+const Login = lazy(() => import('./Components/Forms/Login'));
+
+
 
 function Container({ location }) {
     return (
@@ -20,14 +22,16 @@ function Container({ location }) {
                 classNames={'fade'}
             >
             <section className="route-section">
-            <Switch location={location}>
-                <Route exact path = '/' component = {WorldList}/>
-                <Route exact path = '/add-world' component = {AddWorld} />
-                <Route exact path = '/signup' component = {Signup} />
-                <Route exact path = '/login' component = {Login} />
-                <Route exact path = '/world/:id' component = {World}/>
-                <Route exact path = '/world/:id/graph' component = {WorldGraph} />
-            </Switch>
+            <Suspense fallback={<div className="ui active centered loader"></div>}>
+                <Switch location={location}>
+                    <Route exact path = '/' component = {WorldList}/>
+                    <Route exact path = '/add-world' component = {AddWorld} />
+                    <Route exact path = '/signup' component = {Signup} />
+                    <Route exact path = '/login' component = {Login} />
+                    <Route exact path = '/world/:id' component = {World}/>
+                    <Route exact path = '/world/:id/graph' component = {WorldGraph} />
+                </Switch>
+            </Suspense>
             </section>
             </CSSTransition>
           </TransitionGroup>

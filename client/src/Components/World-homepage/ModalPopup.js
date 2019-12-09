@@ -4,7 +4,6 @@ import { Button, Header, Image, Modal } from 'semantic-ui-react'
 import { Form } from 'semantic-ui-react'
 import {Link, Redirect} from 'react-router-dom'
 import { addCharacterMutation, getWorldQuery } from '../../queries/queries';
-import { Label } from 'semantic-ui-react'
 import jwt_decode from 'jwt-decode'
 
 
