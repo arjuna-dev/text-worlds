@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { Button } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks';
 import { updatePostMutation, getWorldQuery } from '../../queries/queries';

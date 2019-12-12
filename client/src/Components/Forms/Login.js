@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import { Button, Divider, Form, Message } from 'semantic-ui-react';
 import axios from 'axios';
-import { Redirect } from 'react-router'
 import BackNavigation from '../BackNavigation';
-import {Link} from 'react-router-dom'
 import { createBrowserHistory } from "history"
 
 const history = createBrowserHistory();
@@ -15,7 +13,6 @@ const LoginForm = () => {
     password: '',
   });
   const [errors, setErrors] = useState(null);
-  const [local, setLocal] = useState(false);
 
   const updateField = (e) => setValues({
     ...form,
