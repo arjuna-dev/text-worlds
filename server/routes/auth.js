@@ -25,6 +25,7 @@ router.post('/signup',async (req, res) => {
         errors.name = "Username already exists"
         return res.json({error: errors})
     } 
+
     //Check db for existing email
     const emailCheck = await User.findOne({email: req.body.email})
     if(emailCheck){
@@ -32,8 +33,6 @@ router.post('/signup',async (req, res) => {
         return res.json({error: errors})
     } 
 
-    //Send for debugging in postman
-    //res.send(sgnpValidation[1]);
 
     //Hash password
     const salt = await bcrypt.genSalt(10);
