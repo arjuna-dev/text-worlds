@@ -8,17 +8,17 @@ const app = express();
 const cors = require('cors')
 const dotenv = require('dotenv');
 const authRoute = require('./routes/auth')
-
-const getUser = require('./routes/sampleGetLoggedInUser')
+// const getUser = require('./routes/sampleGetLoggedInUser')
 
 app.use(cors())
 dotenv.config();
 
 //Middleware
 app.use(express.json())
+
 //Routes Middleware
 app.use('/api/user', authRoute)
-app.use('/api/sampleget', getUser)
+// app.use('/api/sampleget', getUser)
 
 app.use(bodyParser.json())
 
@@ -48,6 +48,5 @@ app.listen(4000, () => {
 
 
 app.get('/*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
     res.send("Hello there")
 });
