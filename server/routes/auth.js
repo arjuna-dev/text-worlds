@@ -6,8 +6,8 @@ const jwt = require('jsonwebtoken');
 
 router.use(cors())
 // Load input validation
-const validateRegisterInput = require("../Validators/register");
-const validateLoginInput = require("../Validators/login");
+const validateRegisterInput   = require("../Validators/register");
+const validateLoginInput      = require("../Validators/login");
 
 
 router.post('/signup',async (req, res) => {
