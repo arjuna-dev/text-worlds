@@ -40,7 +40,6 @@ const SignupForm = () => {
     }
   }
 
-
   const checkLengthIs2 = (e) => {
     if (e.target.value.length < 2){
       setUserNameLengthOk(false)
