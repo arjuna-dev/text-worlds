@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const cors = require("cors")
-const User = require('../models/user');
+const cors   = require("cors")
+const User   = require('../models/user');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const jwt    = require('jsonwebtoken');
 
 router.use(cors())
 // Load input validation
@@ -21,6 +21,7 @@ router.post('/signup',async (req, res) => {
 
     //Check db for existing username
     const nameCheck = await User.findOne({name: req.body.name})
+
     if(nameCheck){
         errors.name = "Username already exists"
         return res.json({error: errors})
@@ -33,7 +34,6 @@ router.post('/signup',async (req, res) => {
         return res.json({error: errors})
     } 
 
-
     //Hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
@@ -44,9 +44,9 @@ router.post('/signup',async (req, res) => {
         email: req.body.email,
         password: hashedPassword,
     });
+
     try {
         const savedUser = await user.save();
-        // res.send(savedUser);
 
         const payload = {
             _id: savedUser._id,
@@ -56,14 +56,14 @@ router.post('/signup',async (req, res) => {
 
         // Sign token
         jwt.sign(
-        payload,
-        process.env.TOKEN_SECRET,
-        {
-            expiresIn: 31556926 // 1 year in seconds
-        },
-        (err, token) => {
-            res.send(token);
-        }
+            payload,
+            process.env.TOKEN_SECRET,
+            {
+                expiresIn: 31556926 // 1 year in seconds
+            },
+            (err, token) => {
+                res.send(token);
+            }
         );
 
     } catch (error) {

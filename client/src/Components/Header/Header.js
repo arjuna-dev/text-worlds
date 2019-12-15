@@ -18,11 +18,13 @@ const Header = () =>
             <Link to = "/login">Log in </Link>
         </div>
     )
+
     const logged = (
         <div onClick = {logout} className = "logout">
             Logout
         </div>
     )
+    
     return (
         <div className = "header">
             <div className = "topbar">
