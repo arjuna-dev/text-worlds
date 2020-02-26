@@ -15,6 +15,7 @@ router.post('/signup',async (req, res) => {
     //Check for errors
     //form validation
     const { errors, isValid } = validateRegisterInput(req.body);
+    
     if (!isValid) {
         return res.json({error: errors})
     }
