@@ -22,13 +22,12 @@ const LoginForm = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     axios.post('https://textworlds.herokuapp.com/api/user/login', form)
-      .then(response => {
-        console.log(response.data)
+      .then(
+        response => {
         if (response.data.error){
           setErrors(response.data.error)
         }
         else{
-          console.log(response.data)
           localStorage.setItem('usertoken', response.data)
           history.goBack();
         }
@@ -45,16 +44,15 @@ const LoginForm = () => {
   <div className="ui grid">
     <div className="four wide column"></div>
     <div className="eight wide column">
-    {/* <Link className = "signup-link" to = '/signup'>Haven't joined yet? Click here to Sign up</Link> <br /><br /> */}
     {(errors && errors.email)?<Message color = "pink">{errors.email}</Message>: null}
     {(errors && errors.password)?<Message color = "pink">{errors.password}</Message>: null}
       <Form onSubmit={submitHandler}>
         <Form.Input
           // error='Please enter your email address'
           fluid
-          label='Email'
+          label = 'emailInput'
           name='email'
-          placeholder='email'
+          placeholder ='email'
           type="email"
           value={form.email}
           onChange={updateField}
@@ -62,7 +60,7 @@ const LoginForm = () => {
         <Form.Input
           // error='Please enter password'
           fluid
-          label='Password'
+          label='passwordInput'
           name='password'
           placeholder='Password'
           type="password"
