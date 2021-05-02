@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../assets/logo.png';
 import MenuButton from './MenuButton';
-import {Link} from 'react-router-dom';
+//import {Link} from 'react-router-dom';
 
 const Header = () => 
 
@@ -13,8 +13,8 @@ const Header = () =>
 
     const notlogged = (
         <div>
-            <Link to = "/signup" className = "signup">Sign up </Link>
-            <Link to = "/login">Log in </Link>
+            <a href= "/signup" className = "signup">Sign up </a>
+            <a href= "/login">Log in </a>
         </div>
     )
     const logged = (
@@ -30,7 +30,7 @@ const Header = () =>
                     </div>
                         <div className = "eight wide column">
                             <div className = "logo-parent">
-                            <Link to= "/"><img src = {logo} alt = "logo" className = "logo" /></Link>
+                            <a href= "/"><img src = {logo} alt = "logo" className = "logo" /></a>
                             </div>
                         </div>
                     <div className = "four wide column">

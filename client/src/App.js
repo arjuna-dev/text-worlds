@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/client';
 import { BrowserRouter} from 'react-router-dom';
 import Container from './Container';
 
