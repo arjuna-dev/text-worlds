@@ -24,7 +24,7 @@ if (error) return <p>Error :(</p>;
 console.log(data);
 return (
       <div>
-        {/* <Header /> */}
+        <Header />
         <div className = "world-list">
           <div className = "world-list-header">ALL WORLDS</div>
           <List size='massive'>
@@ -47,8 +47,6 @@ return (
             ))}
           </List>
         </div>
-        
-        {/* {data.worlds.map((world) => (<div key = {world._id}>{world.name}</div>))} */}
       </div>
     );
 }
