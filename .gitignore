@@ -1,3 +1,4 @@
 key.js
 .DS_STORE
 **/node_modules
+client/node_modules
