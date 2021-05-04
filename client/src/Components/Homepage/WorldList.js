@@ -1,7 +1,7 @@
 import React from 'react'
 import { List, Image, Segment } from 'semantic-ui-react'
 import Header from '../Header/Header'
-import ReadMore from '../ReadMore'
+import ReadMore from '../Helpers/ReadMore'
 import p1 from '../../assets/Worlds/p1.png'
 import p2 from '../../assets/Worlds/p2.png'
 import pf3 from '../../assets/Worlds/pf3.png'

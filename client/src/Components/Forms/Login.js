@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Button, Divider, Form, Message } from 'semantic-ui-react';
 import axios from 'axios';
-import BackNavigation from '../BackNavigation';
+import BackNavigation from '../Helpers/BackNavigation';
 import { createBrowserHistory } from "history"
 
 const history = createBrowserHistory();
