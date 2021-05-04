@@ -1,24 +1,27 @@
 import React from 'react';
 import logo from '../../assets/logo.png';
 import MenuButton from './MenuButton';
+import { createBrowserHistory } from "history"
 //import {Link} from 'react-router-dom';
+
+const history = createBrowserHistory();
 
 const Header = () => 
 
 {
     function logout(){
         localStorage.removeItem('usertoken');
-        window.location.reload(true);
+        history.push('/');
     }
 
     const notlogged = (
-        <div>
+        <div data-testid = "login-button">
             <a href= "/signup" className = "signup">Sign up </a>
             <a href= "/login">Log in </a>
         </div>
     )
     const logged = (
-        <div onClick = {logout} className = "logout">
+        <div data-testid="logout-button" onClick = {logout} className = "logout">
             Logout
         </div>
     )
