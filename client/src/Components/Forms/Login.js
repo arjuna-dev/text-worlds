@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import { Button, Divider, Form, Message } from 'semantic-ui-react';
 import axios from 'axios';
 import BackNavigation from '../Helpers/BackNavigation';
-import { createBrowserHistory } from "history"
+import { createBrowserHistory } from 'history';
 
-const history = createBrowserHistory();
+let history = createBrowserHistory();
 
 const LoginForm = () => {
 
@@ -29,7 +29,7 @@ const LoginForm = () => {
         }
         else{
           localStorage.setItem('usertoken', response.data)
-          history.goBack();
+          history.back();
         }
       })
   }

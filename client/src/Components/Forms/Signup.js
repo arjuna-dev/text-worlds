@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import { Button, Divider } from 'semantic-ui-react';
 import axios from 'axios';
-import BackNavigation from '../BackNavigation'
+import BackNavigation from '../Helpers/BackNavigation'
 import { Form } from 'formsy-semantic-ui-react';
 import { Message } from 'semantic-ui-react';
-import { createBrowserHistory } from "history"
+import { createBrowserHistory } from 'history';
 
-const history = createBrowserHistory();
+let history = createBrowserHistory();
 
 const SignupForm = () => {
   
@@ -44,8 +44,7 @@ const SignupForm = () => {
         }
         else{
           localStorage.setItem('usertoken', response.data)
-          console.log("ywaytewls")
-          history.goBack()
+          history.back()
         }
       })
   }
