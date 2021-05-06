@@ -2,9 +2,11 @@ import React, {useState} from 'react'
 import { useMutation } from '@apollo/react-hooks';
 import { Form } from 'semantic-ui-react'
 import { addWorldMutation, getAllWorlds } from '../../queries/queries';
-import BackNavigation from '../BackNavigation';
-import {Redirect} from 'react-router-dom'
+import BackNavigation from '../Helpers/BackNavigation';
 import jwt_decode from 'jwt-decode'
+import { createBrowserHistory } from 'history';
+
+let history = createBrowserHistory();
 
 const AddWorld = () => {
     
@@ -15,25 +17,28 @@ const AddWorld = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log((jwt_decode(localStorage.usertoken))._id);
+        let userId = 0;
+        if (localStorage.usertoken){
+          userId = (jwt_decode(localStorage.usertoken))._id;
+        }
         addWorld({variables: {
             name: name,
             description: description,
-            userId: (jwt_decode(localStorage.usertoken))._id
+            userId: userId
         }, refetchQueries: [{ query: getAllWorlds}]
         })
-        console.log(data)
+        //console.log(data)
         setName('');
         setDescription('');
         setCreated(true)
     }
     
     if (created){
-      return (<Redirect to = '/' />)
+      return (history.push('/'))
     }
 
     if (!localStorage.usertoken){
-      return (<Redirect to = '/login' />)
+      return (history.push('/login'))
     }
     
     return(

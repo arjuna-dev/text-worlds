@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import styled from "styled-components";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { Route, withRouter, Switch } from 'react-router-dom';
+import { Route, withRouter, Switch, BrowserRouter } from 'react-router-dom';
 
 const World =  lazy(() => import('./Components/World-homepage/World'));
 const WorldList = lazy(() => import('./Components/Homepage/WorldList'));
@@ -23,6 +23,7 @@ function Container({ location }) {
             >
             <section className="route-section">
             <Suspense fallback={<div className="ui active centered loader"></div>}>
+                <BrowserRouter>
                 <Switch location={location}>
                     <Route exact path = '/' component = {WorldList}/>
                     <Route exact path = '/add-world' component = {AddWorld} />
@@ -31,6 +32,7 @@ function Container({ location }) {
                     <Route exact path = '/world/:id' component = {World}/>
                     <Route exact path = '/world/:id/graph' component = {WorldGraph} />
                 </Switch>
+                </BrowserRouter>
             </Suspense>
             </section>
             </CSSTransition>
