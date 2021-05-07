@@ -7,6 +7,7 @@ import p2 from '../../assets/Worlds/p2.png'
 import pf3 from '../../assets/Worlds/pf3.png'
 import pf4 from '../../assets/Worlds/pf4.png'
 import pp1 from '../../assets/Worlds/pp1.png'
+import {Link} from 'react-router-dom'
 
 import { getAllWorlds } from '../../queries/queries';
 import { useQuery } from '@apollo/react-hooks';
@@ -33,7 +34,7 @@ return (
                 <a href = {'/world/' + world._id} >
                   <Image style={{ display: 'inline-block' }} avatar src={ picNames[Math.floor(Math.random() * Math.floor(4))] } size="small" /></a>
                 <List.Content style={{ display: 'inline-block', marginLeft: "2vw" }}>
-                  <a href = {'/world/' + world._id}><List.Header style={{ marginBottom: "1vh"}}><div className = "world-header" data-testid= "world-header">{ world.name }</div></List.Header>
+                  <a href = {'/world/' + world._id}><List.Header style={{ marginBottom: "1vh"}}><div className = "world-header" data-testid= "world-header">{ world.name }</div></List.Header></a>
                     <List.Description>
                         <Segment piled className = "description-list" style = {{fontSize: "0.8em"}}>
                         <ReadMore lines = {2}>
@@ -41,7 +42,6 @@ return (
                         </ReadMore>
                         </Segment>
                     </List.Description>
-                    </a>
                 </List.Content>
               </List.Item>
             ))}
