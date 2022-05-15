@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import BackNavigation from './BackNavigation';
+import BackNavigation from '../BackNavigation';
 
 
 describe("BackNavigation", () => {

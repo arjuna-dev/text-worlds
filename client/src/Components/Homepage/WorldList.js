@@ -22,7 +22,6 @@ if (loading) {
 };
 if (error) return <p>Error :(</p>;
 
-console.log(data);
 return (
       <div>
         <Header />
@@ -30,7 +29,7 @@ return (
           <div className = "world-list-header">ALL WORLDS</div>
           <List size='massive'>
             {data.worlds.map(( world ) => (
-              <List.Item style={{ marginBottom: '9vh' }} key={world._id}>
+              <List.Item style={{ marginBottom: '9vh' }} key={world._id} data-testid={`world-item-${world._id}`}>
                 <a href = {'/world/' + world._id} >
                   <Image style={{ display: 'inline-block' }} avatar src={ picNames[Math.floor(Math.random() * Math.floor(4))] } size="small" /></a>
                 <List.Content style={{ display: 'inline-block', marginLeft: "2vw" }}>

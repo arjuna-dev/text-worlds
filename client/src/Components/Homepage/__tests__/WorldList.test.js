@@ -2,10 +2,9 @@ import '@testing-library/jest-dom/extend-expect'
 import 'jest-canvas-mock';
 import React from 'react'
 import { render, screen } from '@testing-library/react';
-import {act} from 'react-test-renderer';
 import { MockedProvider } from '@apollo/client/testing';
-import { getAllWorlds } from '../../queries/queries';
-import WorldList from './WorldList';
+import { getAllWorlds } from '../../../queries/queries';
+import WorldList from '../WorldList';
 
 const wait = require('waait');
 
@@ -19,13 +18,13 @@ it('should render world list', async () => {
     },
   }];
 
-    render(
-        <MockedProvider mocks={worldMock} addTypename={false}>
-          <WorldList />
-        </MockedProvider>,
-      );
+  render(
+      <MockedProvider mocks={worldMock} addTypename={false}>
+        <WorldList />
+      </MockedProvider>,
+    );
 
-  await wait(0); // wait for response
-  
-  expect(screen.getByText('Test')).toBeInTheDocument();
+  const worldListElement = await screen.findByTestId("world-item-1")
+
+  expect(worldListElement).toBeInTheDocument();
 });
