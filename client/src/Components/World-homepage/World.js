@@ -9,6 +9,17 @@ import jwt_decode from "jwt-decode";
 import { Timeline, TimelineItem } from "vertical-timeline-component-for-react";
 import _ from "lodash";
 
+function check_if_user_already_joined_world(data) {
+  let userLoggedInToken = localStorage.usertoken;
+  data.world.characters.map((character) => {
+    if (userLoggedInToken && character.userId === jwt_decode(userLoggedInToken)._id)
+    {
+      return true;
+    }
+    return false
+  });
+}
+
 const World = (props) => {
   const [activeItem, setActiveItem] = useState("World Timeline");
   const [activeContent, setActiveContent] = useState("World Timeline");
@@ -19,17 +30,7 @@ const World = (props) => {
   if (loading) return <div className="ui active centered loader"></div>;
   if (error) return <div>Error :( Try again later</div>;
 
-  let alreadyJoined = false;
-  // checking if already joined
-  data.world.characters.map((character) => {
-    if (
-      localStorage.usertoken &&
-      character.userId === jwt_decode(localStorage.usertoken)._id
-    ) {
-      alreadyJoined = true;
-    }
-    return null;
-  });
+  let userAlreadyJoined = check_if_user_already_joined_world(data);
 
   return (
     <div data-testid={`world-item-${data.world._id}`}>
@@ -40,7 +41,7 @@ const World = (props) => {
             <Icon name="world" />
 
             {data.world.name}
-            {alreadyJoined ? (
+            {userAlreadyJoined ? (
               <Label color="olive" horizontal>
                 Joined
               </Label>
