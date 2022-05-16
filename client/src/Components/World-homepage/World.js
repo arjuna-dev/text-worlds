@@ -8,6 +8,7 @@ import { Header, Icon, Menu, List, Label } from "semantic-ui-react";
 import jwt_decode from "jwt-decode";
 import { Timeline, TimelineItem } from "vertical-timeline-component-for-react";
 import _ from "lodash";
+import WorldSummaryBox from "./WorldSummaryBox";
 
 function check_if_user_already_joined_world(worldDetailsData) {
   let userLoggedInToken = localStorage.usertoken;
@@ -39,28 +40,15 @@ const World = (props) => {
 
   let worldDetailsData = data;
   let userAlreadyJoined = check_if_user_already_joined_world(worldDetailsData);
+
   return (
     <div data-testid={`world-item-${worldDetailsData.world._id}`}>
       <div style={{ padding: "15px", display: "flex" }}>
         <BackNavigation />
-        <div className="world-title">
-          <Header as="h2" icon>
-            <Icon name="world" />
-
-            {worldDetailsData.world.name}
-            {userAlreadyJoined ? (
-              <Label color="olive" horizontal>
-                Joined
-              </Label>
-            ) : null}
-            <Header.Subheader style={{ fontSize: "0.8em" }}>
-              <ReadMore line={2}>{worldDetailsData.world.description}</ReadMore>
-            </Header.Subheader>
-          </Header>
-          <div className="join-world">
-            <ModalPopup world={worldDetailsData.world} />
-          </div>
-        </div>
+        <WorldSummaryBox
+          worldDetailsData={worldDetailsData}
+          userAlreadyJoined={userAlreadyJoined}
+        />
       </div>
       <div className="world">
         <Menu pointing secondary>
