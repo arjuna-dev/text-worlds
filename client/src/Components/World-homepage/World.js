@@ -9,14 +9,12 @@ import jwt_decode from "jwt-decode";
 import { Timeline, TimelineItem } from "vertical-timeline-component-for-react";
 import _ from "lodash";
 
-
-
 const World = (props) => {
   const [activeItem, setActiveItem] = useState("World Timeline");
   const [activeContent, setActiveContent] = useState("World Timeline");
 
   const { loading, error, data } = useQuery(getWorldQuery, {
-    variables: { id: props.match.params.id },
+    variables: { id: props.match?.params.id },
   });
   if (loading) return <div className="ui active centered loader"></div>;
   if (error) return <div>Error :( Try again later</div>;
@@ -34,7 +32,7 @@ const World = (props) => {
   });
 
   return (
-    <div>
+    <div data-testid={`world-item-${data.world._id}`}>
       <div style={{ padding: "15px", display: "flex" }}>
         <BackNavigation />
         <div className="world-title">

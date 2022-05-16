@@ -6,7 +6,6 @@ import { MockedProvider } from '@apollo/client/testing';
 import { getAllWorlds } from '../../../queries/queries';
 import WorldList from '../WorldList';
 
-const wait = require('waait');
 
 it('should render world list', async () => {
   const worldMock = [{

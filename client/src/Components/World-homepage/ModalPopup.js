@@ -15,11 +15,10 @@ const ModalPopup = (props) => {
     const [addCharacter] = useMutation(addCharacterMutation);
 
     let link = '/world/' + props.world._id + '/graph';
-    console.log(link);
+    
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(props);
         addCharacter({variables: {
             name: name,
             story: story,

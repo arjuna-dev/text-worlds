@@ -32,11 +32,7 @@ const getWorldQuery = gql`
       world(id: $id){
           _id
           name
-          maxNumberOfCharacters
-          minNumberOfCharacters
           description
-          year
-          private
           user{
             name
           }
@@ -44,11 +40,11 @@ const getWorldQuery = gql`
             _id
             title
             dateCreated
-            type
-            text
             character{
               name
             }
+            type
+            text
             likes
             deletes
             likesCharsId
@@ -60,14 +56,6 @@ const getWorldQuery = gql`
             userId
             name
             story
-            role
-            gender
-            places{
-              _id
-              name
-              description
-              dateCreated
-            }
             posts{
               _id
               title
