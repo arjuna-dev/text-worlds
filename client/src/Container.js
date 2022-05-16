@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { Route, withRouter, Switch, BrowserRouter } from 'react-router-dom';
 
-const World =  lazy(() => import('./Components/World-homepage/World'));
+const WorldHomepage =  lazy(() => import('./Components/World-homepage/WorldHomepage'));
 const WorldList = lazy(() => import('./Components/Homepage/WorldList'));
 const AddWorld = lazy(() => import('./Components/AddWorld/AddWorld'));
 const WorldGraph = lazy(() => import('./Components/World-graph/WorldGraph'));
@@ -29,7 +29,7 @@ function Container({ location }) {
                     <Route exact path = '/add-world' component = {AddWorld} />
                     <Route exact path = '/signup' component = {Signup} />
                     <Route exact path = '/login' component = {Login} />
-                    <Route exact path = '/world/:id' component = {World}/>
+                    <Route exact path = '/world/:id' component = {WorldHomepage}/>
                     <Route exact path = '/world/:id/graph' component = {WorldGraph} />
                 </Switch>
                 </BrowserRouter>

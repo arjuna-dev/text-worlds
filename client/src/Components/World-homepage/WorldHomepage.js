@@ -26,7 +26,7 @@ function getWorldDetails(worldId) {
   });
 }
 
-const World = (props) => {
+const WorldHomepage = (props) => {
 
   let worldId = props.match?.params.id;
   const { loading, error, data } = getWorldDetails(worldId);
@@ -50,4 +50,4 @@ const World = (props) => {
   );
 };
 
-export default World;
+export default WorldHomepage;
