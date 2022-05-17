@@ -5,10 +5,10 @@ import { render, screen } from "@testing-library/react";
 import { MockedProvider } from "@apollo/client/testing";
 import { getWorldQuery } from "../../../queries/queries";
 
-import World from "../World";
+import WorldHomepage from "../WorldHomepage";
 
-describe("World detail page", () => {
-  it("should render world detail page without crashing", async () => {
+describe("World homepage", () => {
+  it("should render world homepage without crashing", async () => {
     const worldDetailMock = [
       {
         request: {
@@ -58,7 +58,7 @@ describe("World detail page", () => {
 
     render(
       <MockedProvider mocks={worldDetailMock} addTypename={false}>
-        <World />
+        <WorldHomepage />
       </MockedProvider>
     );
 
@@ -66,4 +66,5 @@ describe("World detail page", () => {
 
     expect(worldDetailElement).toBeInTheDocument();
   });
+
 });

@@ -27,7 +27,6 @@ function getWorldDetails(worldId) {
 }
 
 const WorldHomepage = (props) => {
-
   let worldId = props.match?.params.id;
   const { loading, error, data } = getWorldDetails(worldId);
   if (loading) return <div className="ui active centered loader"></div>;
@@ -35,6 +34,7 @@ const WorldHomepage = (props) => {
 
   let worldDetailsData = data;
   let userAlreadyJoined = check_if_user_already_joined_world(worldDetailsData);
+
 
   return (
     <div data-testid={`world-item-${worldDetailsData.world._id}`}>

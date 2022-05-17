@@ -10,16 +10,25 @@ const WorldSummaryBox = (props) => {
 
         {props.worldDetailsData.world.name}
         {props.userAlreadyJoined ? (
-          <Label color="olive" horizontal>
+          <Label
+            color="olive"
+            data-testid={`world-item-${props.worldDetailsData.world._id}`}
+            horizontal
+          >
             Joined
           </Label>
         ) : null}
         <Header.Subheader style={{ fontSize: "0.8em" }}>
-          <ReadMore line={2}>{props.worldDetailsData.world.description}</ReadMore>
+          <ReadMore line={2}>
+            {props.worldDetailsData.world.description}
+          </ReadMore>
         </Header.Subheader>
       </Header>
       <div className="join-world">
-        <ModalPopup world={props.worldDetailsData.world} />
+        <ModalPopup
+          worldDetailsData={props.worldDetailsData}
+          userAlreadyJoined={props.userAlreadyJoined}
+        />
       </div>
     </div>
   );
