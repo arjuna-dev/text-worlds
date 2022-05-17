@@ -68,13 +68,6 @@ const ModalPopup = (props) => {
       </Modal>
     );
   }
-  // checking if already joined
-  props.worldDetailsData.world.characters.map((character) => {
-    if (character.userId === jwt_decode(localStorage.usertoken)._id) {
-      props.userAlreadyJoined = true;
-    }
-    return null;
-  });
 
   if (props.userAlreadyJoined) {
     return (
@@ -130,10 +123,6 @@ const ModalPopup = (props) => {
               value={story}
               onChange={(e) => setStory(e.target.value)}
             />
-            {/* <div onChange={event => setGender(event)}>
-                <input type="radio" value="Male" name="gender"/> Male
-                <input type="radio" value="Female" name="gender"/> Female
-            </div> */}
             <Form.Field control="button">CREATE CHARACTER</Form.Field>
           </Form>
         </Modal.Description>
