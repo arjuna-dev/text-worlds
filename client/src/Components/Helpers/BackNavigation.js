@@ -1,17 +1,31 @@
-import React from 'react';
-import logo from '../../assets/logo.png'
-import {Redirect} from 'react-router-dom'
-import { createBrowserHistory } from "history"
+import React from "react";
+import logo from "../../assets/logo.png";
 
-const history = createBrowserHistory();
+import { useHistory } from "react-router-dom";
+
+
 
 const BackNavigation = () => {
-    return (
-    <div className = "back-standard">
-        <div><a href = '/'><img className = "logo-small" src = {logo} alt = "logo" /></a></div>
-        <div className = "logo-small"><i data-testid="back-navigation-icon" className="fa fa-chevron-left back-navigation" aria-hidden="true" onClick = {()=> history.goBack()}>Go Back</i></div>
+  let history = useHistory();
+  return (
+    <div className="back-standard">
+      <div>
+        <a href="/">
+          <img className="logo-small" src={logo} alt="logo" />
+        </a>
+      </div>
+      <div className="logo-small">
+        <i
+          data-testid="back-navigation-icon"
+          className="fa fa-chevron-left back-navigation"
+          aria-hidden="true"
+          onClick={() => history.goBack()}
+        >
+          Go Back
+        </i>
+      </div>
     </div>
-    )
+  );
 };
 
 export default BackNavigation;

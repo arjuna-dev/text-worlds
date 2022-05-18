@@ -22,7 +22,7 @@ const ActivityButtons = (props) => {
           onClose={() => closeModalPost()}
           open={showModalPost}
           trigger={
-            <Button color="brown" onClick={() => setShowModalPost(true)}>
+            <Button test-id= "post-button" color="brown" onClick={() => setShowModalPost(true)}>
               Write as your character
             </Button>
           }

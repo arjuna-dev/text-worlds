@@ -11,8 +11,6 @@ const PostForm = (props) => {
     
     const handleSubmit = (e) => {
          e.preventDefault();
-         console.log(props.myCharacterId);
-         console.log(props.world._id);
           addPost({variables: {
             title: title,
             text: text,
