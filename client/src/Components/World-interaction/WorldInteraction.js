@@ -3,10 +3,10 @@ import { useQuery } from "@apollo/react-hooks";
 import { getWorldQuery } from "../../queries/queries";
 import jwt_decode from "jwt-decode";
 import _ from "lodash";
-import SideBar from "./SideBar";
+import WorldInteractionContent from "./WorldInteractionContent";
 
-function check_user_character(data, loggedInUserId) {
-  data.world.characters.map((character) => {
+function check_user_character(worldDetailsData, loggedInUserId) {
+  worldDetailsData.world.characters.map((character) => {
     if (loggedInUserId && character.userId === loggedInUserId) {
       return character._id;
     }
@@ -26,15 +26,19 @@ const WorldInteraction = (props) => {
   if (loading) return <div className="ui active centered loader"></div>;
   if (error) return <div>Error :( Try again later</div>;
 
-  let userLoggedInToken = localStorage.usertoken;
-  let loggedInUserId = jwt_decode(userLoggedInToken)?._id;
-  let myCharacterId = check_user_character(data, loggedInUserId);
+  const worldDetailsData = data;
+  const userLoggedInToken = localStorage.usertoken;
+  const loggedInUserId = jwt_decode(userLoggedInToken)?._id;
+  const myCharacterId = check_user_character(worldDetailsData, loggedInUserId);
 
   return (
     <div className="world-graph-page">
-      <div className="world-graph" data-testid={`world-item-${data.world._id}`}>
-        <SideBar
-          world={data.world}
+      <div
+        className="world-graph"
+        data-testid={`world-item-${worldDetailsData.world._id}`}
+      >
+        <WorldInteractionContent
+          world={worldDetailsData.world}
           myCharacterId={myCharacterId}
           loggedInUserId={loggedInUserId}
         />
