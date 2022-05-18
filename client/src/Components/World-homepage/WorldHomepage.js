@@ -16,8 +16,8 @@ function check_if_user_already_joined_world(worldDetailsData) {
     ) {
       return true;
     }
-    return false;
   });
+  return false;
 }
 
 function getWorldDetails(worldId) {
@@ -34,7 +34,6 @@ const WorldHomepage = (props) => {
 
   let worldDetailsData = data;
   let userAlreadyJoined = check_if_user_already_joined_world(worldDetailsData);
-
 
   return (
     <div data-testid={`world-item-${worldDetailsData.world._id}`}>

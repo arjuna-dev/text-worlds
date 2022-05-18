@@ -11,7 +11,7 @@ import {
 } from "semantic-ui-react";
 import { useMutation } from "@apollo/react-hooks";
 import { deletePostMutation, getWorldQuery } from "../../queries/queries";
-import jwt_decode from "jwt-decode";
+import _ from "lodash";
 import Reaction from "./Reaction";
 import ReadMore from "../Helpers/ReadMore";
 import BackNavigation from "../Helpers/BackNavigation";
@@ -70,8 +70,7 @@ const SideBar = (props) => {
 
             {/* My character */}
             {props.world.characters.map((character) => {
-              return character.userId ===
-                jwt_decode(localStorage.usertoken)._id ? (
+              return character.userId === props.loggedInUserId ? (
                 <Menu.Item
                   name={character.name}
                   key={character._id}
@@ -90,8 +89,7 @@ const SideBar = (props) => {
 
             {/* other characters */}
             {props.world.characters.map((character) => {
-              return character.userId ===
-                jwt_decode(localStorage.usertoken)._id ? null : (
+              return character.userId === props.loggedInUserId ? null : (
                 <Menu.Item
                   name={character.name}
                   key={character._id}
@@ -273,8 +271,7 @@ const SideBar = (props) => {
                           >
                             {post.title}
                             {/* post delete functionality only if its user's post */}
-                            {post.character.userId ===
-                            jwt_decode(localStorage.usertoken)._id ? (
+                            {post.character.userId === props.loggedInUserId ? (
                               <div>
                                 <Button
                                   className="delete-button"
@@ -298,8 +295,7 @@ const SideBar = (props) => {
                       ) : null}
                       {/* for event */}
                       {post.type === "Event" &&
-                      post.character.userId ===
-                        jwt_decode(localStorage.usertoken)._id ? (
+                      post.character.userId === props.loggedInUserId ? (
                         <div>
                           <Header
                             as="h2"
