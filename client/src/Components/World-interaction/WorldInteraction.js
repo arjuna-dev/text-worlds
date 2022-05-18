@@ -14,12 +14,18 @@ function check_user_character(data, loggedInUserId) {
   return null;
 }
 
-const WorldInteraction = (props) => {
-  const { loading, error, data } = useQuery(getWorldQuery, {
-    variables: { id: props.match?.params.id },
+function getWorldDetails(worldId) {
+  return useQuery(getWorldQuery, {
+    variables: { id: worldId },
   });
+}
+
+const WorldInteraction = (props) => {
+  const worldId = props.match?.params.id;
+  const { loading, error, data } = getWorldDetails(worldId);
   if (loading) return <div className="ui active centered loader"></div>;
   if (error) return <div>Error :( Try again later</div>;
+
   let userLoggedInToken = localStorage.usertoken;
   let loggedInUserId = jwt_decode(userLoggedInToken)?._id;
   let myCharacterId = check_user_character(data, loggedInUserId);

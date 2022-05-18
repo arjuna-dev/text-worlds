@@ -31,7 +31,6 @@ const SideBar = (props) => {
   }, [props.world]);
 
   function handleClick(postId) {
-    console.log(postId);
     deletePost({
       variables: {
         id: postId,
@@ -200,7 +199,6 @@ const SideBar = (props) => {
             {/* world-all-events */}
             {activeContent === props.world
               ? activeContent.posts.map((post) => {
-                  console.log("yaayyeyeee");
                   if (post.type === "Event") {
                     return (
                       <div key={post._id}>
